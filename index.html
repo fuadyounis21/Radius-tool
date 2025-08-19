@@ -644,7 +644,7 @@ if (!urlDomain.startsWith("http")) {
   const today = new Date();
   const dateStr = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0');
   const totalCards = dataList.length;
-  const fileName = `AL-Nasim.Net_${dateStr}_${totalCards}.pdf`;
+  const fileName = `Cards_${dateStr}_${totalCards}.pdf`;
   doc.save(fileName);
 }
 </script>
@@ -771,4 +771,5 @@ window.addEventListener('DOMContentLoaded', function() {
 </script>
 
 </body>
+
 </html>
