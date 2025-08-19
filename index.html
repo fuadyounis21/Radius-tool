@@ -120,8 +120,7 @@
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";
 </script>
- <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -255,39 +254,61 @@ const dateToggle = document.getElementById('dateToggle');
 const datePreview = document.getElementById('datePreview');
 const dateColorInput = document.getElementById('dateColor');
 const dateSizeInput = document.getElementById('dateSize');
-
+function getPosition(e) {
+  if (e.touches && e.touches.length > 0) {
+    return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }
+  return { x: e.clientX, y: e.clientY };
+}
 function makeDraggable(elem) {
   let offsetX, offsetY;
   let isDragging = false;
   let containerRect;
-  elem.addEventListener('mousedown', function(e) {
+
+  function startDrag(e) {
     isDragging = true;
     containerRect = elem.parentElement.getBoundingClientRect();
-    offsetX = e.clientX - elem.getBoundingClientRect().left;
-    offsetY = e.clientY - elem.getBoundingClientRect().top;
+    const pos = getPosition(e);
+    offsetX = pos.x - elem.getBoundingClientRect().left;
+    offsetY = pos.y - elem.getBoundingClientRect().top;
     elem.style.cursor = "grabbing";
     e.preventDefault();
-  });
-  document.addEventListener('mousemove', function(e) {
+  }
+
+  function onDrag(e) {
     if (!isDragging) return;
-    let newLeft = e.clientX - containerRect.left - offsetX;
-    let newTop = e.clientY - containerRect.top - offsetY;
+    const pos = getPosition(e);
+    let newLeft = pos.x - containerRect.left - offsetX;
+    let newTop = pos.y - containerRect.top - offsetY;
+
     const container = elem.parentElement;
     const maxLeft = container.clientWidth - elem.clientWidth;
     const maxTop = container.clientHeight - elem.clientHeight;
+
     if (newLeft < 0) newLeft = 0;
     if (newTop < 0) newTop = 0;
     if (newLeft > maxLeft) newLeft = maxLeft;
     if (newTop > maxTop) newTop = maxTop;
+
     elem.style.left = newLeft + 'px';
     elem.style.top = newTop + 'px';
-  });
-  document.addEventListener('mouseup', function() {
+  }
+
+  function stopDrag() {
     if (isDragging) {
       isDragging = false;
       elem.style.cursor = "move";
     }
-  });
+  }
+
+  elem.addEventListener('mousedown', startDrag);
+  elem.addEventListener('touchstart', startDrag);
+
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('touchmove', onDrag);
+
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchend', stopDrag);
 }
 makeDraggable(usernamePreview);
 makeDraggable(passwordPreview);
@@ -533,6 +554,44 @@ document.addEventListener('mouseup', e => {
     }
   }
 });
+// دعم اللمس لتغيير حجم QR
+qrHandle.addEventListener('touchstart', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  isResizing = true;
+  const touch = e.touches[0];
+  startX = touch.clientX;
+  startY = touch.clientY;
+  startWidth = qrImageElem.offsetWidth;
+  startHeight = qrImageElem.offsetHeight;
+});
+
+document.addEventListener('touchmove', e => {
+  if (!isResizing) return;
+  const touch = e.touches[0];
+  const dx = touch.clientX - startX;
+  const dy = touch.clientY - startY;
+  let d = Math.abs(dx) > Math.abs(dy) ? dx : dy;
+  let newWidth = startWidth + d;
+  let newHeight = startHeight + d;
+  const minSize = 30;
+  if (newWidth < minSize || newHeight < minSize) {
+    newWidth = newHeight = minSize;
+  }
+  qrImageElem.style.width = newWidth + 'px';
+  qrImageElem.style.height = newHeight + 'px';
+});
+
+document.addEventListener('touchend', e => {
+  if (isResizing) {
+    isResizing = false;
+    const finalSize = qrImageElem.offsetWidth;
+    if (qrCodeGenerator) {
+      qrCodeGenerator.size = finalSize;
+      qrCodeGenerator.value = qrCodeGenerator.value;
+    }
+  }
+});
 
 document.getElementById('downloadBtn').addEventListener('click', generatePDF);
 
@@ -646,7 +705,7 @@ if (!urlDomain.startsWith("http")) {
   const today = new Date();
   const dateStr = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0');
   const totalCards = dataList.length;
-  const fileName = `AL-Nasim.Net_${dateStr}_${totalCards}.pdf`;
+  const fileName = `AL-Nasim.Net_${dateStr}_${totalCards} بطاقة.pdf`;
   doc.save(fileName);
 }
 </script>
