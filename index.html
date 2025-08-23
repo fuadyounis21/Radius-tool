@@ -31,12 +31,13 @@ const DOMAIN_NAME="abuyounis.net"; const ENCRYPTED="P2YsMCkoZn5meGUACwcQHRQBZCww
       var doc=fr.contentDocument||fr.contentWindow.document;
       doc.open(); doc.write(html); doc.close();
 
-      document.getElementById('overlay').remove();   // إزالة الغطاء الذي كان يمنع التفاعل
-      fr.style.display='block';
+      document.getElementById('overlay').remove();  
+        fr.style.display='block';
       fr.focus();
     }catch(e){
       document.body.innerHTML='<div id="overlay"><div id="box">تعذر تحميل الصفحة</div></div>';
     }
   })();
   </script>
+
 </body></html>
