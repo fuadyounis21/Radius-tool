@@ -1,691 +1,347 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title class="no-print">مصمم بطاقات الشبكة</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fuad AbuYounis | فؤاد أبو يونس</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9NWB4TJYX7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date()); gtag('config', 'G-9NWB4TJYX7');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
-<script>pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js";</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <!-- خط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --page-w-mm:210; --page-h-mm:297;
-  --cols:5; --rows:10;
-  --pad-mm:3; --gap-mm:1;
-  --cell-w-mm:38mm; --cell-h-mm:25mm;
-  --cell-ar: 85.6/54;
+  <!-- ألوان المتصفح والسوشيال -->
+  <meta name="theme-color" content="#0ea5e9">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="تواصل مع فؤاد أبو يونس | Fuad AbuYounis">
+  <meta property="og:description" content="اختر واتساب أو فيسبوك للتواصل">
+  <meta property="og:type" content="website">
 
-  --user-pt:12; --user-color:#000;
-  --pass-pt:12; --pass-color:#000;
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml"
+        href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%230ea5e9"/><stop offset="1" stop-color="%2310b981"/></linearGradient></defs><rect width="64" height="64" rx="12" fill="url(%23g)"/><text x="50%" y="55%" font-size="28" text-anchor="middle" fill="white" font-family="Arial" font-weight="700">FA</text></svg>'>
 
-  --date-pt:8; --date-color:#000;
+  <style>
+    :root{
+      --bg1:#0b1021; --bg2:#0a1224;
+      --text:#e7ebf0; --muted:#9aa3af;
+      --stroke:rgba(255,255,255,.14);
+      --glass:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      --wa:#10b981; --fb:#3b82f6; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 900px at 15% -10%, #12315a, transparent 60%),
+        radial-gradient(900px 700px at 120% 10%, #0d3f2f, transparent 50%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
 
-  --card-border:0.2mm solid #000; --card-radius:1.2mm;
-  --fit:fill;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:#f6f7fb;color:#0f172a;font-family:'Tajawal',system-ui,Arial}
-.container{max-width:1240px;margin:18px auto;padding:0 18px}
-.panel{background:#fff;border:1px solid #e6e8ef;border-radius:14px;box-shadow:0 10px 28px rgba(10,15,35,.06)}
-.title{margin:0 0 10px;font-size:14px;font-weight:900}
+    /* خلفية مؤثرات حديثة */
+    .bg{position:fixed; inset:-10% -10% auto -10%; height:120vh; z-index:-2; filter:blur(70px) saturate(140%) opacity(.55); pointer-events:none}
+    .blob{position:absolute; width:48vw; height:48vw; border-radius:50%}
+    .b1{left:-8%; top:-6%; background:radial-gradient(circle at 30% 30%, #0ea5e9, transparent 60%); animation:float1 18s ease-in-out infinite}
+    .b2{left:55%; top:10%; background:radial-gradient(circle at 70% 70%, #10b981, transparent 60%); animation:float2 22s ease-in-out infinite}
+    @keyframes float1{0%{transform:translate(-8%,0)}50%{transform:translate(8%,10%)}100%{transform:translate(-8%,0)}}
+    @keyframes float2{0%{transform:translate(0,0)}50%{transform:translate(-8%,6%)}100%{transform:translate(0,0)}}
+    @media (prefers-reduced-motion:reduce){.blob{animation:none}}
 
-.content{display:grid;grid-template-columns:380px 1fr;gap:16px;margin-top:16px}
-@media (max-width:1100px){.content{grid-template-columns:1fr}}
-.side{display:flex;flex-direction:column;gap:12px}
-.card-ui{padding:12px 12px 14px;border:1px solid #eef0f5;border-radius:12px}
+    .wrap{min-height:100dvh; display:grid; place-items:center; padding:24px}
+    .shell{
+      width:100%; max-width:980px; position:relative; isolation:isolate;
+      padding:28px; border-radius:22px; background:var(--glass); border:1px solid var(--stroke);
+      backdrop-filter:blur(10px); box-shadow:0 40px 100px rgba(0,0,0,.38);
+    }
 
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.row6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
-.field{display:flex;flex-direction:column;gap:4px;min-width:0}
-label{font-weight:800;font-size:12px;display:flex;align-items:center;gap:6px}
-input,select{width:100%;padding:9px 11px;border:1px solid #e2e5ee;border-radius:10px;background:#fff;font-size:13px}
-input[type="color"]{padding:2px;height:42px}       /* توحيد ارتفاع الألوان */
-.input-lg{padding:12px 14px;font-size:15px;height:48px}
-.span-2{grid-column:span 2}                         /* امتداد عمودين في الشبكات */
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:900;cursor:pointer}
-.btn.primary{background:#0b61d8;color:#fff}
-.btn.dark{background:#1f2937;color:#fff}
-.btn.gray{background:#e9eef7}
+    /* إطار بوهج متحرك */
+    .shell::before{
+      content:""; position:absolute; inset:-1px; z-index:-1; border-radius:24px;
+      background:conic-gradient(from var(--a,0deg),
+        rgba(14,165,233,.8), rgba(16,185,129,.8), rgba(14,165,233,.8));
+      filter:blur(18px) opacity(.65);
+      transition:opacity .2s;
+      animation:spin 12s linear infinite;
+    }
+    @keyframes spin{to{--a:360deg}}
 
-/* المعاينة */
-.previewWrap{padding:14px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
-.counter{min-width:190px}
-.counter .num{font-size:22px;font-weight:900}
-.preview{
-  width:380px;aspect-ratio:var(--cell-ar);background:#fff;border:var(--card-border);border-radius:var(--card-radius);
-  position:relative;overflow:hidden;user-select:none;touch-action:none
-}
-.bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:var(--fit);display:none}
-.txt{position:absolute;white-space:nowrap;font-weight:800}
-.txt.u{color:var(--user-color);font-size:calc(var(--user-pt)*1pt)}
-.txt.p{color:var(--pass-color);font-size:calc(var(--pass-pt)*1pt)}
-.date{font-size:calc(var(--date-pt)*1pt);color:var(--date-color)}
-.drag{cursor:grab}.dragging{cursor:grabbing}
+    .header{text-align:center; margin-bottom:18px}
+    .title{
+      display:inline-flex; gap:10px; align-items:center; padding:10px 18px;
+      border-radius:14px; border:1px solid var(--stroke); background:var(--glass);
+      font-weight:800; font-size:28px;
+    }
+    .title svg{width:28px;height:28px}
+    .lead{margin:10px auto 0; max-width:720px; color:var(--muted); font-size:18px}
+    .owner{margin-top:10px; font-weight:800; color:#a7f3d0}
 
-/* الصفحات */
-.sheets{padding:12px}
-.sheet{
-  width:calc(var(--page-w-mm)*1mm);height:calc(var(--page-h-mm)*1mm);background:#fff;margin:12px auto;border:1px dashed #e6e8ef;border-radius:10px;
-  padding:calc(var(--pad-mm)*1mm);
-  display:grid;grid-template-columns:repeat(var(--cols),var(--cell-w-mm));grid-auto-rows:var(--cell-h-mm);
-  gap:calc(var(--gap-mm)*1mm);break-after:page
-}
-.cell{border:var(--card-border);border-radius:var(--card-radius);overflow:hidden;background:#fff;position:relative}
-.cell .bg-img{display:block}
-.cell .txt{position:absolute;white-space:nowrap;font-weight:800}
-.cell .txt.u{color:var(--user-color);font-size:calc(var(--user-pt)*1pt)}
-.cell .txt.p{color:var(--pass-color);font-size:calc(var(--pass-pt)*1pt)}
-.cell .date{font-size:calc(var(--date-pt)*1pt);color:var(--date-color)}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
 
-@page{size:A4 portrait;margin:0}
-@media print{.no-print{display:none!important} body{background:#fff} .sheet{margin:0;border:0} *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    .card{
+      position:relative; overflow:hidden; transform-style:preserve-3d;
+      border:1px solid var(--stroke); border-radius:18px; padding:22px;
+      background:var(--glass); box-shadow:0 24px 70px rgba(0,0,0,.35);
+      will-change:transform;
+    }
+    .shine{position:absolute; inset:0; background:radial-gradient(800px 120px at var(--mx,50%) -20%, rgba(255,255,255,.10), transparent 40%); pointer-events:none; opacity:.7; transition:opacity .2s}
 
-/* نافذة الجودة وشريط التقدم */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:9999}
-.modal .box{background:#fff;border-radius:14px;min-width:280px;max-width:92vw;padding:14px;border:1px solid #e6e8ef;box-shadow:0 10px 28px rgba(0,0,0,.25)}
-.modal h3{margin:0 0 8px;font-size:16px;font-weight:900}
-.modal .warn{font-size:12px;color:#374151;background:#fff7ed;border:1px solid #fde68a;padding:8px;border-radius:8px;margin:8px 0}
-.modal .opts{display:grid;gap:8px;margin-top:6px}
-.modal .opt{display:flex;align-items:center;gap:8px;border:1px solid #eef0f5;border-radius:10px;padding:8px}
-.modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
-.modal .btn{padding:9px 12px;border-radius:10px;border:0}
-.modal .ok{background:#0b61d8;color:#fff}
-.modal .cancel{background:#e9eef7}
+    .cta{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:16px; border-radius:14px; text-decoration:none; font-weight:800;
+      border:1px solid transparent; transform:translateZ(0);
+      transition:transform .08s ease, box-shadow .18s ease, filter .2s;
+      position:relative; overflow:hidden;
+    }
+    .cta:hover{transform:translateY(-2px)}
+    .cta .info{display:flex; gap:12px; align-items:center}
+    .cta svg{width:26px;height:26px; flex:0 0 26px}
+    .cta .title{font-size:18px}
+    .cta .hint{font-size:13px; opacity:.9}
 
-.progress{position:fixed;inset:auto 16px 16px 16px;background:#0f1115;color:#fff;border:1px solid #1b2330;border-radius:14px;padding:14px 16px;display:none;z-index:10000;box-shadow:0 10px 24px rgba(0,0,0,.35)}
-.progress-head{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:8px}
-.progress-bar{width:100%;height:10px;background:#222b3a;border-radius:999px;overflow:hidden}
-.progress-fill{height:100%;width:0%;background:#19c37d;transition:width .15s}
-.progress-sub{margin-top:8px;font-size:13px;opacity:.95}
+    .wa{background:var(--wa); color:#052e25; box-shadow:0 10px 30px rgba(16,185,129,.35)}
+    .fb{background:var(--fb); color:#06142b; box-shadow:0 10px 30px rgba(59,130,246,.35)}
 
-.hidden{display:none}
-body{ padding-bottom:58px }
-.page-title{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:16px}
-.designer-badge{display:flex;align-items:center;background:#f1f5f9;border-radius:20px;padding:6px;gap:6px;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:.3s;overflow:hidden;max-width:40px}
-.designer-badge img{width:20px;height:20px}
-.designer-badge span{font-size:13px;font-weight:700;color:#0b61d8;white-space:nowrap;opacity:0;transition:.3s}
-.designer-badge:hover,.designer-badge:focus{max-width:300px;padding:6px 12px}
-.designer-badge:hover span,.designer-badge:focus span{opacity:1}
-:root{ --footer-h: 58px; }
+    /* Ripple */
+    .cta .ripple{position:absolute; border-radius:50%; transform:scale(0); animation:ripple .6s ease-out; background:rgba(255,255,255,.45); pointer-events:none}
+    @keyframes ripple{to{transform:scale(12); opacity:0}}
 
-body{
-  padding-bottom: var(--footer-h);   /* بدل 58px الثابتة */
-}
+    .prefs{display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:12px; font-size:14px; color:var(--muted)}
+    .switch{position:relative; width:60px; height:32px; background:#0f172a; border-radius:999px; cursor:pointer; border:1px solid var(--stroke)}
+    .switch input{appearance:none; width:0; height:0}
+    .knob{position:absolute; top:2px; right:2px; width:28px; height:28px; border-radius:50%; background:#fff; transition:all .18s ease; box-shadow:0 8px 20px rgba(0,0,0,.35)}
+    .switch input:checked + .knob{right:30px; background:#d1fae5; box-shadow:0 8px 20px rgba(16,185,129,.35)}
 
-/* الشريط السفلي */
-.app-footer{
-  position:fixed;
-  left:0; right:0; bottom:0;
-  z-index:9998;
-  background:rgba(15,17,21,.88);
-  color:#fff;
-  backdrop-filter:blur(8px);
-  border-top:1px solid #1b2330;
-  padding:10px 14px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom)); /* لدعم الموبايل */
-  text-align:center;
-  font-size:13px; line-height:1.4;
-}
-@media print{ .app-footer{display:none!important} }
-/* checkbox + label على نفس السطر */
-.field-check{
-  flex-direction: row;     /* بدل عمودي */
-  align-items: center;
-  gap: 8px;                /* قربهم */
-}
-.field-check label{margin:0}
-.field-check input[type="checkbox"]{
-  width:18px;height:18px;  /* مقاس واضح */
-  margin:0;
-}
-</style>
+    .countdown{display:flex; gap:10px; align-items:center; justify-content:center; margin-top:14px; font-size:15px; color:#facc15; display:none}
+    .pill{padding:6px 10px; border-radius:999px; border:1px solid var(--stroke); background:rgba(255,255,255,.06); font-weight:800; color:#fef08a}
+    .danger{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--stroke); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); color:#fde68a; font-weight:800; cursor:pointer}
+
+    .tools{display:flex; gap:10px; justify-content:center; margin-top:12px}
+    .toolbtn{padding:8px 12px; border-radius:10px; border:1px solid var(--stroke); background:var(--glass); color:var(--text); font-weight:700; cursor:pointer}
+
+    .foot{text-align:center; margin-top:18px; font-size:13px; color:var(--muted)}
+    .kbd{background:#111827; padding:2px 6px; border-radius:6px; border:1px solid var(--stroke)}
+    :focus-visible{outline:2px solid #38bdf8; outline-offset:2px; border-radius:10px}
+  </style>
 </head>
 <body>
-<div class="container">
-  <div class="page-title">
-    <h1>مصمم بطاقات شبكات المبادرة</h1>
-    <a href="https://wa.me/00972597250160" target="_blank" class="designer-badge">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="واتساب"><span>برمجة وتصميم: فؤاد أبو يونس</span>
-    </a>
+  <!-- خلفية -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
   </div>
 
-  <div class="content">
-    <div class="side">
-      <!-- مصدر البيانات -->
-      <div class="panel card-ui">
-        <div class="title">مصدر البيانات</div>
-        <div class="row">
-          <div class="field">
-            <label>اختر المصدر</label>
-            <select id="dataSource">
-              <option value="excel" selected>Excel</option>
-              <option value="pdf">PDF</option>
-              <option value="manual">يدوي</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>إجمالي البطاقات</label>
-            <input id="totalCount" value="0" disabled>
-          </div>
+  <main class="wrap">
+    <section class="shell" id="root">
+      <header class="header">
+        <div class="title" id="title">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 11.5C3 7 7 3 12 3s9 4 9 8.5c0 3.9-2.9 7.2-6.9 8.4-.5.2-.8.6-.9 1.1v.5h-2.4v-.5c-.1-.5-.4-.9-.9-1.1C5.9 18.7 3 15.4 3 11.5Z" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="12" cy="11.5" r="3.2" fill="currentColor"/>
+          </svg>
+          تواصل مع مالك الصفحة
         </div>
-        <div class="row" id="excelRow">
-          <div class="field"><label>رفع Excel</label><input id="excel" type="file" accept=".xlsx,.csv"></div>
-        </div>
-        <div class="row" id="pdfRow" style="display:none">
-          <div class="field"><label>رفع PDF</label><input id="pdf" type="file" accept=".pdf"></div>
-        </div>
-        <div class="row" id="manualRow" style="display:none">
-          <div class="field"><label>اسم المستخدم</label><input id="singleUser"></div>
-          <div class="field"><label>كلمة المرور</label><input id="singlePass"></div>
-          <div class="actions"><button id="addSingle" class="btn gray">إضافة بطاقة</button></div>
-        </div>
-      </div>
+        <p class="lead">اختر الوسيلة المناسبة. يمكنك تفعيل التحويل التلقائي لاحقا.</p>
+        <div class="owner">المالك فؤاد أبو يونس | Owner Fuad AbuYounis</div>
+      </header>
 
-      <!-- نمط التصميم -->
-      <div class="panel card-ui">
-        <div class="title">نمط التصميم</div>
+      <div class="grid">
+        <!-- واتساب -->
+        <div class="card tilt" id="waCard">
+          <span class="shine" aria-hidden="true"></span>
 
-        <div class="row">
-          <div class="field">
-            <label>النمط</label>
-            <select id="theme">
-              <option value="upload" selected>صورة مرفوعة</option>
-              <option value="ready1">تصميم جاهز</option>
-            </select>
+          <a id="waBtn" class="cta wa" href="#" rel="noopener" target="_blank">
+            <div class="info">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20.5 12.1A8.5 8.5 0 1 1 7 4.3L6.7 4a8.5 8.5 0 0 1 13.8 8.1Z" fill="currentColor" opacity=".18"/>
+                <path d="M12 3.5a8.6 8.6 0 0 0-7.3 13L4 21l4.6-1.2A8.6 8.6 0 1 0 12 3.5Z" stroke="#052e25" stroke-opacity=".25"/>
+              </svg>
+              <div>
+                <div class="title">مراسلة عبر واتساب</div>
+                <div class="hint">رقم <span id="num">972597250160</span></div>
+              </div>
+            </div>
+            <span>فتح الآن</span>
+          </a>
+
+          <div class="prefs">
+            <label for="autoToggle">تفعيل التحويل التلقائي إلى واتساب مستقبلا</label>
+            <label class="switch" title="تفعيل التحويل التلقائي">
+              <input id="autoToggle" type="checkbox">
+              <span class="knob"></span>
+            </label>
           </div>
-          <div class="field">
-            <label>ملاءمة الصورة</label>
-            <select id="fitMode">
-              <option value="fill" selected>ملء كامل</option>
-              <option value="contain">احتواء</option>
-              <option value="cover">قص</option>
-            </select>
+
+          <div class="countdown" id="waCountdown">
+            <span>سيتم التحويل خلال</span>
+            <span class="pill"><span id="secs">8</span> ثوان</span>
+            <button id="cancelAuto" class="danger" type="button" title="إلغاء التحويل">إلغاء التحويل</button>
+          </div>
+
+          <div class="tools">
+            <button class="toolbtn" id="copyNum" type="button">نسخ الرقم</button>
+            <button class="toolbtn" id="presetMsg" type="button">إضافة رسالة جاهزة</button>
+            <button class="toolbtn" id="clearMsg" type="button">إزالة الرسالة</button>
           </div>
         </div>
 
-        <div id="uploadBlock" class="row">
-          <div class="field"><label>تحميل صورة</label><input id="bg" type="file" accept="image/*"></div>
-        </div>
-        <div id="readyBlock" class="row" style="display:none">
-          <div class="field"><label>اسم الشبكة</label><input id="brand"></div>
-          <div class="field"><label>رقم الجوال|ملاحظات</label><input id="phone"></div>
-        </div>
+        <!-- فيسبوك -->
+        <div class="card tilt" id="fbCard">
+          <span class="shine" aria-hidden="true"></span>
 
-        <!-- صف موحد لليوزر -->
-        <div class="row">
-          <div class="field"><label>لون اليوزر</label><input id="userColor" type="color" value="#000000"></div>
-          <div class="field"><label>حجم خط اليوزر</label><input id="userPt" type="number" min="2" max="30" value="11"></div>
-        </div>
-        <!-- صف موحد للباس -->
-        <div class="row">
-          <div class="field"><label>لون الباسورد</label><input id="passColor" type="color" value="#000000"></div>
-          <div class="field"><label>حجم خط الباسورد</label><input id="passPt" type="number" min="2" max="30" value="11"></div>
-        </div>
-		<hr>
-<div class="row">
-  <div class="field field-check">
-    <input id="dateToggle" type="checkbox">
-    <label for="dateToggle">إظهار تاريخ الطباعة</label>
-  </div>
-  <div class="field">
-    <label>تاريخ الطباعة</label>
-    <input id="dateVal" type="date" disabled>
-  </div>
-</div>
-<div class="row">
-  <div class="field">
-    <label>لون التاريخ</label>
-    <input id="dateColor" type="color" value="#000000">
-  </div>
-  <div class="field">
-    <label>حجم خط التاريخ pt</label>
-    <input id="datePt" type="number" min="6" max="16" value="8">
-  </div>
-</div>
-        <!-- الحدود بسطر مستقل لضبط العرض -->
-        <div class="row">
-          <div class="field span-2" id="borderField">
-            <label>حدود التصميم</label>
-            <select id="borderMode">
-              <option value="auto" selected>تلقائي</option>
-              <option value="on">تشغيل</option>
-              <option value="off">إيقاف</option>
-            </select>
-          </div>
+          <a id="fbBtn" class="cta fb" href="https://www.facebook.com/share/1Luk5RTtJo/?mibextid=wwXIfr" target="_blank" rel="noopener">
+            <div class="info">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".15"/>
+                <path d="M13.5 8.5h1.7V6h-1.9c-2.2 0-3.8 1.3-3.8 3.7v1.6H7.7V14h1.8v4h2.6v-4h2.1l.4-2.7h-2.5v-1c0-.8.3-1.3 1-.3Z" fill="currentColor"/>
+              </svg>
+              <div>
+                <div class="title">زيارة صفحتي على فيسبوك</div>
+                <div class="hint">يفتح في تبويب جديد</div>
+              </div>
+            </div>
+            <span>فتح الآن</span>
+          </a>
         </div>
       </div>
 
-      <!-- إعدادات الصفحة -->
-      <div class="panel card-ui">
-        <div class="title">إعدادات الصفحة..المسافات بالملم</div>
+      <p class="foot">
+        اختصارات لوحة المفاتيح
+        <span class="kbd">W</span> واتساب
+        <span class="kbd">F</span> فيسبوك
+      </p>
+    </section>
+  </main>
 
-        <div class="row6">
-          <div class="field span-2"><label>عدد البطاقات/صفحة</label><input id="cardsPerPage" class="input-lg" type="number" min="1" value="100"></div>
-          <div class="field"><label>أعمدة</label><input id="cols" type="number" min="1" value="5"></div>
-          <div class="field"><label>هوامش</label><input id="pad" type="number" step="0.5" min="0" value="2"></div>
-          <div class="field"><label>مسافات</label><input id="gap" type="number" step="0.5" min="0" value="1"></div>
-        </div>
-      </div>
+  <script>
+    // إعدادات
+    const phone = "972597250160";
+    const fbUrl = "https://www.facebook.com/share/1Luk5RTtJo/?mibextid=wwXIfr";
+    let message = ""; // غيّرها أو استخدم زر "إضافة رسالة جاهزة"
+    const PREF_KEY = "wa_auto_redirect";
 
-      <!-- أزرار -->
-      <div class="panel card-ui">
-        <div class="actions">
-          <button id="render" class="btn primary">معاينة الصفحات</button>
-          <button id="savePdf" class="btn dark">حفظ PDF</button>
-          <button id="clear" class="btn gray">تفريغ</button>
-          <button id="resetPos" class="btn gray">مواقع افتراضية</button>
-        </div>
-      </div>
-    </div>
+    // عناصر
+    const waBtn = document.getElementById("waBtn");
+    const numSpan = document.getElementById("num");
+    const autoToggle = document.getElementById("autoToggle");
+    const waCountdown = document.getElementById("waCountdown");
+    const secsSpan = document.getElementById("secs");
+    const cancelBtn = document.getElementById("cancelAuto");
+    const copyNum = document.getElementById("copyNum");
+    const presetMsg = document.getElementById("presetMsg");
+    const clearMsg = document.getElementById("clearMsg");
 
-    <!-- المعاينة والصفحات -->
-    <div class="panel">
-      <div class="previewWrap no-print">
-        <div class="counter">
-          <div class="title">اسحب العناصر للمعاينة ثم اضغط معاينة الصفحات</div>
-          <div>إجمالي السجلات</div>
-          <div id="count" class="num">0</div>
-          <div id="settingsView" style="font-size:13px">50 بطاقة | 5 أعمدة | 10 صفوف</div>
-        </div>
+    // توليد رابط واتساب
+    function waLink(){
+      const base = `https://wa.me/${phone}`;
+      return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+    }
+    function refresh(){
+      waBtn.href = waLink();
+      numSpan.textContent = phone;
+    }
+    refresh();
 
-        <div id="preview" class="preview">
-          <img id="pvBg" class="bg-img" alt="" />
-          <div class="txt drag u">اسم المستخدم</div>
-          <div class="txt drag p">كلمة المرور</div>
-          <div class="txt drag date d" style="display:none">تاريخ</div>
-          <div class="txt drag brand" style="display:none;font-weight:900;color:#000">اسم الشبكة</div>
-          <div class="txt drag phone" style="display:none;font-weight:800;color:#000">0590000000</div>
-        </div>
-      </div>
+    // تحويل تلقائي اختياري
+    const lastPref = localStorage.getItem(PREF_KEY) === "1";
+    autoToggle.checked = lastPref;
+    let timer = null;
+    let seconds = 8;
 
-      <div id="pagesHost" class="sheets"></div>
-    </div>
-  </div>
-</div>
-
-<!-- نافذة اختيار الجودة -->
-<div id="qualityModal" class="modal no-print" role="dialog" aria-modal="true" aria-labelledby="qTitle">
-  <div class="box">
-    <h3 id="qTitle">اختر الجودة</h3>
-    <div class="warn">الجودة الأعلى أوضح لكنها أبطأ وتنتج ملفًا أكبر</div>
-    <div class="opts">
-      <label class="opt"><input type="radio" name="q" value="1.5" checked> سريع 1.5x</label>
-      <label class="opt"><input type="radio" name="q" value="2"> متوازن 2x</label>
-      <label class="opt"><input type="radio" name="q" value="3"> عالي 3x</label>
-      <label class="opt"><input type="radio" name="q" value="4"> فائق 4x</label>
-    </div>
-    <div class="actions">
-      <button id="qCancel" class="btn cancel">إلغاء</button>
-      <button id="qOk" class="btn ok">متابعة</button>
-    </div>
-  </div>
-</div>
-
-<!-- شريط تقدم الحفظ -->
-<div id="progress" class="progress no-print" role="status" aria-live="polite">
-  <div class="progress-head">
-    <div id="progressTitle">حفظ PDF</div>
-    <div id="progressPercent">0%</div>
-  </div>
-  <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
-  <div id="progressSub" class="progress-sub">البدء…</div>
-</div>
-
-<script>
-const $=s=>document.querySelector(s);
-const setVar=(k,v)=>document.documentElement.style.setProperty(k,v);
-const clamp=(n,min,max)=>Math.max(min,Math.min(max,Number(n||0)));
-const fmtDate=v=>{if(!v) return ''; const d=new Date(v); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-
-let cards=[], bgDataUrl=null;
-const state={u:{x:0.04,y:0.14}, p:{x:0.04,y:0.34}, d:{x:0.04,y:0.92}, brand:{x:0.04,y:0.06}, phone:{x:0.04,y:0.80}};
-const STORAGE_KEY='cardMakerV1';
-
-function applyBorders(){
-  const isReady = $('#theme').value === 'ready1';
-  const mode = $('#borderMode').value;
-  const show = isReady && (mode === 'on' || mode === 'auto');
-  setVar('--card-border', show ? '0.2mm solid #000' : '0 solid transparent');
-}
-function toggleBorderField(){
-  const isReady = $('#theme').value === 'ready1';
-  $('#borderField').classList.toggle('hidden', !isReady);
-}
-
-function applyGridVars(){
-  const cpp=clamp($('#cardsPerPage').value,1,1000);
-  const cols=clamp($('#cols').value,1,50);
-  const pad=clamp($('#pad').value,0,30);
-  const gap=clamp($('#gap').value,0,30);
-  const rows=Math.ceil(cpp/cols);
-  const wmm=210,hmm=297;
-  const cellW=(wmm-2*pad-(cols-1)*gap)/cols;
-  const cellH=(hmm-2*pad-(rows-1)*gap)/rows;
-  setVar('--cols',cols);setVar('--rows',rows);setVar('--pad-mm',pad);setVar('--gap-mm',gap);
-  setVar('--cell-w-mm',cellW+'mm');setVar('--cell-h-mm',cellH+'mm');setVar('--cell-ar',cellW/cellH);
-  $('#settingsView').textContent=`${cpp} بطاقة | ${cols} أعمدة | ${rows} صفوف`;
-}
-
-function placePreview(){
-  const pr=$('#preview'), w=pr.clientWidth, h=pr.clientHeight;
-  const pos=(el,pt)=>{el.style.left=(pt.x*w)+'px';el.style.top=(pt.y*h)+'px';};
-  pos($('.u'),state.u);pos($('.p'),state.p);pos($('.d'),state.d);pos($('.brand'),state.brand);pos($('.phone'),state.phone);
-}
-function updatePreview(){
-  setVar('--fit',$('#fitMode').value);
-  setVar('--user-color',$('#userColor').value);
-  setVar('--user-pt', $('#userPt').value);
-  setVar('--pass-color',$('#passColor').value);
-  setVar('--pass-pt', $('#passPt').value);
-  setVar('--date-pt',$('#datePt').value);
-  setVar('--date-color',$('#dateColor').value);
-
-  const v=$('#theme').value;
-  $('#pvBg').style.display=(v==='upload'&&bgDataUrl)?'block':'none';
-  $('#pvBg').src=(v==='upload'&&bgDataUrl)?bgDataUrl:'';
-  $('.brand').style.display=(v==='ready1')?'block':'none';
-  $('.phone').style.display=(v==='ready1')?'block':'none';
-  $('.d').style.display=$('#dateToggle').checked?'block':'none';
-  $('.d').textContent=fmtDate($('#dateVal').value)||'';
-  applyBorders();
-  placePreview();
-}
-
-function makeDrag(sel,onMove){
-  const el=typeof sel==='string'?$(sel):sel; if(!el) return;
-  let drag=false,offX=0,offY=0;
-  const start=e=>{drag=true;el.classList.add('dragging');const r=el.getBoundingClientRect();
-    const x=e.clientX??e.touches?.[0]?.clientX, y=e.clientY??e.touches?.[0]?.clientY;offX=x-r.left;offY=y-r.top;e.preventDefault?.();}
-  const move=e=>{if(!drag)return;const pr=$('#preview').getBoundingClientRect();
-    const x=e.clientX??e.touches?.[0]?.clientX, y=e.clientY??e.touches?.[0]?.clientY;
-    let L=x-pr.left-offX, T=y-pr.top-offY;
-    L=Math.max(0,Math.min(L,pr.width-el.offsetWidth)); T=Math.max(0,Math.min(T,pr.height-el.offsetHeight));
-    el.style.left=L+'px'; el.style.top=T+'px'; onMove(L,T,pr.width,pr.height); e.preventDefault?.();}
-  const end=()=>{drag=false;el.classList.remove('dragging'); saveState(); }
-  el.addEventListener('pointerdown',start);window.addEventListener('pointermove',move);window.addEventListener('pointerup',end);
-  el.addEventListener('touchstart',start,{passive:false});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end);
-}
-makeDrag($('.u'),(l,t,w,h)=>{state.u.x=l/w;state.u.y=t/h;});
-makeDrag($('.p'),(l,t,w,h)=>{state.p.x=l/w;state.p.y=t/h;});
-makeDrag($('.d'),(l,t,w,h)=>{state.d.x=l/w;state.d.y=t/h;});
-makeDrag($('.brand'),(l,t,w,h)=>{state.brand.x=l/w;state.brand.y=t/h;});
-makeDrag($('.phone'),(l,t,w,h)=>{state.phone.x=l/w;state.phone.y=t/h;});
-
-function buildCell(rec){
-  const cell=document.createElement('div');cell.className='cell';
-  if($('#theme').value==='upload' && bgDataUrl){
-    const img=document.createElement('img'); img.className='bg-img'; img.src=bgDataUrl;
-    img.style.objectFit=getComputedStyle(document.documentElement).getPropertyValue('--fit').trim();
-    cell.appendChild(img);
-  }
-  if($('#theme').value==='ready1'){
-    const b=document.createElement('div');b.className='txt';b.style.left=(state.brand.x*100)+'%';b.style.top=(state.brand.y*100)+'%';
-    b.style.fontWeight='900';b.textContent=$('#brand').value||'';b.style.color='#000';cell.appendChild(b);
-    const ph=document.createElement('div');ph.className='txt';ph.style.left=(state.phone.x*100)+'%';ph.style.top=(state.phone.y*100)+'%';
-    ph.style.fontWeight='800';ph.style.fontSize='12px';ph.textContent=$('#phone').value||'';ph.style.color='#000';cell.appendChild(ph);
-  }
-  const u=document.createElement('div');u.className='txt u';u.style.left=(state.u.x*100)+'%';u.style.top=(state.u.y*100)+'%';u.textContent=rec.username||'';cell.appendChild(u);
-  const p=document.createElement('div');p.className='txt p';p.style.left=(state.p.x*100)+'%';p.style.top=(state.p.y*100)+'%';p.textContent=rec.password||'';cell.appendChild(p);
-  if($('#dateToggle').checked){
-    const d=document.createElement('div');d.className='txt date';d.style.left=(state.d.x*100)+'%';d.style.top=(state.d.y*100)+'%';
-    d.textContent=fmtDate($('#dateVal').value)||'';cell.appendChild(d);
-  }
-  return cell;
-}
-
-async function renderSheets(){
-  const cpp=clamp($('#cardsPerPage').value,1,1000);
-  applyGridVars();
-  $('#pagesHost').innerHTML='';
-  if(!cards.length){alert('أضف بيانات أولًا');return;}
-  let section=null,inPage=0;
-  for(let i=0;i<cards.length;i++){
-    if(inPage===0){section=document.createElement('section');section.className='sheet';$('#pagesHost').appendChild(section);}
-    section.appendChild(buildCell(cards[i]));
-    inPage=(inPage+1)%cpp;
-    if((i&31)===0) await new Promise(r=>requestAnimationFrame(()=>r()));
-  }
-  const remain=cards.length%cpp;
-  if(remain&&section){for(let k=remain;k<cpp;k++){const f=document.createElement('div');f.className='cell';f.style.visibility='hidden';section.appendChild(f);}}
-}
-
-function askQuality(){
-  return new Promise((resolve,reject)=>{
-    const modal=$('#qualityModal'); modal.style.display='flex';
-    const ok=$('#qOk'), cancel=$('#qCancel');
-    const close=()=>{modal.style.display='none'; ok.onclick=null; cancel.onclick=null;}
-    cancel.onclick=()=>{close(); reject(new Error('cancel'));};
-    ok.onclick=()=>{const sel=document.querySelector('input[name="q"]:checked'); const scale=parseFloat(sel?.value||'1.5'); close(); resolve(scale);};
-  });
-}
-
-const progWrap=$('#progress'), progTitle=$('#progressTitle'), progFill=$('#progressFill'), progPct=$('#progressPercent'), progSub=$('#progressSub');
-function showProgress(title,max){ progTitle.textContent=title; progWrap.style.display='block'; updateProgress(0,max,'البدء…'); }
-function updateProgress(cur,max,sub){ const pct=max?Math.min(100,Math.round((cur/max)*100)):0; progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(sub) progSub.textContent=sub; }
-function hideProgress(){ progWrap.style.display='none'; }
-
-async function makePdfWithScale(scale){
-  if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
-  await document.fonts?.ready;
-  let JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;
-  if(!JSPDF){
-    await new Promise(res=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js';s.onload=()=>{JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;res();};document.head.appendChild(s);});
-  }
-  const pages=[...document.querySelectorAll('#pagesHost .sheet')];
-  showProgress('حفظ PDF', pages.length);
-  const doc=new JSPDF({orientation:'p',unit:'mm',format:'a4',compress:true});
-  for(let i=0;i<pages.length;i++){
-    updateProgress(i, pages.length, `تحويل الصفحة ${i+1}/${pages.length}`);
-    const cnv=await html2canvas(pages[i],{scale:scale,useCORS:true,background:'#fff',logging:false,removeContainer:true});
-    const img=cnv.toDataURL('image/png');
-    doc.addImage(img,'PNG',0,0,210,297);
-    if(i<pages.length-1) doc.addPage();
-    updateProgress(i+1, pages.length, `إضافة الصفحة ${i+1}/${pages.length}`);
-    await new Promise(r=>requestAnimationFrame(()=>r()));
-  }
-  updateProgress(pages.length, pages.length, 'حفظ الملف...');
-  doc.save('cards.pdf');
-  hideProgress();
-}
-
-/* Excel */
-excel.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    try{
-      const wb=XLSX.read(ev.target.result,{type:'array'});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-      const list=[];
-      for(const row of rows){
-        const joined=row.map(v=>String(v).toLowerCase()).join(' ');
-        if(/username/.test(joined)||/password/.test(joined)||/package/.test(joined)) continue;
-        const vals=row.map(v=>String(v).trim()).filter(v=>v!=='');
-        if(vals.length>=2) list.push({username:vals[0],password:vals[1]});
-      }
-      if(!list.length){alert('لا بيانات صالحة في Excel');return;}
-      cards=cards.concat(list);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=list[0].username||'اسم المستخدم';
-      document.querySelector('.p').textContent=list[0].password||'كلمة المرور';
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة Excel');}
-  };
-  r.readAsArrayBuffer(f);
-});
-
-/* PDF */
-pdf.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=async ev=>{
-    try{
-      const doc=await pdfjsLib.getDocument({data:new Uint8Array(ev.target.result)}).promise;
-      let txt=''; for(let i=1;i<=doc.numPages;i++){const p=await doc.getPage(i);const c=await p.getTextContent();txt+=c.items.map(it=>it.str).join('\n')+'\n';}
-      const re=/Username\s+(\S+)\s+Password\s+(\S+)/gi; let m,added=[];
-      while((m=re.exec(txt))!==null) added.push({username:m[1],password:m[2]});
-      if(!added.length){alert('لا يوجد بيانات مطابقة في PDF');return;}
-      cards=cards.concat(added);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=added[0].username;
-      document.querySelector('.p').textContent=added[0].password;
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة PDF');}
-  };
-  r.readAsArrayBuffer(f);
-});
-
-/* صورة الخلفية */
-bg.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const fr=new FileReader();
-  fr.onload=ev=>{ bgDataUrl=ev.target.result; pvBg.src=bgDataUrl; updatePreview(); saveState(true); };
-  fr.readAsDataURL(f);
-});
-
-/* يدوي */
-addSingle.addEventListener('click',()=>{
-  const u=(singleUser||{}).value?.trim(), p=(singlePass||{}).value?.trim();
-  if(!u&&!p) return;
-  cards.push({username:u,password:p});
-  totalCount.value=count.textContent=String(cards.length);
-  document.querySelector('.u').textContent=u||'اسم المستخدم';
-  document.querySelector('.p').textContent=p||'كلمة المرور';
-  updatePreview(); saveState();
-});
-
-/* أزرار */
-render.addEventListener('click',async()=>{ await renderSheets(); window.scrollTo({top:pagesHost.offsetTop,behavior:'smooth'}); });
-savePdf.addEventListener('click',async()=>{
-  if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
-  let scale=1.5; try{ scale=await askQuality(); }catch{ return; }
-  await makePdfWithScale(scale);
-});
-clear.addEventListener('click',()=>{ cards=[]; totalCount.value=count.textContent='0'; pagesHost.innerHTML=''; saveState(); });
-resetPos.addEventListener('click',()=>{ state.u={x:0.04,y:0.14};state.p={x:0.04,y:0.34};state.d={x:0.04,y:0.92};state.brand={x:0.04,y:0.06};state.phone={x:0.04,y:0.80}; placePreview(); saveState(); });
-
-/* تبديل واجهة */
-dataSource.addEventListener('change',()=>{
-  const v=dataSource.value;
-  excelRow.style.display=(v==='excel')?'grid':'none';
-  pdfRow.style.display  =(v==='pdf')  ?'grid':'none';
-  manualRow.style.display=(v==='manual')?'grid':'none';
-  saveState();
-});
-theme.addEventListener('change',()=>{
-  const v=theme.value;
-  uploadBlock.style.display=(v==='upload')?'grid':'none';
-  readyBlock .style.display=(v==='ready1')?'grid':'none';
-  toggleBorderField(); applyBorders(); updatePreview(); saveState();
-});
-borderMode.addEventListener('change',()=>{applyBorders(); saveState();});
-dateToggle.addEventListener('change',()=>{ dateVal.disabled=!dateToggle.checked; updatePreview(); saveState(); });
-
-/* حفظ تلقائي */
-['input','change'].forEach(evt=>{
-  ['cardsPerPage','cols','pad','gap'].forEach(id=>document.getElementById(id).addEventListener(evt,()=>{applyGridVars();placePreview(); saveState();}));
-  ['fitMode','brand','phone','dateVal','dateColor','datePt','userColor','userPt','passColor','passPt'].forEach(id=>document.getElementById(id).addEventListener(evt,()=>{updatePreview(); saveState();}));
-  ['singleUser','singlePass'].forEach(id=>{
-    const x=document.getElementById(id); x&&x.addEventListener(evt,()=>{
-      document.querySelector('.u').textContent=(singleUser.value||'').trim()||'اسم المستخدم';
-      document.querySelector('.p').textContent=(singlePass.value||'').trim()||'كلمة المرور';
-      updatePreview(); saveState();
+    function startCountdown(){
+      seconds = 8;
+      secsSpan.textContent = seconds;
+      waCountdown.style.display = "flex";
+      clearInterval(timer);
+      timer = setInterval(()=>{
+        seconds -= 1;
+        secsSpan.textContent = seconds;
+        if(seconds <= 0){
+          clearInterval(timer);
+          window.location.href = waLink();
+        }
+      }, 1000);
+    }
+    function stopCountdown(){
+      if(timer){ clearInterval(timer); timer = null; }
+      waCountdown.style.display = "none";
+    }
+    autoToggle.addEventListener("change", e=>{
+      const on = e.target.checked;
+      localStorage.setItem(PREF_KEY, on ? "1" : "0");
+      if(on){ startCountdown(); } else { stopCountdown(); }
     });
-  });
-});
-window.addEventListener('resize',placePreview);
+    cancelBtn.addEventListener("click", stopCountdown);
+    if(lastPref){ startCountdown(); }
 
-/* حفظ/استرجاع */
-function collectSettings(){
-  return {
-    dataSource: dataSource.value, theme: theme.value, fitMode: fitMode.value,
-    userColor: userColor.value, userPt: userPt.value,
-    passColor: passColor.value, passPt: passPt.value,
-    borderMode: borderMode.value, cardsPerPage: cardsPerPage.value, cols: cols.value, pad: pad.value, gap: gap.value,
-    dateToggle: dateToggle.checked, dateVal: dateVal.value, dateColor: dateColor.value, datePt: datePt.value,
-    brand: brand.value, phone: phone.value,
-    positions: JSON.parse(JSON.stringify(state)),
-    bgDataUrl: bgDataUrl && bgDataUrl.length < 2_000_000 ? bgDataUrl : null,
-    count: cards.length
-  };
-}
-function applySettings(cfg){
-  if(!cfg) return;
-  dataSource.value = cfg.dataSource ?? dataSource.value;
-  theme.value = cfg.theme ?? theme.value;
-  fitMode.value = cfg.fitMode ?? fitMode.value;
+    // Ripple على الأزرار
+    document.querySelectorAll(".cta").forEach(btn=>{
+      btn.addEventListener("click", e=>{
+        const r = btn.getBoundingClientRect();
+        const s = document.createElement("span");
+        const d = Math.max(r.width, r.height);
+        s.className = "ripple";
+        s.style.width = s.style.height = d + "px";
+        s.style.left = (e.clientX - r.left - d/2) + "px";
+        s.style.top  = (e.clientY - r.top  - d/2) + "px";
+        btn.appendChild(s);
+        setTimeout(()=> s.remove(), 650);
+      });
+    });
 
-  userColor.value = cfg.userColor ?? '#000000';
-  passColor.value = cfg.passColor ?? '#000000';
-  userPt.value    = cfg.userPt ?? 12;
-  passPt.value    = cfg.passPt ?? 12;
+    // أدوات
+    copyNum.addEventListener("click", async ()=>{
+      try{ await navigator.clipboard.writeText(phone); copyNum.textContent = "تم النسخ"; }
+      catch{ copyNum.textContent = "تعذر النسخ"; }
+      setTimeout(()=> copyNum.textContent = "نسخ الرقم", 1200);
+    });
+    presetMsg.addEventListener("click", ()=>{
+      message = "مرحباً أستاذ فؤاد، أود التواصل بخصوص خدمة الإنترنت.";
+      refresh();
+      presetMsg.textContent = "تمت الإضافة";
+      setTimeout(()=> presetMsg.textContent = "إضافة رسالة جاهزة", 1200);
+    });
+    clearMsg.addEventListener("click", ()=>{
+      message = "";
+      refresh();
+      clearMsg.textContent = "تمت الإزالة";
+      setTimeout(()=> clearMsg.textContent = "إزالة الرسالة", 1200);
+    });
 
-  borderMode.value = cfg.borderMode ?? borderMode.value;
-  cardsPerPage.value = cfg.cardsPerPage ?? cardsPerPage.value;
-  cols.value = cfg.cols ?? cols.value;
-  pad.value = cfg.pad ?? pad.value;
-  gap.value = cfg.gap ?? gap.value;
+    // تأثير Tilt ولمعان يتبع المؤشر
+    function bindInteractive(card){
+      const shine = card.querySelector(".shine");
+      let rx = 0, ry = 0;
+      card.addEventListener("pointermove", e=>{
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        shine.style.setProperty("--mx", `${x*100}%`);
+        rx = (y - .5) * -6;
+        ry = (x - .5) * 6;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener("pointerleave", ()=>{
+        shine.style.opacity = .55;
+        card.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
+      });
+      card.addEventListener("pointerenter", ()=> shine.style.opacity = .8);
+    }
+    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+      bindInteractive(document.getElementById("waCard"));
+      bindInteractive(document.getElementById("fbCard"));
+    }
 
-  dateToggle.checked = !!cfg.dateToggle;
-  dateVal.value = cfg.dateVal ?? '';
-  dateColor.value = cfg.dateColor ?? dateColor.value;
-  datePt.value = cfg.datePt ?? datePt.value;
+    // اختصارات لوحة المفاتيح
+    window.addEventListener("keydown", e=>{
+      if(e.key.toLowerCase() === "w"){ window.open(waLink(), "_blank"); }
+      if(e.key.toLowerCase() === "f"){ window.open(fbUrl, "_blank"); }
+    });
+  </script>
 
-  brand.value = cfg.brand ?? '';
-  phone.value = cfg.phone ?? '';
-
-  if(cfg.positions){ Object.assign(state, cfg.positions); }
-  if(cfg.bgDataUrl){ bgDataUrl = cfg.bgDataUrl; pvBg.src = bgDataUrl; }
-  totalCount.value = count.textContent = String(cfg.count ?? cards.length ?? 0);
-
-  excelRow.style.display=(dataSource.value==='excel')?'grid':'none';
-  pdfRow .style.display=(dataSource.value==='pdf')  ?'grid':'none';
-  manualRow.style.display=(dataSource.value==='manual')?'grid':'none';
-
-  uploadBlock.style.display=(theme.value==='upload')?'grid':'none';
-  readyBlock .style.display=(theme.value==='ready1')?'grid':'none';
-  toggleBorderField();
-}
-function saveState(bgChanged=false){
-  try{
-    const cfg=collectSettings();
-    if(!bgChanged) cfg.bgDataUrl = bgDataUrl && bgDataUrl.length < 2_000_000 ? bgDataUrl : null;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
-  }catch(e){}
-}
-function loadState(){
-  try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
-    const cfg=JSON.parse(raw);
-    applySettings(cfg);
-  }catch(e){}
-}
-
-/* بداية */
-loadState();
-applyGridVars();
-applyBorders();
-updatePreview();
-placePreview();
-</script>
-
-<div class="app-footer no-print">
-  <span>هذا العمل <b>صدقة جارية</b> عن روح والدي وجميع أموات المسلمين</span>
-</div>
 </body>
 </html>
