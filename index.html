@@ -51,9 +51,9 @@ html,body{margin:0;background:#f6f7fb;color:#0f172a;font-family:'Tajawal',system
 .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 label{font-weight:800;font-size:12px;display:flex;align-items:center;gap:6px}
 input,select{width:100%;padding:9px 11px;border:1px solid #e2e5ee;border-radius:10px;background:#fff;font-size:13px}
-input[type="color"]{padding:2px;height:42px}       /* توحيد ارتفاع الألوان */
+input[type="color"]{padding:2px;height:42px}
 .input-lg{padding:12px 14px;font-size:15px;height:48px}
-.span-2{grid-column:span 2}                         /* امتداد عمودين في الشبكات */
+.span-2{grid-column:span 2}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .btn{border:0;border-radius:10px;padding:10px 13px;font-weight:900;cursor:pointer}
 .btn.primary{background:#0b61d8;color:#fff}
@@ -93,18 +93,29 @@ input[type="color"]{padding:2px;height:42px}       /* توحيد ارتفاع ا
 @page{size:A4 portrait;margin:0}
 @media print{.no-print{display:none!important} body{background:#fff} .sheet{margin:0;border:0} *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
-/* نافذة الجودة وشريط التقدم */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:9999}
-.modal .box{background:#fff;border-radius:14px;min-width:280px;max-width:92vw;padding:14px;border:1px solid #e6e8ef;box-shadow:0 10px 28px rgba(0,0,0,.25)}
-.modal h3{margin:0 0 8px;font-size:16px;font-weight:900}
-.modal .warn{font-size:12px;color:#374151;background:#fff7ed;border:1px solid #fde68a;padding:8px;border-radius:8px;margin:8px 0}
+/* النوافذ الجميلة: الجودة + المعلومات */
+.modal{position:fixed;inset:0;display:none;place-items:center;z-index:9999}
+.modal::before{content:"";position:absolute;inset:0;background:rgba(15,18,27,.55);backdrop-filter:blur(6px)}
+.modal .box{
+  position:relative;background:#fff;border-radius:16px;min-width:320px;max-width:92vw;
+  padding:16px;border:1px solid #e7e9f2;
+  box-shadow:0 18px 38px rgba(0,0,0,.18), 0 6px 14px rgba(0,0,0,.10);
+  animation:pop .16s ease-out;
+}
+@keyframes pop{from{transform:scale(.96);opacity:.0}to{transform:scale(1);opacity:1}}
+.modal h3{margin:0 0 6px;font-size:16px;font-weight:900;text-align:center}
+.modal .warn{font-size:12px;color:#334155;background:#f8fafc;border:1px dashed #e2e8f0;padding:8px 10px;border-radius:10px;margin:8px 0;text-align:center}
 .modal .opts{display:grid;gap:8px;margin-top:6px}
-.modal .opt{display:flex;align-items:center;gap:8px;border:1px solid #eef0f5;border-radius:10px;padding:8px}
-.modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.modal .opt{display:flex;align-items:center;gap:10px;border:1px solid #e7e9f2;border-radius:12px;padding:10px;background:#fff;transition:.15s}
+.modal .opt:hover{border-color:#c7d2fe;background:#f8fafc}
+.modal .opt input{width:18px;height:18px}
+.modal .actions{display:flex;gap:8px;justify-content:space-between;margin-top:12px}
 .modal .btn{padding:9px 12px;border-radius:10px;border:0}
 .modal .ok{background:#0b61d8;color:#fff}
 .modal .cancel{background:#e9eef7}
+.modal .content{font-size:14px;line-height:1.7;text-align:center;padding:6px 0}
 
+/* شريط التقدم */
 .progress{position:fixed;inset:auto 16px 16px 16px;background:#0f1115;color:#fff;border:1px solid #1b2330;border-radius:14px;padding:14px 16px;display:none;z-index:10000;box-shadow:0 10px 24px rgba(0,0,0,.35)}
 .progress-head{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:8px}
 .progress-bar{width:100%;height:10px;background:#222b3a;border-radius:999px;overflow:hidden}
@@ -120,37 +131,20 @@ body{ padding-bottom:58px }
 .designer-badge:hover,.designer-badge:focus{max-width:300px;padding:6px 12px}
 .designer-badge:hover span,.designer-badge:focus span{opacity:1}
 :root{ --footer-h: 58px; }
-
-body{
-  padding-bottom: var(--footer-h);   /* بدل 58px الثابتة */
-}
+body{ padding-bottom: var(--footer-h); }
 
 /* الشريط السفلي */
 .app-footer{
-  position:fixed;
-  left:0; right:0; bottom:0;
-  z-index:9998;
-  background:rgba(15,17,21,.88);
-  color:#fff;
-  backdrop-filter:blur(8px);
-  border-top:1px solid #1b2330;
-  padding:10px 14px;
-  padding-bottom: max(10px, env(safe-area-inset-bottom)); /* لدعم الموبايل */
-  text-align:center;
-  font-size:13px; line-height:1.4;
+  position:fixed;left:0; right:0; bottom:0;z-index:9998;background:rgba(15,17,21,.88);
+  color:#fff;backdrop-filter:blur(8px);border-top:1px solid #1b2330;padding:10px 14px;
+  padding-bottom:max(10px, env(safe-area-inset-bottom));text-align:center;font-size:13px; line-height:1.4;
 }
 @media print{ .app-footer{display:none!important} }
-/* checkbox + label على نفس السطر */
-.field-check{
-  flex-direction: row;     /* بدل عمودي */
-  align-items: center;
-  gap: 8px;                /* قربهم */
-}
+
+/* checkbox + label */
+.field-check{ flex-direction:row; align-items:center; gap:8px }
 .field-check label{margin:0}
-.field-check input[type="checkbox"]{
-  width:18px;height:18px;  /* مقاس واضح */
-  margin:0;
-}
+.field-check input[type="checkbox"]{ width:18px; height:18px; margin:0 }
 </style>
 </head>
 <body>
@@ -182,10 +176,10 @@ body{
           </div>
         </div>
         <div class="row" id="excelRow">
-          <div class="field"><label>رفع Excel</label><input id="excel" type="file" accept=".xlsx,.csv"></div>
+          <div class="field"><label>رفع Excel</label><input id="excel" type="file" accept=".xlsx,.csv" multiple></div>
         </div>
         <div class="row" id="pdfRow" style="display:none">
-          <div class="field"><label>رفع PDF</label><input id="pdf" type="file" accept=".pdf"></div>
+          <div class="field"><label>رفع PDF</label><input id="pdf" type="file" accept=".pdf" multiple></div>
         </div>
         <div class="row" id="manualRow" style="display:none">
           <div class="field"><label>اسم المستخدم</label><input id="singleUser"></div>
@@ -224,38 +218,45 @@ body{
           <div class="field"><label>رقم الجوال|ملاحظات</label><input id="phone"></div>
         </div>
 
-        <!-- صف موحد لليوزر -->
         <div class="row">
           <div class="field"><label>لون اليوزر</label><input id="userColor" type="color" value="#000000"></div>
           <div class="field"><label>حجم خط اليوزر</label><input id="userPt" type="number" min="2" max="30" value="11"></div>
         </div>
-        <!-- صف موحد للباس -->
         <div class="row">
           <div class="field"><label>لون الباسورد</label><input id="passColor" type="color" value="#000000"></div>
           <div class="field"><label>حجم خط الباسورد</label><input id="passPt" type="number" min="2" max="30" value="11"></div>
         </div>
-		<hr>
-<div class="row">
-  <div class="field field-check">
-    <input id="dateToggle" type="checkbox">
-    <label for="dateToggle">إظهار تاريخ الطباعة</label>
-  </div>
-  <div class="field">
-    <label>تاريخ الطباعة</label>
-    <input id="dateVal" type="date" disabled>
-  </div>
-</div>
-<div class="row">
-  <div class="field">
-    <label>لون التاريخ</label>
-    <input id="dateColor" type="color" value="#000000">
-  </div>
-  <div class="field">
-    <label>حجم خط التاريخ pt</label>
-    <input id="datePt" type="number" min="6" max="16" value="8">
-  </div>
-</div>
-        <!-- الحدود بسطر مستقل لضبط العرض -->
+
+        <!-- ترتيب تصاعدي -->
+        <div class="row">
+          <div class="field field-check span-2">
+            <input id="sortAsc" type="checkbox">
+            <label for="sortAsc">ترتيب اسم المستخدم تصاعديًا</label>
+          </div>
+        </div>
+
+        <hr>
+        <div class="row">
+          <div class="field field-check">
+            <input id="dateToggle" type="checkbox">
+            <label for="dateToggle">إظهار تاريخ الطباعة</label>
+          </div>
+          <div class="field">
+            <label>تاريخ الطباعة</label>
+            <input id="dateVal" type="date" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label>لون التاريخ</label>
+            <input id="dateColor" type="color" value="#000000">
+          </div>
+          <div class="field">
+            <label>حجم خط التاريخ pt</label>
+            <input id="datePt" type="number" min="6" max="16" value="8">
+          </div>
+        </div>
+
         <div class="row">
           <div class="field span-2" id="borderField">
             <label>حدود التصميم</label>
@@ -291,7 +292,6 @@ body{
       </div>
     </div>
 
-    <!-- المعاينة والصفحات -->
     <div class="panel">
       <div class="previewWrap no-print">
         <div class="counter">
@@ -334,6 +334,17 @@ body{
   </div>
 </div>
 
+<!-- نافذة معلومات جميلة -->
+<div id="infoModal" class="modal no-print" role="dialog" aria-modal="true" aria-labelledby="iTitle">
+  <div class="box">
+    <h3 id="iTitle">تنبيه</h3>
+    <div id="iContent" class="content">—</div>
+    <div class="actions" style="justify-content:center">
+      <button id="iOk" class="btn ok" style="min-width:120px">موافق</button>
+    </div>
+  </div>
+</div>
+
 <!-- شريط تقدم الحفظ -->
 <div id="progress" class="progress no-print" role="status" aria-live="polite">
   <div class="progress-head">
@@ -349,6 +360,14 @@ const $=s=>document.querySelector(s);
 const setVar=(k,v)=>document.documentElement.style.setProperty(k,v);
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,Number(n||0)));
 const fmtDate=v=>{if(!v) return ''; const d=new Date(v); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+
+/* نافذة معلومات */
+function showInfo(msg){
+  $('#iContent').textContent = msg;
+  const m=$('#infoModal'); m.style.display='grid';
+  $('#iOk').onclick=()=>{ m.style.display='none'; };
+}
 
 let cards=[], bgDataUrl=null;
 const state={u:{x:0.04,y:0.14}, p:{x:0.04,y:0.34}, d:{x:0.04,y:0.92}, brand:{x:0.04,y:0.06}, phone:{x:0.04,y:0.80}};
@@ -363,6 +382,23 @@ function applyBorders(){
 function toggleBorderField(){
   const isReady = $('#theme').value === 'ready1';
   $('#borderField').classList.toggle('hidden', !isReady);
+}
+
+/* ترتيب + إزالة تكرار وترجيع العدد المستبعد */
+function dedupeAndMaybeSort(){
+  const before=cards.length;
+  const seen=new Set();
+  const out=[];
+  for(const r of cards){
+    const key=String(r.username||'').trim().toLowerCase();
+    if(!seen.has(key)){ seen.add(key); out.push(r); }
+  }
+  cards=out;
+  if($('#sortAsc')?.checked){
+    cards.sort((a,b)=>a.username.localeCompare(b.username,'ar',{numeric:true,sensitivity:'base'}));
+  }
+  totalCount.value=count.textContent=String(cards.length);
+  return before - cards.length;
 }
 
 function applyGridVars(){
@@ -450,7 +486,7 @@ async function renderSheets(){
   const cpp=clamp($('#cardsPerPage').value,1,1000);
   applyGridVars();
   $('#pagesHost').innerHTML='';
-  if(!cards.length){alert('أضف بيانات أولًا');return;}
+  if(!cards.length){showInfo('أضف بيانات أولًا');return;}
   let section=null,inPage=0;
   for(let i=0;i<cards.length;i++){
     if(inPage===0){section=document.createElement('section');section.className='sheet';$('#pagesHost').appendChild(section);}
@@ -462,91 +498,134 @@ async function renderSheets(){
   if(remain&&section){for(let k=remain;k<cpp;k++){const f=document.createElement('div');f.className='cell';f.style.visibility='hidden';section.appendChild(f);}}
 }
 
+/* جودة */
 function askQuality(){
   return new Promise((resolve,reject)=>{
-    const modal=$('#qualityModal'); modal.style.display='flex';
+    const modal=$('#qualityModal'); modal.style.display='grid';
     const ok=$('#qOk'), cancel=$('#qCancel');
-    const close=()=>{modal.style.display='none'; ok.onclick=null; cancel.onclick=null;}
+    function close(){modal.style.display='none'; ok.onclick=null; cancel.onclick=null;}
     cancel.onclick=()=>{close(); reject(new Error('cancel'));};
     ok.onclick=()=>{const sel=document.querySelector('input[name="q"]:checked'); const scale=parseFloat(sel?.value||'1.5'); close(); resolve(scale);};
   });
 }
 
+/* تقدم */
 const progWrap=$('#progress'), progTitle=$('#progressTitle'), progFill=$('#progressFill'), progPct=$('#progressPercent'), progSub=$('#progressSub');
 function showProgress(title,max){ progTitle.textContent=title; progWrap.style.display='block'; updateProgress(0,max,'البدء…'); }
 function updateProgress(cur,max,sub){ const pct=max?Math.min(100,Math.round((cur/max)*100)):0; progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(sub) progSub.textContent=sub; }
 function hideProgress(){ progWrap.style.display='none'; }
 
+/* تحويل صفحة إلى JPEG + تجميع PDF */
+async function renderPageToJPEG(pageEl, scale, quality=0.9){
+  const cnv=await html2canvas(pageEl,{scale, useCORS:true, background:'#fff', logging:false, removeContainer:true});
+  return new Promise(res=>cnv.toBlob(res,'image/jpeg',quality));
+}
+function blobToDataURL(blob){return new Promise(r=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(blob);});}
+async function asyncPool(limit, items, fn, onProgress){
+  let i=0, done=0; const results=new Array(items.length);
+  return new Promise((resolve,reject)=>{
+    const launch=()=>{
+      if(done===items.length) return resolve(results);
+      while(i<items.length && limit>0){
+        const idx=i++, el=items[idx]; limit--;
+        fn(el, idx).then(r=>{results[idx]=r; done++; onProgress?.(done, items.length); limit++; launch();})
+                   .catch(reject);
+      }
+    };
+    launch();
+  });
+}
+
 async function makePdfWithScale(scale){
+  showProgress('تجهيز المحتوى', 100);
   if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
+
   await document.fonts?.ready;
   let JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;
   if(!JSPDF){
+    updateProgress(8, 100, 'تحميل محرك PDF…');
     await new Promise(res=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js';s.onload=()=>{JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;res();};document.head.appendChild(s);});
   }
+
   const pages=[...document.querySelectorAll('#pagesHost .sheet')];
-  showProgress('حفظ PDF', pages.length);
+
+  updateProgress(10, 100, 'تحويل الصفحات إلى صور…');
+  const blobs=await asyncPool(
+    4,
+    pages,
+    (el)=>renderPageToJPEG(el,scale,0.9),
+    (done,total)=>updateProgress(10 + Math.round(70*done/total), 100, `تحويل ${done}/${total}`)
+  );
+
+  updateProgress(85, 100, 'تجميع الملف…');
   const doc=new JSPDF({orientation:'p',unit:'mm',format:'a4',compress:true});
-  for(let i=0;i<pages.length;i++){
-    updateProgress(i, pages.length, `تحويل الصفحة ${i+1}/${pages.length}`);
-    const cnv=await html2canvas(pages[i],{scale:scale,useCORS:true,background:'#fff',logging:false,removeContainer:true});
-    const img=cnv.toDataURL('image/png');
-    doc.addImage(img,'PNG',0,0,210,297);
-    if(i<pages.length-1) doc.addPage();
-    updateProgress(i+1, pages.length, `إضافة الصفحة ${i+1}/${pages.length}`);
+  for(let i=0;i<blobs.length;i++){
+    const url=await blobToDataURL(blobs[i]);
+    doc.addImage(url,'JPEG',0,0,210,297);
+    if(i<blobs.length-1) doc.addPage();
+    updateProgress(85 + Math.round(15*(i+1)/blobs.length), 100, `إضافة صفحة ${i+1}`);
     await new Promise(r=>requestAnimationFrame(()=>r()));
   }
-  updateProgress(pages.length, pages.length, 'حفظ الملف...');
-  doc.save('cards.pdf');
+  const fileName = `AL-Nasim.Net_${todayStr()}_${cards.length}.pdf`;
+  updateProgress(100, 100, 'حفظ الملف…');
+  doc.save(fileName);
   hideProgress();
 }
 
-/* Excel */
-excel.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
+/* Excel متعدد مع رسالة واحدة أنيقة */
+excel.addEventListener('change', async e=>{
+  const files=[...(e.target.files||[])]; if(!files.length) return;
+  let all=[];
+  for(const f of files){
+    const buf=await new Promise((res,rej)=>{const r=new FileReader();r.onload=ev=>res(ev.target.result);r.onerror=rej;r.readAsArrayBuffer(f);});
     try{
-      const wb=XLSX.read(ev.target.result,{type:'array'});
+      const wb=XLSX.read(buf,{type:'array'});
       const ws=wb.Sheets[wb.SheetNames[0]];
       const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-      const list=[];
       for(const row of rows){
         const joined=row.map(v=>String(v).toLowerCase()).join(' ');
         if(/username/.test(joined)||/password/.test(joined)||/package/.test(joined)) continue;
         const vals=row.map(v=>String(v).trim()).filter(v=>v!=='');
-        if(vals.length>=2) list.push({username:vals[0],password:vals[1]});
+        if(vals.length>=2) all.push({username:vals[0],password:vals[1]});
       }
-      if(!list.length){alert('لا بيانات صالحة في Excel');return;}
-      cards=cards.concat(list);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=list[0].username||'اسم المستخدم';
-      document.querySelector('.p').textContent=list[0].password||'كلمة المرور';
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة Excel');}
-  };
-  r.readAsArrayBuffer(f);
+    }catch(_){}
+  }
+  if(!all.length){showInfo('لا بيانات صالحة في Excel');return;}
+  cards = cards.concat(all);
+  const removed = dedupeAndMaybeSort();               // رسالة واحدة هنا فقط
+  const s=(cards[0]||{});
+  document.querySelector('.u').textContent=s.username||'اسم المستخدم';
+  document.querySelector('.p').textContent=s.password||'كلمة المرور';
+  if(removed>0) showInfo(`تم استبعاد (${removed} بطاقات) مكررة`);
+  updatePreview(); saveState();
 });
 
-/* PDF */
-pdf.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=async ev=>{
+/* PDF متعدد مع رسالة واحدة أنيقة */
+pdf.addEventListener('change', async e=>{
+  const files=[...(e.target.files||[])]; if(!files.length) return;
+  let added=[];
+  for(const f of files){
+    const buf=await new Promise((res,rej)=>{const r=new FileReader();r.onload=ev=>res(ev.target.result);r.onerror=rej;r.readAsArrayBuffer(f);});
     try{
-      const doc=await pdfjsLib.getDocument({data:new Uint8Array(ev.target.result)}).promise;
-      let txt=''; for(let i=1;i<=doc.numPages;i++){const p=await doc.getPage(i);const c=await p.getTextContent();txt+=c.items.map(it=>it.str).join('\n')+'\n';}
-      const re=/Username\s+(\S+)\s+Password\s+(\S+)/gi; let m,added=[];
+      const pdf=await pdfjsLib.getDocument({data:new Uint8Array(buf)}).promise;
+      let txt='';
+      for(let i=1;i<=pdf.numPages;i++){
+        const p=await pdf.getPage(i);
+        const c=await p.getTextContent();
+        txt+=c.items.map(it=>it.str).join('\n')+'\n';
+      }
+      const re=/Username\s+(\S+)\s+Password\s+(\S+)/gi; let m;
       while((m=re.exec(txt))!==null) added.push({username:m[1],password:m[2]});
-      if(!added.length){alert('لا يوجد بيانات مطابقة في PDF');return;}
-      cards=cards.concat(added);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=added[0].username;
-      document.querySelector('.p').textContent=added[0].password;
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة PDF');}
-  };
-  r.readAsArrayBuffer(f);
+    }catch(_){}
+  }
+  if(!added.length){showInfo('لا يوجد بيانات مطابقة في PDF');return;}
+  cards = cards.concat(added);
+  const removed = dedupeAndMaybeSort();               // رسالة واحدة هنا فقط
+  const s=(cards[0]||{});
+  document.querySelector('.u').textContent=s.username||'اسم المستخدم';
+  document.querySelector('.p').textContent=s.password||'كلمة المرور';
+  if(removed>0) showInfo(`تم استبعاد (${removed} بطاقات) مكررة`);
+  updatePreview(); saveState();
 });
 
 /* صورة الخلفية */
@@ -562,16 +641,18 @@ addSingle.addEventListener('click',()=>{
   const u=(singleUser||{}).value?.trim(), p=(singlePass||{}).value?.trim();
   if(!u&&!p) return;
   cards.push({username:u,password:p});
-  totalCount.value=count.textContent=String(cards.length);
+  const removed = dedupeAndMaybeSort();               // تظهر فقط هنا عند وجود تكرار وقت الإدخال اليدوي
   document.querySelector('.u').textContent=u||'اسم المستخدم';
   document.querySelector('.p').textContent=p||'كلمة المرور';
+  if(removed>0) showInfo(`تم استبعاد (${removed} بطاقات) مكررة`);
   updatePreview(); saveState();
 });
 
 /* أزرار */
 render.addEventListener('click',async()=>{ await renderSheets(); window.scrollTo({top:pagesHost.offsetTop,behavior:'smooth'}); });
 savePdf.addEventListener('click',async()=>{
-  if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
+  // dedupe صامت وقت الحفظ بدون إظهار رسالة ثانية
+  dedupeAndMaybeSort();
   let scale=1.5; try{ scale=await askQuality(); }catch{ return; }
   await makePdfWithScale(scale);
 });
@@ -598,7 +679,7 @@ dateToggle.addEventListener('change',()=>{ dateVal.disabled=!dateToggle.checked;
 /* حفظ تلقائي */
 ['input','change'].forEach(evt=>{
   ['cardsPerPage','cols','pad','gap'].forEach(id=>document.getElementById(id).addEventListener(evt,()=>{applyGridVars();placePreview(); saveState();}));
-  ['fitMode','brand','phone','dateVal','dateColor','datePt','userColor','userPt','passColor','passPt'].forEach(id=>document.getElementById(id).addEventListener(evt,()=>{updatePreview(); saveState();}));
+  ['fitMode','brand','phone','dateVal','dateColor','datePt','userColor','userPt','passColor','passPt','sortAsc'].forEach(id=>document.getElementById(id).addEventListener(evt,()=>{ if(id==='sortAsc'){dedupeAndMaybeSort();} updatePreview(); saveState();}));
   ['singleUser','singlePass'].forEach(id=>{
     const x=document.getElementById(id); x&&x.addEventListener(evt,()=>{
       document.querySelector('.u').textContent=(singleUser.value||'').trim()||'اسم المستخدم';
@@ -618,6 +699,7 @@ function collectSettings(){
     borderMode: borderMode.value, cardsPerPage: cardsPerPage.value, cols: cols.value, pad: pad.value, gap: gap.value,
     dateToggle: dateToggle.checked, dateVal: dateVal.value, dateColor: dateColor.value, datePt: datePt.value,
     brand: brand.value, phone: phone.value,
+    sortAsc: $('#sortAsc')?.checked || false,
     positions: JSON.parse(JSON.stringify(state)),
     bgDataUrl: bgDataUrl && bgDataUrl.length < 2_000_000 ? bgDataUrl : null,
     count: cards.length
@@ -647,6 +729,7 @@ function applySettings(cfg){
 
   brand.value = cfg.brand ?? '';
   phone.value = cfg.phone ?? '';
+  if($('#sortAsc')) $('#sortAsc').checked = !!cfg.sortAsc;
 
   if(cfg.positions){ Object.assign(state, cfg.positions); }
   if(cfg.bgDataUrl){ bgDataUrl = cfg.bgDataUrl; pvBg.src = bgDataUrl; }
