@@ -179,7 +179,7 @@ body{
 <div class="container">
   <div class="page-title">
     <h1>مصمم بطاقات شبكات المبادرة</h1>
-    <a href="https://wa.me/972597250160" target="_blank" class="designer-badge">
+    <a href="https://wa.me/00972597250160" target="_blank" class="designer-badge">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="واتساب"><span>برمجة وتصميم: فؤاد أبو يونس</span>
     </a>
   </div>
@@ -411,7 +411,34 @@ const $=s=>document.querySelector(s);
 const setVar=(k,v)=>document.documentElement.style.setProperty(k,v);
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,Number(n||0)));
 const fmtDate=v=>{if(!v) return ''; const d=new Date(v); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+function todayStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
 
+async function renderPageToJPEG(pageEl, scale, quality=0.92){
+  const cnv = await html2canvas(pageEl, {scale, useCORS:true, background:'#fff', logging:false, removeContainer:true});
+  return new Promise(res => cnv.toBlob(res, 'image/jpeg', quality));
+}
+
+function blobToDataURL(blob){
+  return new Promise(r => {const fr=new FileReader(); fr.onload=e=>r(e.target.result); fr.readAsDataURL(blob);});
+}
+
+async function asyncPool(limit, items, fn, onProgress){
+  let i=0, done=0; const results=new Array(items.length);
+  return new Promise((resolve,reject)=>{
+    const launch=()=>{
+      if(done===items.length) return resolve(results);
+      while(i<items.length && limit>0){
+        const idx=i++, el=items[idx]; limit--;
+        fn(el, idx).then(r=>{results[idx]=r; done++; onProgress?.(done, items.length); limit++; launch();})
+                   .catch(reject);
+      }
+    };
+    launch();
+  });
+  }
 let cards=[], bgDataUrl=null;
 const state={u:{x:0.04,y:0.14}, p:{x:0.04,y:0.34}, d:{x:0.04,y:0.92}, brand:{x:0.04,y:0.06}, phone:{x:0.04,y:0.80}, qr:{x:0.70,y:0.10, size:70}};
 const STORAGE_KEY='cardMakerV1';
@@ -550,26 +577,39 @@ function showProgress(title,max){ progTitle.textContent=title; progWrap.style.di
 function updateProgress(cur,max,sub){ const pct=max?Math.min(100,Math.round((cur/max)*100)):0; progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(sub) progSub.textContent=sub; }
 function hideProgress(){ progWrap.style.display='none'; }
 async function makePdfWithScale(scale){
+  showProgress('تجهيز المحتوى', 100);
   if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
+
   await document.fonts?.ready;
   let JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;
   if(!JSPDF){
+    updateProgress(8, 100, 'تحميل محرك PDF…');
     await new Promise(res=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js';s.onload=()=>{JSPDF=(window.jspdf&&window.jspdf.jsPDF)?window.jspdf.jsPDF:window.jsPDF;res();};document.head.appendChild(s);});
   }
+
   const pages=[...document.querySelectorAll('#pagesHost .sheet')];
-  showProgress('حفظ PDF', pages.length);
+
+  updateProgress(10, 100, 'تحويل الصفحات إلى صور…');
+  const blobs=await asyncPool(
+    4,
+    pages,
+    (el)=>renderPageToJPEG(el,scale,0.92),
+    (done,total)=>updateProgress(10 + Math.round(70*done/total), 100, `تحويل ${done}/${total}`)
+  );
+
+  updateProgress(85, 100, 'تجميع الملف…');
   const doc=new JSPDF({orientation:'p',unit:'mm',format:'a4',compress:true});
-  for(let i=0;i<pages.length;i++){
-    updateProgress(i, pages.length, `تحويل الصفحة ${i+1}/${pages.length}`);
-    const cnv=await html2canvas(pages[i],{scale:scale,useCORS:true,background:'#fff',logging:false,removeContainer:true});
-    const img=cnv.toDataURL('image/png');
-    doc.addImage(img,'PNG',0,0,210,297);
-    if(i<pages.length-1) doc.addPage();
-    updateProgress(i+1, pages.length, `إضافة الصفحة ${i+1}/${pages.length}`);
+  for(let i=0;i<blobs.length;i++){
+    const url=await blobToDataURL(blobs[i]);
+    doc.addImage(url,'JPEG',0,0,210,297);
+    if(i<blobs.length-1) doc.addPage();
+    updateProgress(85 + Math.round(15*(i+1)/blobs.length), 100, `إضافة صفحة ${i+1}`);
     await new Promise(r=>requestAnimationFrame(()=>r()));
   }
-  updateProgress(pages.length, pages.length, 'حفظ الملف...');
-  doc.save('cards.pdf');
+  
+  const fileName = `AL-Nasim.Net_${todayStr()}_${cards.length}.pdf`;
+  updateProgress(100, 100, 'حفظ الملف…');
+  doc.save(fileName);
   hideProgress();
 }
 /* Excel */
@@ -638,8 +678,9 @@ addSingle.addEventListener('click',()=>{
 /* أزرار */
 render.addEventListener('click',async()=>{ await renderSheets(); window.scrollTo({top:pagesHost.offsetTop,behavior:'smooth'}); });
 savePdf.addEventListener('click',async()=>{
-  if(!document.querySelector('#pagesHost .sheet')) await renderSheets();
-  let scale=1.5; try{ scale=await askQuality(); }catch{ return; }
+  if(!cards.length){ alert('أضف بيانات أولًا'); return; }
+  let scale=1.5; 
+  try{ scale=await askQuality(); }catch{ return; }
   await makePdfWithScale(scale);
 });
 clear.addEventListener('click',()=>{ cards=[]; totalCount.value=count.textContent='0'; pagesHost.innerHTML=''; saveState(); });
@@ -852,5 +893,4 @@ placePreview();
   <span>هذا العمل <b>صدقة جارية</b> عن روح والدي وجميع أموات المسلمين</span>
 </div>
 </body>
-
 </html>
