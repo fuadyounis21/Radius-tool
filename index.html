@@ -145,6 +145,10 @@ body{ padding-bottom: var(--footer-h); }
 .field-check{ flex-direction:row; align-items:center; gap:8px }
 .field-check label{margin:0}
 .field-check input[type="checkbox"]{ width:18px; height:18px; margin:0 }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.15); opacity: 0.9; }
+}
 </style>
 </head>
 <body>
@@ -155,6 +159,50 @@ body{ padding-bottom: var(--footer-h); }
       <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="واتساب"><span>برمجة وتصميم: فؤاد أبو يونس</span>
     </a>
   </div>
+  <!-- زر تجريبي مركزي - حجم متوازن + جذب انتباه -->
+<div style="text-align: center; margin: 30px 0 45px 0;">
+  <div style="position: relative; display: inline-block;">
+    <!-- شارة جديد نابضة -->
+    <div style="
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ef4444;
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(239,68,68,0.35);
+      animation: pulse 1.8s infinite;
+      white-space: nowrap;
+      z-index: 10;
+    ">جديد 🔥</div>
+
+    <!-- الزر نفسه -->
+    <a href="index2.html"
+       style="
+         display: inline-flex;
+         align-items: center;
+         gap: 10px;
+         padding: 14px 36px;
+         background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+         color: white;
+         font-size: 1.08rem;
+         font-weight: 700;
+         text-decoration: none;
+         border-radius: 50px;
+         box-shadow: 0 6px 20px rgba(29,78,216,0.35);
+         transition: all 0.3s ease;
+       "
+       onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(29,78,216,0.45)';"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(29,78,216,0.35)';">
+      الموقع التجريبي - يطبع QR
+      <span style="font-size: 1.3rem;">↗</span>
+    </a>
+  </div>
+</div>
 
   <div class="content">
     <div class="side">
@@ -772,5 +820,6 @@ placePreview();
 </div>
 </body>
 </html>
+
 
 
