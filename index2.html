@@ -226,10 +226,12 @@ body{
           </div>
         </div>
         <div class="row" id="excelRow">
-          <div class="field"><label>رفع Excel</label><input id="excel" type="file" accept=".xlsx,.csv"></div>
+          <div class=
+		  
+"field"><label>رفع Excel</label><input id="excel" type="file" accept=".xlsx,.csv" multiple></div>
         </div>
         <div class="row" id="pdfRow" style="display:none">
-          <div class="field"><label>رفع PDF</label><input id="pdf" type="file" accept=".pdf"></div>
+          <div class="field"><label>رفع PDF</label><input id="pdf" type="file" accept=".pdf" multiple></div>
         </div>
         <div class="row" id="manualRow" style="display:none">
           <div class="field"><label>اسم المستخدم</label><input id="singleUser"></div>
@@ -299,7 +301,12 @@ body{
     <input id="datePt" type="number" min="6" max="16" value="8">
   </div>
 </div>
-
+<div class="row">
+  <div class="field field-check span-2">
+    <input id="sortAsc" type="checkbox">
+    <label for="sortAsc">ترتيب البطاقات تصاعدياً (حسب رقم اليوزر)</label>
+  </div>
+</div>
 <!-- قسم QR الجديد في مكان منفصل -->
 <hr>
 <div class="row">
@@ -445,6 +452,33 @@ const STORAGE_KEY='cardMakerV1';
 let qrCode = null;
 let isResizingQR = false;
 let qrStartX, qrStartY, qrStartSize;
+
+function dedupeAndMaybeSort() {
+    const before = cards.length;
+    const seen = new Set();
+    const out = [];
+
+    for (const r of cards) {
+        const key = String(r.username || '').trim().toLowerCase();
+        if (!seen.has(key)) {
+            seen.add(key);
+            out.push(r);
+        }
+    }
+
+    cards = out;
+
+    if (document.getElementById('sortAsc')?.checked) {
+        cards.sort((a, b) =>
+            a.username.localeCompare(b.username, 'ar', {numeric: true, sensitivity: 'base'})
+        );
+    }
+
+    document.getElementById('totalCount').value =
+    document.getElementById('count').textContent = String(cards.length);
+
+    return before - cards.length;  // عدد البطاقات المكررة التي تم حذفها
+}
 
 function applyBorders(){
   const isReady = $('#theme').value === 'ready1';
@@ -612,51 +646,110 @@ async function makePdfWithScale(scale){
   doc.save(fileName);
   hideProgress();
 }
-/* Excel */
-excel.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    try{
-      const wb=XLSX.read(ev.target.result,{type:'array'});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-      const list=[];
-      for(const row of rows){
-        const joined=row.map(v=>String(v).toLowerCase()).join(' ');
-        if(/username/.test(joined)||/password/.test(joined)||/package/.test(joined)) continue;
-        const vals=row.map(v=>String(v).trim()).filter(v=>v!=='');
-        if(vals.length>=2) list.push({username:vals[0],password:vals[1]});
-      }
-      if(!list.length){alert('لا بيانات صالحة في Excel');return;}
-      cards=cards.concat(list);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=list[0].username||'اسم المستخدم';
-      document.querySelector('.p').textContent=list[0].password||'كلمة المرور';
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة Excel');}
-  };
-  r.readAsArrayBuffer(f);
+excel.addEventListener('change', async e => {
+    const files = [...(e.target.files || [])];
+    if (!files.length) return;
+
+    let all = [];
+    for (const f of files) {
+        const buf = await new Promise((res, rej) => {
+            const r = new FileReader();
+            r.onload = ev => res(ev.target.result);
+            r.onerror = rej;
+            r.readAsArrayBuffer(f);
+        });
+
+        try {
+            const wb = XLSX.read(buf, {type: 'array'});
+            const ws = wb.Sheets[wb.SheetNames[0]];
+            const rows = XLSX.utils.sheet_to_json(ws, {header: 1, defval: ''});
+
+            for (const row of rows) {
+                const joined = row.map(v => String(v).toLowerCase()).join(' ');
+                if (/username/.test(joined) || /password/.test(joined) || /package/.test(joined)) continue;
+
+                const vals = row.map(v => String(v).trim()).filter(v => v !== '');
+                if (vals.length >= 2) {
+                    all.push({username: vals[0], password: vals[1]});
+                }
+            }
+        } catch (err) {
+            console.warn("خطأ في ملف Excel:", f.name, err);
+        }
+    }
+
+    if (!all.length) {
+        alert('ما في بيانات صالحة في الملفات اللي رفعتها');
+        return;
+    }
+
+    cards = cards.concat(all);
+    const removed = dedupeAndMaybeSort();
+
+    if (cards.length > 0) {
+        const s = cards[0];
+        document.querySelector('.u').textContent = s.username || 'اسم المستخدم';
+        document.querySelector('.p').textContent = s.password || 'كلمة المرور';
+    }
+
+    if (removed > 0) {
+        alert(`تم استبعاد ${removed} بطاقة مكررة`);
+    }
+
+    updatePreview();
+    saveState();
 });
-/* PDF */
-pdf.addEventListener('change',e=>{
-  const f=e.target.files?.[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=async ev=>{
-    try{
-      const doc=await pdfjsLib.getDocument({data:new Uint8Array(ev.target.result)}).promise;
-      let txt=''; for(let i=1;i<=doc.numPages;i++){const p=await doc.getPage(i);const c=await p.getTextContent();txt+=c.items.map(it=>it.str).join('\n')+'\n';}
-      const re=/Username\s+(\S+)\s+Password\s+(\S+)/gi; let m,added=[];
-      while((m=re.exec(txt))!==null) added.push({username:m[1],password:m[2]});
-      if(!added.length){alert('لا يوجد بيانات مطابقة في PDF');return;}
-      cards=cards.concat(added);
-      totalCount.value=count.textContent=String(cards.length);
-      document.querySelector('.u').textContent=added[0].username;
-      document.querySelector('.p').textContent=added[0].password;
-      updatePreview(); saveState();
-    }catch{alert('خطأ قراءة PDF');}
-  };
-  r.readAsArrayBuffer(f);
+pdf.addEventListener('change', async e => {
+    const files = [...(e.target.files || [])];
+    if (!files.length) return;
+
+    let added = [];
+    for (const f of files) {
+        const buf = await new Promise((res, rej) => {
+            const r = new FileReader();
+            r.onload = ev => res(ev.target.result);
+            r.onerror = rej;
+            r.readAsArrayBuffer(f);
+        });
+
+        try {
+            const pdfDoc = await pdfjsLib.getDocument({data: new Uint8Array(buf)}).promise;
+            let txt = '';
+            for (let i = 1; i <= pdfDoc.numPages; i++) {
+                const page = await pdfDoc.getPage(i);
+                const content = await page.getTextContent();
+                txt += content.items.map(it => it.str).join(' ') + '\n';
+            }
+            const re = /Username\s+(\S+)\s+Password\s+(\S+)/gi;
+            let m;
+            while ((m = re.exec(txt)) !== null) {
+                added.push({username: m[1], password: m[2]});
+            }
+        } catch (err) {
+            console.warn("خطأ في ملف PDF:", f.name, err);
+        }
+    }
+
+    if (!added.length) {
+        alert('ما لقينا Username و Password في الملفات');
+        return;
+    }
+
+    cards = cards.concat(added);
+    const removed = dedupeAndMaybeSort();
+
+    if (cards.length > 0) {
+        const s = cards[0];
+        document.querySelector('.u').textContent = s.username || 'اسم المستخدم';
+        document.querySelector('.p').textContent = s.password || 'كلمة المرور';
+    }
+
+    if (removed > 0) {
+        alert(`تم استبعاد ${removed} بطاقة مكررة`);
+    }
+
+    updatePreview();
+    saveState();
 });
 /* صورة الخلفية */
 bg.addEventListener('change',e=>{
@@ -673,6 +766,10 @@ addSingle.addEventListener('click',()=>{
   totalCount.value=count.textContent=String(cards.length);
   document.querySelector('.u').textContent=u||'اسم المستخدم';
   document.querySelector('.p').textContent=p||'كلمة المرور';
+      const removed = dedupeAndMaybeSort();
+    if (removed > 0) {
+        alert(`تم استبعاد ${removed} بطاقة مكررة`);
+    }
   updatePreview(); saveState();
 });
 /* أزرار */
@@ -880,7 +977,14 @@ $('#qrToggle').addEventListener('change',()=>{
   saveState();
 });
 $('#qrDomain').addEventListener('input',()=>{updateQRContent(); saveState();});
+// ترتيب فوري عند تفعيل/تعطيل خيار الترتيب التصاعدي
+document.getElementById('sortAsc').addEventListener('change', function() {
+    dedupeAndMaybeSort();
+    saveState();
 
+    // إذا كنت تريد إعادة رسم الصفحات فوراً (اختياري - يمكنك تجربته)
+    // renderSheets();
+});
 /* بداية */
 loadState();
 applyGridVars();
