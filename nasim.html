@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فحص بطاقات الإنترنت</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      color: #111827;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      text-align: center;
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #64748b;
+      margin-bottom: 22px;
+      line-height: 1.8;
+    }
+
+    .checker-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 120px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="title">شبكة النسيم نت اللاسلكية</div>
+    <div class="subtitle">
+      أدخل رقم البطاقة لمعرفة حالتها أو صلاحيتها
+    </div>
+
+    <div class="checker-box">
+      <div id="gnl-card-checker"
+           data-network="chk_6c2b3b8128eadca083b81b02fe65c45fbd2cff565746ef18387f63642a5a">
+      </div>
+    </div>
+
+    <div class="footer">
+      خدمة فحص البطاقات
+    </div>
+  </div>
+
+  <script src="https://api.getnetlab.com/card-checker.js" async></script>
+
+</body>
+</html>
