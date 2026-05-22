@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>فحص بطاقات شبكة هيا</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      font-family:Tahoma, Arial, sans-serif;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:linear-gradient(135deg,#0f172a,#1e293b);
+    }
+
+    .container{
+      width:100%;
+      max-width:460px;
+      background:#ffffff;
+      border-radius:24px;
+      padding:30px 25px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+      text-align:center;
+    }
+
+    .logo{
+      width:90px;
+      height:90px;
+      margin:auto;
+      margin-bottom:18px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:34px;
+      font-weight:bold;
+      box-shadow:0 10px 25px rgba(34,197,94,0.35);
+    }
+
+    h1{
+      margin:0;
+      color:#0f172a;
+      font-size:30px;
+    }
+
+    .subtitle{
+      margin-top:10px;
+      margin-bottom:25px;
+      color:#64748b;
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .checker-box{
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-radius:18px;
+      padding:20px;
+    }
+
+    .footer{
+      margin-top:25px;
+      color:#475569;
+      font-size:14px;
+      font-weight:bold;
+    }
+
+    .footer span{
+      color:#16a34a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      H
+    </div>
+
+    <h1>شبكة هيا</h1>
+
+    <div class="subtitle">
+      صفحة فحص بطاقات الإنترنت<br>
+      أدخل رقم البطاقة لمعرفة حالتها وصلاحيتها
+    </div>
+
+    <div class="checker-box">
+
+      <div id="gnl-card-checker"
+           data-network="chk_9da5c6c868dbe2352d0e07a233137929236bfa9ae4ae4d7a2c79b1256354">
+      </div>
+
+    </div>
+
+    <div class="footer">
+      مع تحيات <span>يسري أبو هلال (أبو يونس)</span>
+    </div>
+
+  </div>
+
+  <script src="https://api.getnetlab.com/card-checker.js" async></script>
+
+</body>
+</html>
