@@ -1,0 +1,6479 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>شبكة النسيم نت | AL-Nasim Net</title>
+
+    <meta name="description" content="شبكة النسيم نت اللاسلكية - إنترنت سريع، باقات متنوعة، اشتراكات منزلية، بوابة مشتركين ودعم فني.">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- خطوط عربية جميلة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   AL-NASIM NET
+   NEXT GENERATION WEBSITE
+========================================================= */
+
+:root{
+
+    --primary:#1267ff;
+    --primary-dark:#0750dc;
+
+    --cyan:#00c9f5;
+    --violet:#7357ff;
+    --purple:#9b4dff;
+
+    --green:#00b985;
+    --red:#f04461;
+
+    --ink:#0b1730;
+    --text:#34445e;
+    --muted:#7a899f;
+
+    --bg:#f7faff;
+    --soft:#eef5ff;
+    --white:#ffffff;
+
+    --border:rgba(25,65,120,.09);
+
+    --shadow:
+        0 18px 60px rgba(28,74,135,.10);
+
+    --shadow-lg:
+        0 35px 100px rgba(28,74,135,.15);
+
+    --radius:30px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:95px;
+}
+
+body{
+
+    font-family:
+        "Alexandria",
+        "IBM Plex Sans Arabic",
+        Arial,
+        sans-serif;
+
+    color:var(--text);
+
+    background:
+        #f8fbff;
+
+    overflow-x:hidden;
+
+    line-height:1.8;
+}
+
+body.menu-open{
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+img{
+    max-width:100%;
+}
+
+::selection{
+    color:#fff;
+    background:var(--primary);
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+section{
+    position:relative;
+    padding:105px 0;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.page-background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-20;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f5f9ff 38%,
+            #ffffff 70%,
+            #f7faff 100%
+        );
+}
+
+.bg-grid{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.45;
+
+    background-image:
+
+        linear-gradient(
+            rgba(29,83,150,.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(29,83,150,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:48px 48px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            #000,
+            transparent 80%
+        );
+}
+
+.glow{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.25;
+}
+
+.glow-one{
+
+    width:650px;
+    height:650px;
+
+    right:-300px;
+    top:-300px;
+
+    background:#48bfff;
+}
+
+.glow-two{
+
+    width:550px;
+    height:550px;
+
+    left:-300px;
+    top:30%;
+
+    background:#9c6cff;
+}
+
+.glow-three{
+
+    width:500px;
+    height:500px;
+
+    right:20%;
+    bottom:-350px;
+
+    background:#00e3ca;
+}
+
+
+/* =========================================================
+   SCROLL BAR
+========================================================= */
+
+.scroll-progress{
+
+    position:fixed;
+
+    top:0;
+    right:0;
+
+    width:0;
+    height:3px;
+
+    z-index:10000;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--violet),
+            var(--primary),
+            var(--cyan)
+        );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:3000;
+
+    transition:.3s ease;
+}
+
+.header.scrolled{
+
+    background:
+        rgba(255,255,255,.86);
+
+    backdrop-filter:blur(22px);
+
+    -webkit-backdrop-filter:blur(22px);
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-shadow:
+        0 8px 35px rgba(30,70,120,.06);
+}
+
+.navbar{
+
+    min-height:86px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:25px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    flex-shrink:0;
+}
+
+.brand-logo{
+
+    width:68px;
+    height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:4px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d65ff,
+            #7357ff
+        );
+
+    box-shadow:
+        0 12px 30px rgba(41,94,230,.18);
+
+    overflow:hidden;
+}
+
+.brand-logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+.brand-text strong{
+
+    display:block;
+
+    color:var(--ink);
+
+    font-size:17px;
+
+    font-weight:800;
+
+    line-height:1.4;
+}
+
+.brand-text span{
+
+    display:block;
+
+    margin-top:1px;
+
+    color:#8a9aaf;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    letter-spacing:1.5px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.desktop-nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+}
+
+.desktop-nav .nav-link{
+
+    position:relative;
+
+    color:#53667e;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.desktop-nav .nav-link:hover{
+    color:var(--primary);
+}
+
+.desktop-nav .nav-link::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:0;
+    bottom:-9px;
+
+    width:0;
+    height:2px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--cyan)
+        );
+
+    transition:.25s;
+}
+
+.desktop-nav .nav-link:hover::after{
+    width:100%;
+}
+
+.portal-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    min-height:44px;
+
+    padding:9px 17px;
+
+    border-radius:14px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1267ff,
+            #7357ff
+        );
+
+    box-shadow:
+        0 12px 30px rgba(61,82,230,.18);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.portal-top:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 16px 38px rgba(61,82,230,.24);
+}
+
+
+/* =========================================================
+   MOBILE BUTTON
+========================================================= */
+
+.menu-btn{
+
+    display:none;
+
+    width:46px;
+    height:46px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:14px;
+
+    background:#fff;
+
+    box-shadow:
+        0 8px 25px rgba(30,70,120,.06);
+}
+
+.menu-btn span{
+
+    display:block;
+
+    width:21px;
+    height:2px;
+
+    margin:4px auto;
+
+    border-radius:5px;
+
+    background:var(--ink);
+
+    transition:.25s;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-menu{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:2500;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:90px 22px 30px;
+
+    visibility:hidden;
+
+    opacity:0;
+
+    background:
+        rgba(247,250,255,.96);
+
+    backdrop-filter:blur(24px);
+
+    transition:.3s;
+}
+
+.mobile-menu.open{
+
+    visibility:visible;
+    opacity:1;
+}
+
+.mobile-menu-content{
+
+    width:min(430px,100%);
+
+    display:grid;
+
+    gap:10px;
+}
+
+.mobile-menu a{
+
+    padding:15px 17px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:15px;
+
+    background:#fff;
+
+    box-shadow:
+        0 10px 30px rgba(30,70,120,.05);
+
+    color:var(--ink);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-align:center;
+}
+
+.mobile-menu .mobile-portal{
+
+    color:#fff;
+
+    border:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--violet)
+        );
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:100svh;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:
+        135px 0 85px;
+
+    overflow:hidden;
+}
+
+.hero-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        1.05fr .95fr;
+
+    align-items:center;
+
+    gap:70px;
+}
+
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.hero-content{
+    position:relative;
+    z-index:5;
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:8px 14px;
+
+    margin-bottom:23px;
+
+    border:
+        1px solid rgba(18,103,255,.1);
+
+    border-radius:999px;
+
+    background:
+        rgba(255,255,255,.8);
+
+    box-shadow:
+        0 10px 35px rgba(35,80,130,.07);
+
+    color:#42617f;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+.live-dot{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#00bd83;
+
+    box-shadow:
+        0 0 0 5px rgba(0,189,131,.08);
+
+    animation:
+        livePulse 2s infinite;
+}
+
+@keyframes livePulse{
+
+    50%{
+        opacity:.45;
+        transform:scale(.8);
+    }
+
+}
+
+.hero-title{
+
+    max-width:700px;
+
+    color:var(--ink);
+
+    font-size:
+        clamp(43px,5.8vw,74px);
+
+    line-height:1.18;
+
+    font-weight:800;
+
+    letter-spacing:-2px;
+}
+
+.hero-title .colored{
+
+    color:transparent;
+
+    background:
+        linear-gradient(
+            100deg,
+            #086cff 0%,
+            #00bddd 38%,
+            #7357ff 72%,
+            #a447ff 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+}
+
+.hero-subtitle{
+
+    margin-top:20px;
+
+    max-width:650px;
+
+    color:#687b93;
+
+    font-size:16px;
+
+    font-weight:400;
+}
+
+.hero-subtitle strong{
+
+    color:#263b56;
+
+    font-weight:600;
+}
+
+
+/* =========================================================
+   HERO ACTIONS
+========================================================= */
+
+.hero-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:11px;
+
+    margin-top:31px;
+}
+
+.button{
+
+    min-height:53px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 21px;
+
+    border-radius:15px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.button:hover{
+    transform:translateY(-3px);
+}
+
+.button-primary{
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #096eff,
+            #4c63ff
+        );
+
+    box-shadow:
+        0 16px 40px rgba(18,103,255,.21);
+}
+
+.button-support{
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00bfe9,
+            #0879ff
+        );
+
+    box-shadow:
+        0 16px 40px rgba(0,170,230,.18);
+}
+
+.button-light{
+
+    color:#405873;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(255,255,255,.82);
+
+    box-shadow:
+        0 12px 35px rgba(30,70,120,.07);
+}
+
+
+/* =========================================================
+   HERO TRUST
+========================================================= */
+
+.hero-trust{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+    margin-top:30px;
+}
+
+.trust-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#7a8ca2;
+
+    font-size:10px;
+
+    font-weight:500;
+}
+
+.trust-icon{
+
+    width:24px;
+    height:24px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:8px;
+
+    background:
+        rgba(18,103,255,.06);
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.hero-visual{
+
+    position:relative;
+
+    min-height:550px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.visual-glow{
+
+    position:absolute;
+
+    width:390px;
+    height:390px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(41,142,255,.22),
+            rgba(115,87,255,.09) 50%,
+            transparent 72%
+        );
+
+    filter:blur(12px);
+}
+
+
+/* =========================================================
+   MAIN DEVICE
+========================================================= */
+
+.device{
+
+    position:relative;
+
+    z-index:4;
+
+    width:min(390px,90%);
+
+    padding:16px;
+
+    border:
+        1px solid rgba(255,255,255,.95);
+
+    border-radius:36px;
+
+    background:
+        rgba(255,255,255,.72);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 40px 100px rgba(31,76,140,.17);
+
+    transform:
+        rotate(-2deg);
+}
+
+.device-inner{
+
+    position:relative;
+
+    min-height:430px;
+
+    overflow:hidden;
+
+    padding:32px 27px;
+
+    border-radius:26px;
+
+    background:
+        linear-gradient(
+            150deg,
+            #0a62f1,
+            #305cf5 47%,
+            #7357ff
+        );
+
+    color:#fff;
+}
+
+.device-inner::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:270px;
+    height:270px;
+
+    top:-150px;
+    left:-100px;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,229,255,.25);
+
+    filter:blur(30px);
+}
+
+.device-inner::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    right:-140px;
+    bottom:-100px;
+
+    border-radius:50%;
+
+    background:
+        rgba(180,73,255,.35);
+
+    filter:blur(30px);
+}
+
+
+/* LOGO IN DEVICE */
+
+.device-logo{
+
+    position:relative;
+
+    z-index:2;
+
+    width:145px;
+    height:88px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:auto;
+
+    padding:8px;
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    border-radius:22px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    backdrop-filter:blur(15px);
+}
+
+.device-logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+
+/* SIGNAL */
+
+.signal{
+
+    position:relative;
+
+    z-index:2;
+
+    width:160px;
+    height:125px;
+
+    margin:
+        30px auto 10px;
+}
+
+.signal-ring{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        3px solid transparent;
+
+    border-top-color:
+        rgba(255,255,255,.9);
+
+    border-radius:50%;
+}
+
+.signal-ring:nth-child(1){
+
+    width:150px;
+    height:150px;
+
+    top:0;
+
+    animation:
+        signalPulse 2.5s infinite;
+}
+
+.signal-ring:nth-child(2){
+
+    width:105px;
+    height:105px;
+
+    top:30px;
+
+    animation:
+        signalPulse 2.5s .25s infinite;
+}
+
+.signal-ring:nth-child(3){
+
+    width:60px;
+    height:60px;
+
+    top:60px;
+
+    animation:
+        signalPulse 2.5s .5s infinite;
+}
+
+.signal-dot{
+
+    position:absolute;
+
+    left:50%;
+    bottom:2px;
+
+    width:15px;
+    height:15px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.7);
+}
+
+@keyframes signalPulse{
+
+    50%{
+        opacity:.4;
+    }
+
+}
+
+
+/* DEVICE CONTENT */
+
+.device-title{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:10px;
+
+    text-align:center;
+}
+
+.device-title strong{
+
+    display:block;
+
+    font-size:25px;
+
+    font-weight:700;
+}
+
+.device-title span{
+
+    display:block;
+
+    margin-top:3px;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:10px;
+
+    letter-spacing:1.5px;
+}
+
+
+/* DEVICE STATS */
+
+.device-stats{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:9px;
+
+    margin-top:25px;
+}
+
+.device-stat{
+
+    padding:13px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
+
+    text-align:center;
+}
+
+.device-stat strong{
+
+    display:block;
+
+    font-size:13px;
+}
+
+.device-stat span{
+
+    display:block;
+
+    margin-top:2px;
+
+    color:rgba(255,255,255,.64);
+
+    font-size:8px;
+}
+
+
+/* =========================================================
+   FLOATING ELEMENTS
+========================================================= */
+
+.float-box{
+
+    position:absolute;
+
+    z-index:8;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 15px;
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.86);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 18px 45px rgba(31,76,140,.13);
+
+    animation:
+        floating 4s ease-in-out infinite;
+}
+
+.float-box .icon{
+
+    width:35px;
+    height:35px;
+
+    display:grid;
+    place-items:center;
+
+    flex-shrink:0;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18,103,255,.10),
+            rgba(0,201,245,.12)
+        );
+}
+
+.float-box strong{
+
+    display:block;
+
+    color:var(--ink);
+
+    font-size:10px;
+}
+
+.float-box span{
+
+    display:block;
+
+    color:#8a99ac;
+
+    font-size:8px;
+}
+
+.float-one{
+
+    right:-10px;
+    top:15%;
+
+    animation-delay:-1s;
+}
+
+.float-two{
+
+    left:-20px;
+    bottom:22%;
+
+    animation-delay:-2s;
+}
+
+.float-three{
+
+    right:5%;
+    bottom:3%;
+
+    animation-delay:-3s;
+}
+
+@keyframes floating{
+
+    50%{
+        transform:translateY(-9px);
+    }
+
+}
+
+
+/* =========================================================
+   QUICK STRIP
+========================================================= */
+
+.quick-strip{
+
+    position:relative;
+
+    z-index:5;
+
+    margin-top:-35px;
+}
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 25px 70px rgba(28,74,135,.10);
+}
+
+.quick-item{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    min-height:105px;
+
+    padding:22px;
+}
+
+.quick-item:not(:last-child)::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:25%;
+    left:0;
+
+    width:1px;
+    height:50%;
+
+    background:
+        rgba(30,70,120,.07);
+}
+
+.quick-icon{
+
+    width:46px;
+    height:46px;
+
+    flex-shrink:0;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:14px;
+
+    color:var(--primary);
+
+    background:
+        rgba(18,103,255,.065);
+
+    font-size:20px;
+}
+
+.quick-item strong{
+
+    display:block;
+
+    color:var(--ink);
+
+    font-size:12px;
+}
+
+.quick-item span{
+
+    display:block;
+
+    margin-top:2px;
+
+    color:#8999ad;
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-header{
+
+    max-width:720px;
+
+    margin:
+        0 auto 52px;
+
+    text-align:center;
+}
+
+.eyebrow{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-bottom:13px;
+
+    padding:7px 12px;
+
+    border-radius:999px;
+
+    color:var(--primary);
+
+    background:
+        rgba(18,103,255,.06);
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.section-header h2{
+
+    color:var(--ink);
+
+    font-size:
+        clamp(30px,4.5vw,48px);
+
+    line-height:1.35;
+
+    font-weight:750;
+}
+
+.section-header p{
+
+    max-width:600px;
+
+    margin:
+        12px auto 0;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   PACKAGES
+========================================================= */
+
+.package-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+}
+
+.package-card{
+
+    position:relative;
+
+    min-height:355px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    padding:26px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:26px;
+
+    background:#fff;
+
+    box-shadow:
+        0 15px 45px rgba(28,74,135,.07);
+
+    transition:.3s;
+}
+
+.package-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow);
+}
+
+.package-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    left:-80px;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:var(--package-color);
+
+    opacity:.09;
+
+    filter:blur(25px);
+}
+
+.package-card.one{
+    --package-color:#00bfe9;
+}
+
+.package-card.two{
+    --package-color:#1267ff;
+}
+
+.package-card.three{
+    --package-color:#7357ff;
+}
+
+.package-card.four{
+    --package-color:#00b985;
+}
+
+.package-card.featured{
+
+    color:#fff;
+
+    border:0;
+
+    background:
+        linear-gradient(
+            150deg,
+            #096af7,
+            #315cf5 52%,
+            #6e55f5
+        );
+
+    box-shadow:
+        0 25px 60px rgba(49,83,220,.20);
+
+    transform:translateY(-8px);
+}
+
+.package-card.featured::before{
+
+    width:260px;
+    height:260px;
+
+    background:#00e1ff;
+
+    opacity:.16;
+}
+
+.package-top{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.package-name{
+
+    color:#8292a7;
+
+    font-size:10px;
+
+    font-weight:600;
+}
+
+.featured .package-name{
+    color:rgba(255,255,255,.68);
+}
+
+.package-badge{
+
+    padding:5px 9px;
+
+    border-radius:999px;
+
+    color:var(--package-color);
+
+    background:
+        rgba(18,103,255,.06);
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+.featured .package-badge{
+
+    color:#fff;
+
+    background:
+        rgba(255,255,255,.13);
+}
+
+.package-price{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:30px;
+
+    color:var(--ink);
+
+    font-size:53px;
+
+    line-height:1;
+
+    font-weight:800;
+}
+
+.featured .package-price{
+    color:#fff;
+}
+
+.package-price small{
+
+    font-size:12px;
+
+    color:#8596aa;
+}
+
+.featured .package-price small{
+    color:rgba(255,255,255,.65);
+}
+
+.package-divider{
+
+    position:relative;
+
+    z-index:2;
+
+    height:1px;
+
+    margin:25px 0;
+
+    background:
+        rgba(30,70,120,.07);
+}
+
+.featured .package-divider{
+    background:
+        rgba(255,255,255,.12);
+}
+
+.package-info{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    gap:10px;
+}
+
+.package-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    font-size:11px;
+}
+
+.package-row span{
+    color:#8999ac;
+}
+
+.package-row strong{
+    color:var(--ink);
+}
+
+.featured .package-row span{
+    color:rgba(255,255,255,.63);
+}
+
+.featured .package-row strong{
+    color:#fff;
+}
+
+.package-bottom{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:auto;
+
+    padding-top:25px;
+
+    color:#95a4b5;
+
+    font-size:9px;
+}
+
+.featured .package-bottom{
+    color:rgba(255,255,255,.6);
+}
+
+
+/* =========================================================
+   HOME INTERNET - BENTO
+========================================================= */
+
+.home-bento{
+
+    display:grid;
+
+    grid-template-columns:
+        1.3fr .7fr;
+
+    gap:17px;
+}
+
+.home-main{
+
+    position:relative;
+
+    min-height:420px;
+
+    overflow:hidden;
+
+    padding:45px;
+
+    border-radius:32px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071c45,
+            #0d4cb5 50%,
+            #1267ff
+        );
+
+    box-shadow:
+        0 30px 80px rgba(18,65,145,.20);
+}
+
+.home-main::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    top:-220px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:#00d9ff;
+
+    opacity:.25;
+
+    filter:blur(45px);
+}
+
+.home-main::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    bottom:-180px;
+    right:-150px;
+
+    border-radius:50%;
+
+    background:#875aff;
+
+    opacity:.30;
+
+    filter:blur(45px);
+}
+
+.home-content{
+
+    position:relative;
+
+    z-index:3;
+}
+
+.home-tag{
+
+    display:inline-block;
+
+    padding:6px 11px;
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius:999px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color:#cfeaff;
+
+    font-size:9px;
+
+    font-weight:600;
+}
+
+.home-main h2{
+
+    max-width:550px;
+
+    margin-top:18px;
+
+    font-size:
+        clamp(30px,4vw,47px);
+
+    line-height:1.35;
+
+    font-weight:700;
+}
+
+.home-main p{
+
+    max-width:550px;
+
+    margin-top:13px;
+
+    color:rgba(255,255,255,.68);
+
+    font-size:12px;
+}
+
+.home-features{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin-top:27px;
+}
+
+.home-features span{
+
+    padding:8px 11px;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    border-radius:11px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color:rgba(255,255,255,.82);
+
+    font-size:9px;
+}
+
+
+/* PRICE */
+
+.home-price-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-height:420px;
+
+    overflow:hidden;
+
+    padding:35px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:32px;
+
+    background:#fff;
+
+    box-shadow:
+        var(--shadow);
+}
+
+.home-price-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    top:-120px;
+    left:-100px;
+
+    border-radius:50%;
+
+    background:#00c9f5;
+
+    opacity:.10;
+
+    filter:blur(35px);
+}
+
+.speed-label{
+
+    color:#8a9aad;
+
+    font-size:10px;
+}
+
+.speed-number{
+
+    margin-top:7px;
+
+    color:var(--primary);
+
+    font-size:61px;
+
+    line-height:1;
+
+    font-weight:800;
+}
+
+.speed-number span{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#778ba3;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+.price-line{
+
+    height:1px;
+
+    margin:28px 0;
+
+    background:var(--border);
+}
+
+.home-price{
+
+    color:var(--ink);
+
+    font-size:35px;
+
+    font-weight:750;
+}
+
+.home-price span{
+
+    display:block;
+
+    margin-top:3px;
+
+    color:#8a9aad;
+
+    font-size:9px;
+
+    font-weight:500;
+}
+
+
+/* =========================================================
+   SERVICES BENTO
+========================================================= */
+
+.services-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+.service-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:230px;
+
+    padding:27px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:25px;
+
+    background:#fff;
+
+    box-shadow:
+        0 15px 45px rgba(28,74,135,.06);
+
+    transition:.3s;
+}
+
+.service-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow);
+}
+
+.service-icon{
+
+    width:51px;
+    height:51px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18,103,255,.08),
+            rgba(0,201,245,.10)
+        );
+
+    font-size:21px;
+}
+
+.service-card h3{
+
+    margin-top:20px;
+
+    color:var(--ink);
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+.service-card p{
+
+    margin-top:7px;
+
+    color:#8495aa;
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   PORTAL SECTION
+========================================================= */
+
+.portal-section{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:70px 45px;
+
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #081a3b,
+            #0b347a 45%,
+            #1267ff 100%
+        );
+
+    box-shadow:
+        0 35px 90px rgba(14,55,125,.20);
+
+    color:#fff;
+}
+
+.portal-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    top:-280px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:#00d9ff;
+
+    opacity:.25;
+
+    filter:blur(55px);
+}
+
+.portal-layout{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    align-items:center;
+
+    gap:35px;
+}
+
+.portal-small{
+
+    color:#6ee9ff;
+
+    font-size:10px;
+
+    font-weight:600;
+}
+
+.portal-section h2{
+
+    margin-top:8px;
+
+    font-size:
+        clamp(29px,4vw,45px);
+
+    font-weight:700;
+}
+
+.portal-section p{
+
+    max-width:620px;
+
+    margin-top:10px;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:11px;
+}
+
+.portal-button{
+
+    min-width:210px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:14px 20px;
+
+    border-radius:15px;
+
+    color:#0b4bd4;
+
+    background:#fff;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.15);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.portal-button:hover{
+    transform:translateY(-3px);
+}
+
+
+/* =========================================================
+   SUPPORT
+========================================================= */
+
+.support-wrapper{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:20px;
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    border-radius:36px;
+
+    background:
+        rgba(255,255,255,.68);
+
+    box-shadow:
+        var(--shadow-lg);
+}
+
+.support-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        .78fr 1.22fr;
+
+    gap:18px;
+}
+
+
+/* SUPPORT SIDE */
+
+.support-side{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:37px;
+
+    border-radius:27px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #096af7,
+            #365cf1 55%,
+            #7255ed
+        );
+}
+
+.support-side::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:270px;
+    height:270px;
+
+    top:-150px;
+    left:-130px;
+
+    border-radius:50%;
+
+    background:#00e5ff;
+
+    opacity:.28;
+
+    filter:blur(35px);
+}
+
+.support-side-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.support-icon{
+
+    width:62px;
+    height:62px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:19px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    font-size:27px;
+}
+
+.support-side h3{
+
+    margin-top:23px;
+
+    font-size:25px;
+
+    font-weight:700;
+}
+
+.support-side p{
+
+    margin-top:9px;
+
+    color:rgba(255,255,255,.67);
+
+    font-size:10px;
+}
+
+.support-points{
+
+    display:grid;
+
+    gap:8px;
+
+    margin-top:27px;
+}
+
+.support-point{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:10px 12px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:rgba(255,255,255,.82);
+
+    font-size:9px;
+}
+
+.support-phone{
+
+    display:block;
+
+    margin-top:30px;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.10);
+
+    direction:ltr;
+
+    color:#fff;
+
+    font-size:23px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-box{
+
+    padding:35px 30px;
+}
+
+.form-head h3{
+
+    color:var(--ink);
+
+    font-size:24px;
+
+    font-weight:700;
+}
+
+.form-head p{
+
+    margin-top:5px;
+
+    color:#8b9aad;
+
+    font-size:9px;
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+
+    margin-top:25px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+
+    color:#52677f;
+
+    font-size:9px;
+
+    font-weight:600;
+}
+
+.required{
+    color:var(--red);
+}
+
+.form-control{
+
+    width:100%;
+
+    min-height:52px;
+
+    padding:12px 14px;
+
+    outline:none;
+
+    border:
+        1px solid rgba(29,70,120,.09);
+
+    border-radius:13px;
+
+    color:var(--ink);
+
+    background:#f6f9fd;
+
+    font-size:11px;
+
+    transition:.25s;
+}
+
+.form-control:focus{
+
+    border-color:
+        rgba(18,103,255,.32);
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 4px rgba(18,103,255,.05);
+}
+
+.form-control::placeholder{
+    color:#a3afbd;
+}
+
+textarea.form-control{
+
+    min-height:120px;
+
+    resize:vertical;
+}
+
+.submit-btn{
+
+    width:100%;
+
+    min-height:54px;
+
+    margin-top:17px;
+
+    border:0;
+
+    border-radius:14px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0874ff,
+            #00bde7
+        );
+
+    box-shadow:
+        0 15px 35px rgba(18,103,255,.18);
+
+    font-size:11px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.submit-btn:hover:not(:disabled){
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 20px 40px rgba(18,103,255,.24);
+}
+
+.submit-btn:disabled{
+    opacity:.6;
+}
+
+.status{
+
+    display:none;
+
+    margin-top:13px;
+
+    padding:12px 13px;
+
+    border-radius:12px;
+
+    font-size:9px;
+}
+
+.status.error{
+
+    display:block;
+
+    color:#c63b53;
+
+    background:
+        rgba(240,68,97,.07);
+
+    border:
+        1px solid rgba(240,68,97,.12);
+}
+
+.status.success{
+
+    display:block;
+
+    color:#008c64;
+
+    background:
+        rgba(0,185,133,.07);
+
+    border:
+        1px solid rgba(0,185,133,.12);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:45px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:30px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+}
+
+.contact-card h2{
+
+    color:var(--ink);
+
+    font-size:
+        clamp(25px,4vw,38px);
+
+    font-weight:700;
+}
+
+.contact-card p{
+
+    margin-top:7px;
+
+    color:#8192a7;
+
+    font-size:10px;
+}
+
+.contact-phone{
+
+    min-width:245px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:15px 20px;
+
+    border-radius:15px;
+
+    direction:ltr;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--violet)
+        );
+
+    box-shadow:
+        0 15px 35px rgba(49,83,220,.18);
+
+    font-size:19px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    margin-top:30px;
+
+    padding:
+        60px 0 25px;
+
+    color:#fff;
+
+    background:#07162f;
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    align-items:center;
+
+    gap:30px;
+}
+
+.footer-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.footer-logo{
+
+    width:85px;
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.footer-logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+.footer-brand strong{
+
+    display:block;
+
+    font-size:15px;
+}
+
+.footer-brand span{
+
+    display:block;
+
+    margin-top:3px;
+
+    color:#7e95b3;
+
+    font-size:9px;
+}
+
+.footer-info{
+
+    color:#8197b3;
+
+    font-size:9px;
+
+    text-align:left;
+}
+
+.footer-bottom{
+
+    margin-top:35px;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    color:#536c8c;
+
+    text-align:center;
+
+    font-size:8px;
+}
+
+
+/* =========================================================
+   FLOATING SUPPORT
+========================================================= */
+
+.floating-support{
+
+    position:fixed;
+
+    left:18px;
+    bottom:18px;
+
+    z-index:1500;
+
+    width:58px;
+    height:58px;
+
+    display:grid;
+    place-items:center;
+
+    border:
+        3px solid #fff;
+
+    border-radius:18px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #00c8ed,
+            #1267ff
+        );
+
+    box-shadow:
+        0 16px 40px rgba(18,103,255,.25);
+
+    font-size:23px;
+
+    transition:.25s;
+}
+
+.floating-support:hover{
+    transform:
+        translateY(-4px)
+        scale(1.04);
+}
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
+.success-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    visibility:hidden;
+
+    opacity:0;
+
+    background:
+        rgba(9,26,55,.35);
+
+    backdrop-filter:blur(17px);
+
+    transition:.3s;
+}
+
+.success-modal.show{
+
+    visibility:visible;
+    opacity:1;
+}
+
+.success-box{
+
+    width:min(450px,100%);
+
+    padding:37px 27px;
+
+    border-radius:28px;
+
+    background:#fff;
+
+    box-shadow:
+        0 40px 120px rgba(20,50,90,.25);
+
+    text-align:center;
+
+    transform:
+        translateY(15px)
+        scale(.95);
+
+    transition:.3s;
+}
+
+.success-modal.show
+.success-box{
+    transform:none;
+}
+
+.success-icon{
+
+    width:75px;
+    height:75px;
+
+    display:grid;
+    place-items:center;
+
+    margin:
+        0 auto 18px;
+
+    border-radius:50%;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1fd49a,
+            #00aa79
+        );
+
+    box-shadow:
+        0 15px 35px rgba(0,185,133,.20);
+
+    font-size:32px;
+}
+
+.success-box h3{
+
+    color:var(--ink);
+
+    font-size:21px;
+}
+
+.success-box p{
+
+    margin-top:8px;
+
+    color:#8091a5;
+
+    font-size:10px;
+}
+
+.ticket-box{
+
+    margin:20px 0;
+
+    padding:13px;
+
+    border:
+        1px dashed rgba(18,103,255,.25);
+
+    border-radius:13px;
+
+    background:
+        rgba(18,103,255,.04);
+}
+
+.ticket-box span{
+
+    display:block;
+
+    color:#8b9aad;
+
+    font-size:8px;
+}
+
+.ticket-number{
+
+    margin-top:3px;
+
+    direction:ltr;
+
+    color:var(--primary);
+
+    font-size:21px;
+
+    font-weight:700;
+}
+
+.close-modal{
+
+    width:100%;
+
+    padding:12px;
+
+    border:0;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--violet)
+        );
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(24px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media(max-width:1000px){
+
+    .desktop-nav{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-layout{
+
+        grid-template-columns:1fr;
+
+        gap:45px;
+    }
+
+    .hero-content{
+        text-align:center;
+    }
+
+    .hero-subtitle{
+        margin-inline:auto;
+    }
+
+    .hero-actions,
+    .hero-trust{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        min-height:520px;
+    }
+
+    .quick-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .quick-item:nth-child(2)::after{
+        display:none;
+    }
+
+    .package-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .home-bento{
+        grid-template-columns:1fr;
+    }
+
+    .home-price-card{
+        min-height:auto;
+    }
+
+    .services-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .support-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+    section{
+        padding:76px 0;
+    }
+
+    .container{
+        width:min(92%,560px);
+    }
+
+    .navbar{
+        min-height:72px;
+    }
+
+    .brand-logo{
+
+        width:57px;
+        height:47px;
+
+        border-radius:13px;
+    }
+
+    .brand-text strong{
+        font-size:14px;
+    }
+
+    .brand-text span{
+        font-size:7px;
+    }
+
+    .menu-btn{
+
+        width:43px;
+        height:43px;
+    }
+
+    /* HERO */
+
+    .hero{
+
+        min-height:auto;
+
+        padding:
+            115px 0 85px;
+    }
+
+    .hero-title{
+
+        font-size:40px;
+
+        line-height:1.28;
+
+        letter-spacing:-1px;
+    }
+
+    .hero-subtitle{
+
+        margin-top:15px;
+
+        font-size:13px;
+    }
+
+    .hero-actions{
+
+        display:grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        width:100%;
+    }
+
+    .hero-actions
+    .button-light{
+
+        grid-column:
+            1 / -1;
+    }
+
+    .button{
+
+        min-height:50px;
+
+        padding:10px;
+
+        font-size:9px;
+    }
+
+    .hero-trust{
+
+        gap:8px 12px;
+
+        margin-top:24px;
+    }
+
+    .trust-item{
+        font-size:8px;
+    }
+
+    /* VISUAL */
+
+    .hero-visual{
+
+        min-height:445px;
+
+        margin-top:5px;
+    }
+
+    .device{
+
+        width:280px;
+
+        padding:10px;
+
+        border-radius:28px;
+
+        transform:none;
+    }
+
+    .device-inner{
+
+        min-height:365px;
+
+        padding:25px 20px;
+
+        border-radius:21px;
+    }
+
+    .device-logo{
+
+        width:120px;
+        height:72px;
+    }
+
+    .signal{
+
+        width:135px;
+        height:110px;
+
+        margin-top:22px;
+    }
+
+    .signal-ring:nth-child(1){
+
+        width:130px;
+        height:130px;
+    }
+
+    .signal-ring:nth-child(2){
+
+        width:90px;
+        height:90px;
+    }
+
+    .signal-ring:nth-child(3){
+
+        width:52px;
+        height:52px;
+    }
+
+    .device-title strong{
+        font-size:20px;
+    }
+
+    .float-box{
+
+        padding:8px 10px;
+
+        border-radius:13px;
+    }
+
+    .float-box .icon{
+
+        width:28px;
+        height:28px;
+
+        font-size:12px;
+    }
+
+    .float-box strong{
+        font-size:7px;
+    }
+
+    .float-box span{
+        font-size:6px;
+    }
+
+    .float-one{
+
+        right:-3px;
+        top:10%;
+    }
+
+    .float-two{
+
+        left:-3px;
+        bottom:23%;
+    }
+
+    .float-three{
+
+        right:4%;
+        bottom:-2%;
+    }
+
+    /* QUICK */
+
+    .quick-strip{
+        margin-top:-20px;
+    }
+
+    .quick-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+        border-radius:20px;
+    }
+
+    .quick-item{
+
+        min-height:95px;
+
+        padding:15px 13px;
+    }
+
+    .quick-item::after{
+        display:none !important;
+    }
+
+    .quick-icon{
+
+        width:38px;
+        height:38px;
+
+        border-radius:12px;
+
+        font-size:16px;
+    }
+
+    .quick-item strong{
+        font-size:9px;
+    }
+
+    .quick-item span{
+        font-size:7px;
+    }
+
+    /* PACKAGES */
+
+    .package-grid{
+        grid-template-columns:1fr;
+    }
+
+    .package-card{
+
+        min-height:300px;
+    }
+
+    .package-card.featured{
+        transform:none;
+    }
+
+    /* HOME */
+
+    .home-main{
+
+        min-height:auto;
+
+        padding:32px 23px;
+
+        border-radius:27px;
+    }
+
+    .home-main h2{
+        font-size:29px;
+    }
+
+    .home-price-card{
+
+        padding:30px 23px;
+
+        border-radius:27px;
+    }
+
+    .speed-number{
+        font-size:52px;
+    }
+
+    /* SERVICES */
+
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+
+    .service-card{
+        min-height:auto;
+    }
+
+    /* PORTAL */
+
+    .portal-section{
+
+        padding:45px 23px;
+
+        border-radius:28px;
+
+        text-align:center;
+    }
+
+    .portal-layout{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+    }
+
+    .portal-button{
+        width:100%;
+    }
+
+    /* SUPPORT */
+
+    .support-wrapper{
+
+        padding:9px;
+
+        border-radius:29px;
+    }
+
+    .support-side{
+
+        padding:29px 22px;
+
+        border-radius:23px;
+    }
+
+    .form-box{
+
+        padding:
+            28px 14px 20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    /* CONTACT */
+
+    .contact-card{
+
+        grid-template-columns:1fr;
+
+        padding:32px 22px;
+
+        text-align:center;
+    }
+
+    .contact-phone{
+
+        width:100%;
+        min-width:0;
+    }
+
+    /* FOOTER */
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+    .footer-brand{
+        justify-content:center;
+    }
+
+    .footer-info{
+        text-align:center;
+    }
+
+    .floating-support{
+
+        left:13px;
+        bottom:13px;
+
+        width:53px;
+        height:53px;
+
+        border-radius:17px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:390px){
+
+    .hero-title{
+        font-size:35px;
+    }
+
+    .hero-actions{
+        grid-template-columns:1fr;
+    }
+
+    .hero-actions
+    .button-light{
+        grid-column:auto;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+
+    .device{
+        width:255px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   PREMIUM PACKAGE SLIDER - 2026
+========================================================= */
+.premium-packages{overflow:hidden}
+.package-slider-shell{position:relative}
+.package-slider-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:12px}
+.package-swipe-hint{display:flex;align-items:center;gap:9px;color:#7b8da5;font-size:10px;font-weight:600}
+.swipe-pill{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;color:#1267ff;background:#edf4ff;font-size:16px}
+.package-slider-actions{display:flex;gap:8px}
+.package-nav-btn{width:45px;height:45px;border:1px solid var(--border);border-radius:14px;background:#fff;color:#29445f;box-shadow:0 10px 28px rgba(30,70,120,.08);font-size:18px;transition:.25s}
+.package-nav-btn:hover{transform:translateY(-2px);color:#fff;background:linear-gradient(135deg,#1267ff,#7357ff);box-shadow:0 15px 35px rgba(18,103,255,.2)}
+
+.package-slider-viewport{
+    width:100%;overflow-x:auto;overflow-y:visible;scrollbar-width:none;
+    scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;
+    padding:34px max(24px,calc((100% - 440px)/2)) 42px;
+    margin:-20px 0 -10px;overscroll-behavior-inline:contain;cursor:grab
+}
+.package-slider-viewport::-webkit-scrollbar{display:none}
+.package-slider-viewport.dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+.package-slider-track{display:flex;gap:22px;width:max-content}
+
+.premium-package{
+    position:relative;isolation:isolate;flex:0 0 min(430px,calc(100vw - 64px));min-height:475px;
+    display:flex;flex-direction:column;overflow:hidden;padding:29px;border-radius:32px;color:#fff;
+    border:1px solid rgba(255,255,255,.32);scroll-snap-align:center;
+    box-shadow:0 24px 65px rgba(23,62,120,.16);
+    transform:scale(.91);opacity:.64;filter:saturate(.82);
+    transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .42s ease,filter .42s ease,box-shadow .42s ease
+}
+.premium-package.active{transform:scale(1);opacity:1;filter:saturate(1);box-shadow:0 34px 85px rgba(23,62,120,.25)}
+.package-aqua{background:linear-gradient(145deg,#00c7d9 0%,#00a7e8 48%,#1378f2 100%)}
+.package-blue{background:linear-gradient(145deg,#0c78ff 0%,#315ff4 50%,#6258ef 100%)}
+.package-violet{background:linear-gradient(145deg,#6c5cf6 0%,#8b4fe9 50%,#c044d4 100%)}
+.package-emerald{background:linear-gradient(145deg,#00bea0 0%,#00a8a8 48%,#1287d3 100%)}
+.package-orb{position:absolute;z-index:-1;border-radius:50%;pointer-events:none}
+.orb-a{width:300px;height:300px;top:-180px;left:-100px;background:rgba(255,255,255,.2);filter:blur(4px)}
+.orb-b{width:330px;height:330px;right:-210px;bottom:-190px;border:55px solid rgba(255,255,255,.055)}
+.premium-package::after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(125deg,rgba(255,255,255,.15),transparent 38%,rgba(255,255,255,.035));pointer-events:none}
+
+.popular-ribbon{position:absolute;top:0;left:28px;padding:7px 13px 8px;border-radius:0 0 13px 13px;background:#fff;color:#2854a0;font-size:8px;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.package-card-top{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:2}
+.package-logo-box{width:105px;height:62px;display:flex;align-items:center;justify-content:center;padding:5px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(255,255,255,.12);backdrop-filter:blur(12px)}
+.package-logo-box img{width:100%;height:100%;object-fit:contain}
+.package-chip{padding:7px 11px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.88);font-size:8px;font-weight:650}
+
+.package-card-body{position:relative;z-index:2;margin-top:45px}
+.package-kicker{display:block;color:rgba(255,255,255,.72);font-size:10px;font-weight:500}
+.package-price-new{display:flex;align-items:flex-end;gap:13px;margin-top:4px}
+.package-price-new>strong{font-size:92px;line-height:.95;font-weight:800;letter-spacing:-5px;text-shadow:0 10px 30px rgba(0,0,0,.08)}
+.package-price-new>div{display:flex;flex-direction:column;padding-bottom:10px}
+.package-price-new b{font-size:20px}
+.package-price-new span{color:rgba(255,255,255,.62);font-size:8px;margin-top:1px}
+
+.package-stats-new{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:38px}
+.package-stat-new{display:flex;align-items:center;gap:10px;padding:14px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px)}
+.stat-symbol{width:36px;height:36px;display:grid;place-items:center;flex-shrink:0;border-radius:11px;background:rgba(255,255,255,.14);font-size:15px}
+.package-stat-new small{display:block;color:rgba(255,255,255,.62);font-size:7px}
+.package-stat-new strong{display:block;margin-top:1px;color:#fff;font-size:11px}
+
+.package-card-foot{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:24px;color:rgba(255,255,255,.5);font-size:7px;letter-spacing:1.2px}
+
+.package-slider-dots{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:15px}
+.package-slider-dot{width:7px;height:7px;padding:0;border:0;border-radius:999px;background:#cbd7e7;transition:.3s}
+.package-slider-dot.active{width:31px;background:linear-gradient(90deg,#1267ff,#00c9f5)}
+.package-availability-new{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin-top:21px;color:#8191a5;font-size:9px}
+.package-availability-new strong{color:#1267ff}
+.availability-pulse{width:7px;height:7px;margin-left:3px;border-radius:50%;background:#00bd83;box-shadow:0 0 0 5px rgba(0,189,131,.08);animation:packagePulse 2s infinite}
+@keyframes packagePulse{50%{opacity:.42;transform:scale(.85)}}
+
+@media(hover:hover){.premium-package.active:hover{transform:scale(1.012) translateY(-5px)}}
+@media(max-width:650px){
+    .package-slider-toolbar{justify-content:center;margin-bottom:5px}
+    .package-slider-actions{display:none}
+    .package-swipe-hint{font-size:8px}
+    .package-slider-viewport{
+        width:calc(100% + 8%);margin:-15px -4% -8px;
+        padding:28px calc((100vw - 304px)/2) 35px;touch-action:pan-x
+    }
+    .package-slider-track{gap:14px}
+    .premium-package{flex-basis:304px;min-height:405px;padding:21px;border-radius:26px;transform:scale(.92)}
+    .premium-package.active{transform:scale(1)}
+    .package-logo-box{width:85px;height:50px;border-radius:13px}
+    .package-chip{padding:6px 9px;font-size:7px}
+    .popular-ribbon{left:20px;padding:6px 10px;font-size:7px}
+    .package-card-body{margin-top:35px}
+    .package-kicker{font-size:9px}
+    .package-price-new>strong{font-size:75px;letter-spacing:-4px}
+    .package-price-new b{font-size:17px}
+    .package-price-new span{font-size:7px}
+    .package-stats-new{gap:7px;margin-top:29px}
+    .package-stat-new{gap:7px;padding:10px;border-radius:12px}
+    .stat-symbol{width:30px;height:30px;border-radius:9px;font-size:12px}
+    .package-stat-new strong{font-size:9px}
+    .package-stat-new small{font-size:6px}
+    .package-card-foot{padding-top:17px;font-size:6px}
+    .package-slider-dots{margin-top:9px}
+}
+@media(max-width:355px){
+    .package-slider-viewport{padding-left:calc((100vw - 278px)/2);padding-right:calc((100vw - 278px)/2)}
+    .premium-package{flex-basis:278px;min-height:392px}
+}
+
+
+/* =========================================================
+   OUR STORY - PREMIUM CINEMATIC SECTION
+========================================================= */
+.story-section{overflow:hidden}
+.story-stage{
+    position:relative;overflow:hidden;padding:58px;border:1px solid rgba(255,255,255,.92);
+    border-radius:38px;background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(239,247,255,.93));
+    box-shadow:0 35px 100px rgba(28,74,135,.12)
+}
+.story-stage::before{
+    content:"";position:absolute;width:440px;height:440px;top:-270px;right:-180px;border-radius:50%;
+    background:#32c4ff;opacity:.17;filter:blur(55px)
+}
+.story-stage::after{
+    content:"";position:absolute;width:410px;height:410px;left:-230px;bottom:-260px;border-radius:50%;
+    background:#875cff;opacity:.14;filter:blur(58px)
+}
+.story-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:55px;align-items:center}
+.story-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;
+    color:#1267ff;background:rgba(18,103,255,.07);font-size:9px;font-weight:750
+}
+.story-title{margin-top:18px;color:var(--ink);font-size:clamp(32px,4.6vw,53px);line-height:1.35;font-weight:800;letter-spacing:-1px}
+.story-gradient{
+    color:transparent;background:linear-gradient(100deg,#086cff,#00bddd 42%,#7657f5 78%,#a447ff);
+    -webkit-background-clip:text;background-clip:text
+}
+.story-lead{margin-top:19px;color:#647990;font-size:12px;line-height:2.05}
+.story-lead strong{color:#203b5c;font-weight:750}
+.story-quote{
+    position:relative;margin-top:27px;padding:22px 24px;border:1px solid rgba(18,103,255,.09);
+    border-radius:20px;background:rgba(255,255,255,.76);box-shadow:0 15px 45px rgba(31,76,140,.07);
+    color:#193758;font-size:15px;font-weight:700;line-height:1.9
+}
+.story-quote::before{content:"“";position:absolute;top:-18px;right:16px;color:rgba(18,103,255,.12);font-size:75px;line-height:1;font-weight:800}
+.story-quote b{color:#1267ff}
+
+.story-timeline{position:relative;display:grid;gap:13px}
+.story-timeline::before{
+    content:"";position:absolute;right:24px;top:38px;bottom:38px;width:2px;
+    background:linear-gradient(#23b9f4,#1267ff,#7759f5,#10b98a);opacity:.28
+}
+.story-step{
+    position:relative;display:grid;grid-template-columns:49px 1fr;gap:14px;align-items:center;
+    padding:16px;border:1px solid rgba(25,65,120,.08);border-radius:18px;background:rgba(255,255,255,.82);
+    box-shadow:0 12px 35px rgba(30,70,120,.055);transition:.3s
+}
+.story-step:hover{transform:translateX(-5px);box-shadow:0 18px 45px rgba(30,70,120,.09)}
+.story-step-icon{
+    position:relative;z-index:2;width:49px;height:49px;display:grid;place-items:center;border-radius:15px;
+    color:#fff;background:linear-gradient(145deg,#1267ff,#7357ff);box-shadow:0 10px 25px rgba(45,82,220,.18);font-size:13px;font-weight:800
+}
+.story-step:nth-child(2) .story-step-icon{background:linear-gradient(145deg,#00bddd,#1267ff)}
+.story-step:nth-child(3) .story-step-icon{background:linear-gradient(145deg,#7357ff,#a94bdc)}
+.story-step:nth-child(4) .story-step-icon{background:linear-gradient(145deg,#00b98a,#00a6b5)}
+.story-step small{display:block;color:#8b9bae;font-size:7px;font-weight:600}
+.story-step strong{display:block;margin-top:2px;color:var(--ink);font-size:12px;font-weight:750}
+.story-step p{margin-top:2px;color:#8293a8;font-size:8px;line-height:1.65}
+
+.jawwal-pride{
+    position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:20px;
+    margin-top:28px;padding:23px 25px;border-radius:22px;color:#fff;
+    background:linear-gradient(120deg,#071f48,#0c4aa8 48%,#1267ff);
+    box-shadow:0 22px 55px rgba(14,55,125,.17);overflow:hidden
+}
+.jawwal-pride::after{
+    content:"";position:absolute;width:230px;height:230px;left:-130px;top:-140px;border-radius:50%;
+    background:#00dcff;opacity:.2;filter:blur(35px)
+}
+.jawwal-pride-icon{
+    position:relative;z-index:2;width:54px;height:54px;display:grid;place-items:center;border-radius:16px;
+    border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.1);font-size:22px
+}
+.jawwal-pride-content{position:relative;z-index:2}
+.jawwal-pride-content span{display:block;color:#68e7ff;font-size:8px;font-weight:700}
+.jawwal-pride-content strong{display:block;margin-top:2px;font-size:15px;font-weight:750}
+.jawwal-pride-content p{margin-top:4px;color:rgba(255,255,255,.7);font-size:8px;line-height:1.8}
+
+.story-finale{
+    position:relative;z-index:2;margin-top:30px;text-align:center;padding:31px 20px 3px;
+    border-top:1px solid rgba(25,65,120,.07)
+}
+.story-finale span{display:block;color:#8b9bae;font-size:8px;letter-spacing:1.6px}
+.story-finale strong{display:block;margin-top:8px;color:var(--ink);font-size:clamp(20px,3.2vw,31px);line-height:1.55;font-weight:800}
+.story-finale strong b{
+    color:transparent;background:linear-gradient(90deg,#1267ff,#00bddd,#7357ff);
+    -webkit-background-clip:text;background-clip:text
+}
+.story-highlight{display:inline-block;animation:storyFloat 3.2s ease-in-out infinite}
+@keyframes storyFloat{50%{transform:translateY(-3px)}}
+
+@media(max-width:900px){
+    .story-stage{padding:38px 30px}
+    .story-grid{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:650px){
+    .story-stage{padding:28px 18px;border-radius:28px}
+    .story-title{font-size:31px}
+    .story-lead{font-size:10px;line-height:2}
+    .story-quote{padding:18px;font-size:12px}
+    .story-step{grid-template-columns:43px 1fr;padding:13px;gap:11px}
+    .story-step-icon{width:43px;height:43px;border-radius:13px;font-size:11px}
+    .story-timeline::before{right:21px}
+    .story-step strong{font-size:10px}
+    .story-step p{font-size:7px}
+    .jawwal-pride{grid-template-columns:1fr;text-align:center;padding:22px 18px}
+    .jawwal-pride-icon{margin:auto}
+    .jawwal-pride-content strong{font-size:13px}
+    .story-finale{padding-top:24px}
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
+
+<div class="page-background">
+
+    <div class="bg-grid"></div>
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+
+</div>
+
+
+<div
+    class="scroll-progress"
+    id="scrollProgress"
+></div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header
+    class="header"
+    id="header"
+>
+
+<div class="container navbar">
+
+
+    <!-- BRAND -->
+
+    <a
+        href="#home"
+        class="brand"
+    >
+
+        <div class="brand-logo">
+
+            <!--
+                ضع ملف الشعار:
+                1.png
+                بجانب index.html
+            -->
+
+            <img
+                src="1.png"
+                alt="شعار شبكة النسيم نت"
+            >
+
+        </div>
+
+
+        <div class="brand-text">
+
+            <strong>
+                النسيم نت
+            </strong>
+
+            <span>
+                AL-NASIM NET
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <!-- DESKTOP NAV -->
+
+    <nav class="desktop-nav">
+
+        <a
+            href="#home"
+            class="nav-link"
+        >
+            الرئيسية
+        </a>
+
+        <a
+            href="#packages"
+            class="nav-link"
+        >
+            الباقات
+        </a>
+
+        <a
+            href="#homeInternet"
+            class="nav-link"
+        >
+            الإنترنت المنزلي
+        </a>
+
+        <a
+            href="#services"
+            class="nav-link"
+        >
+            خدماتنا
+        </a>
+
+        <a href="#story" class="nav-link">
+            قصتنا
+        </a>
+
+        <a
+            href="#support"
+            class="nav-link"
+        >
+            الدعم والشكاوى
+        </a>
+
+        <a
+            href="https://pppoe.abuyounis.net"
+            class="portal-top"
+        >
+            👤
+            بوابة المشتركين
+        </a>
+
+    </nav>
+
+
+    <!-- MOBILE BUTTON -->
+
+    <button
+        type="button"
+        class="menu-btn"
+        id="menuBtn"
+        aria-label="فتح القائمة"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</div>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE MENU
+========================================================= -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
+
+<div class="mobile-menu-content">
+
+
+    <a
+        href="#home"
+        class="mobile-link"
+    >
+        الرئيسية
+    </a>
+
+
+    <a
+        href="#packages"
+        class="mobile-link"
+    >
+        الباقات
+    </a>
+
+
+    <a
+        href="#homeInternet"
+        class="mobile-link"
+    >
+        الإنترنت المنزلي
+    </a>
+
+
+    <a
+        href="#services"
+        class="mobile-link"
+    >
+        خدماتنا
+    </a>
+
+    <a href="#story" class="mobile-link">
+        قصتنا
+    </a>
+
+
+    <a
+        href="#support"
+        class="mobile-link"
+    >
+        🎧 الدعم والشكاوى
+    </a>
+
+
+    <a
+        href="https://pppoe.abuyounis.net"
+        class="mobile-portal"
+    >
+        👤 بوابة المشتركين
+    </a>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main
+    class="hero"
+    id="home"
+>
+
+<div class="container hero-layout">
+
+
+    <!-- CONTENT -->
+
+    <div class="hero-content">
+
+
+        <div class="hero-badge">
+
+            <span class="live-dot"></span>
+
+            شبكة النسيم نت اللاسلكية
+
+        </div>
+
+
+        <h1 class="hero-title">
+
+            الإنترنت الذي
+
+            <span class="colored">
+                يبقيك متصلًا
+            </span>
+
+            بالعالم.
+
+        </h1>
+
+
+        <p class="hero-subtitle">
+
+            تجربة إنترنت لاسلكية
+            مصممة لتكون
+
+            <strong>
+                أسرع، أبسط وأقرب إليك.
+            </strong>
+
+            باقات متعددة، إنترنت منزلي،
+            بوابة إلكترونية ودعم فني
+            لمشتركي شبكة النسيم نت.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+
+            <a
+                href="#packages"
+                class="button button-primary"
+            >
+                ⚡ اكتشف الباقات
+            </a>
+
+
+            <a
+                href="#support"
+                class="button button-support"
+            >
+                🎧 أرسل مشكلة
+            </a>
+
+
+            <a
+                href="https://pppoe.abuyounis.net"
+                class="button button-light"
+            >
+                👤 بوابة المشتركين
+            </a>
+
+        </div>
+
+
+        <div class="hero-trust">
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    📍
+                </span>
+
+                خانيونس – البراق الجنوبي
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    🛠
+                </span>
+
+                دعم فني
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <span class="trust-icon">
+                    📡
+                </span>
+
+                اتصال لاسلكي
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- VISUAL -->
+
+    <div class="hero-visual">
+
+
+        <div class="visual-glow"></div>
+
+
+        <!-- DEVICE -->
+
+        <div class="device">
+
+
+            <div class="device-inner">
+
+
+                <div class="device-logo">
+
+                    <img
+                        src="1.png"
+                        alt="AL-Nasim Net"
+                    >
+
+                </div>
+
+
+                <div class="signal">
+
+                    <div class="signal-ring"></div>
+
+                    <div class="signal-ring"></div>
+
+                    <div class="signal-ring"></div>
+
+                    <div class="signal-dot"></div>
+
+                </div>
+
+
+                <div class="device-title">
+
+                    <strong>
+                        النسيم نت
+                    </strong>
+
+                    <span>
+                        ALWAYS CONNECTED
+                    </span>
+
+                </div>
+
+
+                <div class="device-stats">
+
+
+                    <div class="device-stat">
+
+                        <strong>
+                            24/7
+                        </strong>
+
+                        <span>
+                            SUPPORT
+                        </span>
+
+                    </div>
+
+
+                    <div class="device-stat">
+
+                        <strong>
+                            Wi-Fi
+                        </strong>
+
+                        <span>
+                            WIRELESS
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FLOATING -->
+
+        <div class="float-box float-one">
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <strong>
+                    اتصال سريع
+                </strong>
+
+                <span>
+                    باقات متعددة
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="float-box float-two">
+
+            <div class="icon">
+                🎧
+            </div>
+
+            <div>
+
+                <strong>
+                    دعم فني
+                </strong>
+
+                <span>
+                    أرسل بلاغك مباشرة
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="float-box float-three">
+
+            <div class="icon">
+                ✓
+            </div>
+
+            <div>
+
+                <strong>
+                    متصل
+                </strong>
+
+                <span>
+                    AL-Nasim Net
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+     QUICK INFO
+========================================================= -->
+
+<div class="quick-strip">
+
+<div class="container">
+
+
+    <div class="quick-grid reveal">
+
+
+        <div class="quick-item">
+
+            <div class="quick-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <strong>
+                    باقات متنوعة
+                </strong>
+
+                <span>
+                    خيارات تناسب استخدامك
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <div class="quick-icon">
+                🏠
+            </div>
+
+            <div>
+
+                <strong>
+                    إنترنت منزلي
+                </strong>
+
+                <span>
+                    سرعة 8 ميجا
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <div class="quick-icon">
+                📱
+            </div>
+
+            <div>
+
+                <strong>
+                    جوال باي
+                </strong>
+
+                <span>
+                    بطاقات متوفرة بسهولة
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <div class="quick-icon">
+                🎧
+            </div>
+
+            <div>
+
+                <strong>
+                    مركز الدعم
+                </strong>
+
+                <span>
+                    تسجيل ومتابعة المشاكل
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     PACKAGES - PREMIUM SLIDER
+========================================================= -->
+
+<section id="packages" class="premium-packages">
+
+<div class="container">
+
+    <div class="section-header reveal">
+        <div class="eyebrow">⚡ بطاقات النسيم نت</div>
+        <h2>اختر باقتك وانطلق</h2>
+        <p>اسحب يمينًا ويسارًا لاستعراض بطاقات النسيم نت واختيار السرعة والمدة المناسبة.</p>
+    </div>
+
+    <div class="package-slider-shell reveal">
+
+        <div class="package-slider-toolbar">
+            <div class="package-swipe-hint">
+                <span class="swipe-pill">↔</span>
+                <span>اسحب لاستعراض الباقات</span>
+            </div>
+
+            <div class="package-slider-actions">
+                <button class="package-nav-btn" id="packagePrev" type="button" aria-label="الباقة السابقة">→</button>
+                <button class="package-nav-btn" id="packageNext" type="button" aria-label="الباقة التالية">←</button>
+            </div>
+        </div>
+
+        <div class="package-slider-viewport" id="packagesSlider" tabindex="0" aria-label="باقات النسيم نت">
+            <div class="package-slider-track">
+
+                <article class="premium-package package-aqua" data-package="0">
+                    <div class="package-orb orb-a"></div>
+                    <div class="package-orb orb-b"></div>
+                    <div class="package-card-top">
+                        <div class="package-logo-box"><img src="1.png" alt="شعار شبكة النسيم نت"></div>
+                        <span class="package-chip">اقتصادية</span>
+                    </div>
+                    <div class="package-card-body">
+                        <span class="package-kicker">بطاقة إنترنت</span>
+                        <div class="package-price-new">
+                            <strong>1</strong>
+                            <div><b>شيكل</b><span>بطاقة النسيم نت</span></div>
+                        </div>
+                    </div>
+                    <div class="package-stats-new">
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">⚡</span>
+                            <div><small>السرعة</small><strong>2 ميجا</strong></div>
+                        </div>
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">◷</span>
+                            <div><small>المدة</small><strong>8 ساعات</strong></div>
+                        </div>
+                    </div>
+                    <div class="package-card-foot"><span>AL-NASIM NET</span><span>Wi-Fi</span></div>
+                </article>
+
+                <article class="premium-package package-blue" data-package="1">
+                    <div class="popular-ribbon">★ الأكثر اختيارًا</div>
+                    <div class="package-orb orb-a"></div>
+                    <div class="package-orb orb-b"></div>
+                    <div class="package-card-top">
+                        <div class="package-logo-box"><img src="1.png" alt="شعار شبكة النسيم نت"></div>
+                        <span class="package-chip">استخدام يومي</span>
+                    </div>
+                    <div class="package-card-body">
+                        <span class="package-kicker">بطاقة إنترنت</span>
+                        <div class="package-price-new">
+                            <strong>2</strong>
+                            <div><b>شيكل</b><span>بطاقة النسيم نت</span></div>
+                        </div>
+                    </div>
+                    <div class="package-stats-new">
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">⚡</span>
+                            <div><small>السرعة</small><strong>3 ميجا</strong></div>
+                        </div>
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">◷</span>
+                            <div><small>المدة</small><strong>10 ساعات</strong></div>
+                        </div>
+                    </div>
+                    <div class="package-card-foot"><span>AL-NASIM NET</span><span>Wi-Fi</span></div>
+                </article>
+
+                <article class="premium-package package-violet" data-package="2">
+                    <div class="package-orb orb-a"></div>
+                    <div class="package-orb orb-b"></div>
+                    <div class="package-card-top">
+                        <div class="package-logo-box"><img src="1.png" alt="شعار شبكة النسيم نت"></div>
+                        <span class="package-chip">سرعة أعلى</span>
+                    </div>
+                    <div class="package-card-body">
+                        <span class="package-kicker">بطاقة إنترنت</span>
+                        <div class="package-price-new">
+                            <strong>2</strong>
+                            <div><b>شيكل</b><span>باقة السرعة</span></div>
+                        </div>
+                    </div>
+                    <div class="package-stats-new">
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">⚡</span>
+                            <div><small>السرعة</small><strong>5 ميجا</strong></div>
+                        </div>
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">◷</span>
+                            <div><small>المدة</small><strong>ساعتان</strong></div>
+                        </div>
+                    </div>
+                    <div class="package-card-foot"><span>AL-NASIM NET</span><span>Wi-Fi</span></div>
+                </article>
+
+                <article class="premium-package package-emerald" data-package="3">
+                    <div class="package-orb orb-a"></div>
+                    <div class="package-orb orb-b"></div>
+                    <div class="package-card-top">
+                        <div class="package-logo-box"><img src="1.png" alt="شعار شبكة النسيم نت"></div>
+                        <span class="package-chip">يوم كامل</span>
+                    </div>
+                    <div class="package-card-body">
+                        <span class="package-kicker">بطاقة إنترنت</span>
+                        <div class="package-price-new">
+                            <strong>3</strong>
+                            <div><b>شيكل</b><span>بطاقة اليوم الكامل</span></div>
+                        </div>
+                    </div>
+                    <div class="package-stats-new">
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">⚡</span>
+                            <div><small>السرعة</small><strong>2 ميجا</strong></div>
+                        </div>
+                        <div class="package-stat-new">
+                            <span class="stat-symbol">◷</span>
+                            <div><small>المدة</small><strong>24 ساعة</strong></div>
+                        </div>
+                    </div>
+                    <div class="package-card-foot"><span>AL-NASIM NET</span><span>Wi-Fi</span></div>
+                </article>
+
+            </div>
+        </div>
+
+        <div class="package-slider-dots" id="packageDots" aria-label="التنقل بين الباقات"></div>
+
+        <div class="package-availability-new">
+            <span class="availability-pulse"></span>
+            البطاقات متوفرة عبر <strong>جوال باي</strong> ونقاط البيع المعتمدة
+        </div>
+    </div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     HOME INTERNET
+========================================================= -->
+
+<section id="homeInternet">
+
+<div class="container">
+
+
+    <div class="section-header reveal">
+
+        <div class="eyebrow">
+            🏠 الإنترنت المنزلي
+        </div>
+
+        <h2>
+            اتصال منزلي ببساطة
+        </h2>
+
+        <p>
+            اشتراك مخصص للاستخدام
+            المنزلي مع دعم فني من شبكة النسيم نت.
+        </p>
+
+    </div>
+
+
+    <div class="home-bento">
+
+
+        <div class="home-main reveal">
+
+
+            <div class="home-content">
+
+
+                <span class="home-tag">
+                    AL-NASIM HOME
+                </span>
+
+
+                <h2>
+                    الإنترنت الذي تحتاجه في منزلك.
+                </h2>
+
+
+                <p>
+
+                    مناسب للتصفح،
+                    منصات التواصل،
+                    الفيديو والخدمات
+                    الإلكترونية اليومية.
+
+                </p>
+
+
+                <div class="home-features">
+
+                    <span>
+                        📡 اتصال لاسلكي
+                    </span>
+
+                    <span>
+                        ⚡ سرعة 8 ميجا
+                    </span>
+
+                    <span>
+                        🎧 دعم فني
+                    </span>
+
+                    <span>
+                        🏠 للمنزل
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-price-card reveal">
+
+
+            <div class="speed-label">
+                سرعة الاشتراك
+            </div>
+
+
+            <div class="speed-number">
+
+                8
+
+                <span>
+                    ميجا
+                </span>
+
+            </div>
+
+
+            <div class="price-line"></div>
+
+
+            <div class="home-price">
+
+                100 شيكل
+
+                <span>
+                    قيمة الاشتراك
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section id="services">
+
+<div class="container">
+
+
+    <div class="section-header reveal">
+
+        <div class="eyebrow">
+            ✦ خدماتنا
+        </div>
+
+        <h2>
+            كل ما تحتاجه في مكان واحد
+        </h2>
+
+        <p>
+            خدمات مصممة لتسهيل تجربة
+            مشتركي شبكة النسيم نت.
+        </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                📡
+            </div>
+
+            <h3>
+                إنترنت لاسلكي
+            </h3>
+
+            <p>
+                شبكة لاسلكية وخيارات
+                متعددة للاتصال بالإنترنت.
+            </p>
+
+        </article>
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                ⚡
+            </div>
+
+            <h3>
+                سرعات متعددة
+            </h3>
+
+            <p>
+                باقات بسرعات ومدد مختلفة
+                تناسب احتياجات المشتركين.
+            </p>
+
+        </article>
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                🏠
+            </div>
+
+            <h3>
+                إنترنت منزلي
+            </h3>
+
+            <p>
+                خدمة إنترنت مخصصة
+                للمشتركين المنزليين.
+            </p>
+
+        </article>
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                🎧
+            </div>
+
+            <h3>
+                دعم فني
+            </h3>
+
+            <p>
+                سجل مشكلتك مباشرة
+                من الموقع ليتم متابعتها.
+            </p>
+
+        </article>
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                👤
+            </div>
+
+            <h3>
+                بوابة المشتركين
+            </h3>
+
+            <p>
+                بوابة إلكترونية مخصصة
+                لخدمات مشتركي النسيم نت.
+            </p>
+
+        </article>
+
+
+        <article class="service-card reveal">
+
+            <div class="service-icon">
+                📱
+            </div>
+
+            <h3>
+                جوال باي ونقاط البيع
+            </h3>
+
+            <p>
+                بطاقات الشبكة متوفرة
+                عبر جوال باي ونقاط بيع متعددة.
+            </p>
+
+        </article>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     OUR STORY
+========================================================= -->
+
+<section id="story" class="story-section">
+
+<div class="container">
+
+    <div class="section-header reveal">
+        <div class="eyebrow">✦ قصتنا</div>
+        <h2>من قلب التحدي... بدأت الحكاية</h2>
+        <p>قصة شبكة بدأت من جديد بإمكانيات بسيطة، وتواصل اليوم طريقها نحو المزيد من النمو والتطور.</p>
+    </div>
+
+    <div class="story-stage reveal">
+
+        <div class="story-grid">
+
+            <div class="story-copy">
+
+                <div class="story-eyebrow">
+                    <span class="live-dot"></span>
+                    قصة AL-NASIM NET
+                </div>
+
+                <h2 class="story-title">
+                    وُلدت من رحم المعاناة،
+                    <span class="story-gradient story-highlight">وكبرت بالإصرار.</span>
+                </h2>
+
+                <p class="story-lead">
+                    <strong>شبكة النسيم نت اللاسلكية</strong> ليست مجرد شبكة إنترنت؛
+                    بل مبادرة وُلدت في ظروف استثنائية فرضتها الحرب. وبعد أن تعرضت بنيتها
+                    ومعداتها للدمار، بدأت رحلتها من جديد بأبسط الأدوات والإمكانيات.
+                    خطوة بعد خطوة، وبإرادة لا تعرف التوقف، واصلت الشبكة إعادة البناء
+                    والتوسع وتطوير خدماتها، وما زالت تنمو <strong>بقوة وبوتيرة متزايدة</strong>
+                    لتقديم خدمات إنترنت سريعة ومتطورة، وخدمة أقرب إلى مشتركيها.
+                </p>
+
+                <div class="story-quote">
+                    بدأنا من أبسط الإمكانيات...
+                    واليوم نبني شبكة <b>تتطلع إلى القمة.</b>
+                </div>
+
+            </div>
+
+            <div class="story-timeline">
+
+                <article class="story-step">
+                    <div class="story-step-icon">01</div>
+                    <div>
+                        <small>البداية</small>
+                        <strong>من قلب الظروف الصعبة</strong>
+                        <p>مبادرة بدأت بإمكانيات بسيطة وإصرار كبير على إيصال الخدمة.</p>
+                    </div>
+                </article>
+
+                <article class="story-step">
+                    <div class="story-step-icon">02</div>
+                    <div>
+                        <small>إعادة البناء</small>
+                        <strong>نبدأ من جديد</strong>
+                        <p>إعادة بناء الشبكة وتطويرها بعد تضرر المعدات والبنية بسبب الحرب.</p>
+                    </div>
+                </article>
+
+                <article class="story-step">
+                    <div class="story-step-icon">03</div>
+                    <div>
+                        <small>اليوم</small>
+                        <strong>نمو أسرع وخدمة أفضل</strong>
+                        <p>توسع مستمر وتطوير للخدمة والبنية والدعم الفني لمشتركي النسيم نت.</p>
+                    </div>
+                </article>
+
+                <article class="story-step">
+                    <div class="story-step-icon">04</div>
+                    <div>
+                        <small>المستقبل</small>
+                        <strong>طموحنا لا يتوقف</strong>
+                        <p>نتطلع إلى شبكة أكبر، تغطية أوسع، سرعات أعلى وخدمات أكثر تطورًا.</p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+        <div class="jawwal-pride">
+            <div class="jawwal-pride-icon">📡</div>
+            <div class="jawwal-pride-content">
+                <span>مصدر خدمة الإنترنت</span>
+                <strong>بكل فخر — شركة جوال ضمن مشروع المبادرة</strong>
+                <p>
+                    نفخر بأن مصدر خدمة الإنترنت لدينا هو شركة جوال ضمن مشروع المبادرة،
+                    بما يدعم استمرارنا في تقديم الخدمة وتطويرها، ويمنحنا دافعًا أكبر
+                    لمواصلة النمو وخدمة مشتركينا رغم الظروف الاستثنائية.
+                </p>
+            </div>
+        </div>
+
+        <div class="story-finale">
+            <span>AL-NASIM NET • OUR STORY</span>
+            <strong>
+                بدأت بإمكانيات بسيطة، كبرت بالإصرار،
+                <b>والقادم أكبر بإذن الله.</b>
+            </strong>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     PORTAL
+========================================================= -->
+
+<section>
+
+<div class="container">
+
+
+    <div class="portal-section reveal">
+
+
+        <div class="portal-layout">
+
+
+            <div>
+
+                <div class="portal-small">
+                    👤 AL-NASIM CUSTOMER PORTAL
+                </div>
+
+                <h2>
+                    بوابة المشتركين
+                </h2>
+
+                <p>
+
+                    الوصول إلى الخدمات
+                    الإلكترونية المخصصة
+                    لمشتركي شبكة النسيم نت.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="https://pppoe.abuyounis.net"
+                class="portal-button"
+            >
+                الدخول إلى البوابة ←
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     SUPPORT
+========================================================= -->
+
+<section id="support">
+
+<div class="container">
+
+
+    <div class="section-header reveal">
+
+        <div class="eyebrow">
+            🎧 مركز الدعم
+        </div>
+
+        <h2>
+            عندك مشكلة؟ نحن هنا.
+        </h2>
+
+        <p>
+
+            أرسل المشكلة مباشرة من الموقع،
+            وسيتم تسجيلها وإرسالها
+            إلى فريق الدعم الفني.
+
+        </p>
+
+    </div>
+
+
+    <div class="support-wrapper reveal">
+
+
+        <div class="support-grid">
+
+
+            <!-- SUPPORT INFO -->
+
+            <aside class="support-side">
+
+
+                <div class="support-side-content">
+
+
+                    <div class="support-icon">
+                        🎧
+                    </div>
+
+
+                    <h3>
+                        الدعم الفني
+                    </h3>
+
+
+                    <p>
+
+                        سجل المشكلة بدقة
+                        لمساعدة فريق الدعم
+                        على متابعتها بشكل أسرع.
+
+                    </p>
+
+
+                    <div class="support-points">
+
+
+                        <div class="support-point">
+
+                            🎫
+
+                            رقم خاص لكل بلاغ
+
+                        </div>
+
+
+                        <div class="support-point">
+
+                            🚀
+
+                            وصول مباشر لفريق الدعم
+
+                        </div>
+
+
+                        <div class="support-point">
+
+                            📡
+
+                            تحديد رقم الشبكة
+
+                        </div>
+
+
+                        <div class="support-point">
+
+                            🕐
+
+                            استقبال البلاغات على مدار الساعة
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="tel:0597250160"
+                        class="support-phone"
+                    >
+                        0597250160
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+            <!-- FORM -->
+
+            <div class="form-box">
+
+
+                <div class="form-head">
+
+                    <h3>
+                        إرسال مشكلة جديدة
+                    </h3>
+
+                    <p>
+                        جميع الحقول الأساسية مطلوبة لإرسال البلاغ.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="complaintForm"
+                    novalidate
+                >
+
+
+                    <div class="form-grid">
+
+
+                        <!-- NAME -->
+
+                        <div class="form-group">
+
+                            <label for="name">
+
+                                الاسم
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="name"
+                                class="form-control"
+                                type="text"
+                                maxlength="60"
+                                autocomplete="name"
+                                placeholder="اكتب اسمك"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="form-group">
+
+                            <label for="phone">
+
+                                رقم الجوال
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="phone"
+                                class="form-control"
+                                type="tel"
+                                inputmode="numeric"
+                                maxlength="10"
+                                autocomplete="tel"
+                                placeholder="05XXXXXXXX"
+                                dir="ltr"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- ROUTER -->
+
+                        <div class="form-group">
+
+                            <label for="router">
+
+                                رقم الشبكة (الراوتر)
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="router"
+                                class="form-control"
+                                type="text"
+                                inputmode="numeric"
+                                maxlength="20"
+                                placeholder="أدخل رقم الشبكة"
+                                dir="ltr"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- TYPE -->
+
+                        <div class="form-group">
+
+                            <label for="problemType">
+
+                                نوع المشكلة
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="problemType"
+                                class="form-control"
+                                required
+                            >
+
+                                <option value="">
+                                    اختر نوع المشكلة
+                                </option>
+
+                                <option value="انقطاع الإنترنت">
+                                    انقطاع الإنترنت
+                                </option>
+
+                                <option value="ضعف الإنترنت">
+                                    ضعف الإنترنت
+                                </option>
+
+                                <option value="بطء التصفح">
+                                    بطء التصفح
+                                </option>
+
+                                <option value="مشكلة تسجيل الدخول">
+                                    مشكلة تسجيل الدخول
+                                </option>
+
+                                <option value="مشكلة في الاشتراك المنزلي">
+                                    مشكلة في الاشتراك المنزلي
+                                </option>
+
+                                <option value="مشكلة في الشبكة">
+                                    مشكلة في الشبكة
+                                </option>
+
+                                <option value="شكوى أخرى">
+                                    شكوى أخرى
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- DETAILS -->
+
+                        <div class="form-group full">
+
+                            <label for="details">
+
+                                تفاصيل المشكلة
+
+                                <span class="required">
+                                    *
+                                </span>
+
+                            </label>
+
+
+                            <textarea
+                                id="details"
+                                class="form-control"
+                                maxlength="800"
+                                placeholder="اشرح المشكلة بالتفصيل..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                        id="submitBtn"
+                    >
+                        <span id="submitText">
+                            🚀 إرسال المشكلة إلى الدعم الفني
+                        </span>
+                    </button>
+
+
+                    <div
+                        id="status"
+                        class="status"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section>
+
+<div class="container">
+
+
+    <div class="contact-card reveal">
+
+
+        <div>
+
+            <h2>
+                شبكة النسيم نت اللاسلكية
+            </h2>
+
+            <p>
+
+                إدارة أبو نسيم
+                •
+                خانيونس – البراق الجنوبي
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="tel:0597250160"
+            class="contact-phone"
+        >
+            0597250160
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+<div class="container">
+
+
+    <div class="footer-grid">
+
+
+        <div class="footer-brand">
+
+
+            <div class="footer-logo">
+
+                <img
+                    src="1.png"
+                    alt="شعار شبكة النسيم نت"
+                >
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    شبكة النسيم نت اللاسلكية
+                </strong>
+
+                <span>
+                    AL-NASIM NET
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-info">
+
+            <div>
+                إدارة أبو نسيم
+            </div>
+
+            <div>
+                خانيونس – البراق الجنوبي
+            </div>
+
+            <div dir="ltr">
+                0597250160
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        ©
+        <span id="year"></span>
+
+        شبكة النسيم نت اللاسلكية
+        — جميع الحقوق محفوظة
+
+    </div>
+
+</div>
+
+</footer>
+
+
+<!-- =========================================================
+     FLOAT SUPPORT
+========================================================= -->
+
+<a
+    href="#support"
+    class="floating-support"
+    title="الدعم الفني"
+    aria-label="الدعم الفني"
+>
+    🎧
+</a>
+
+
+<!-- =========================================================
+     SUCCESS MODAL
+========================================================= -->
+
+<div
+    class="success-modal"
+    id="successModal"
+>
+
+<div class="success-box">
+
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <h3>
+        تم إرسال المشكلة بنجاح
+    </h3>
+
+
+    <p>
+
+        تم تسجيل البلاغ
+        وإرساله إلى فريق الدعم الفني.
+
+        <br>
+
+        احتفظ برقم الشكوى.
+
+    </p>
+
+
+    <div class="ticket-box">
+
+        <span>
+            رقم الشكوى
+        </span>
+
+        <div
+            class="ticket-number"
+            id="ticketNumber"
+        >
+            ---
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="close-modal"
+        id="closeModal"
+    >
+        تم
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+(function(){
+
+"use strict";
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const API_URL =
+    "https://api.abuyounis.net/complaints";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const header =
+    document.getElementById("header");
+
+const progress =
+    document.getElementById("scrollProgress");
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const year =
+    document.getElementById("year");
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+if(year){
+
+    year.textContent =
+        new Date().getFullYear();
+
+}
+
+
+/* =========================================================
+   HEADER + PROGRESS
+========================================================= */
+
+function handleScroll(){
+
+    const y =
+        window.scrollY ||
+        document.documentElement.scrollTop;
+
+
+    if(header){
+
+        header.classList.toggle(
+            "scrolled",
+            y > 15
+        );
+
+    }
+
+
+    if(progress){
+
+        const max =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+
+        const percent =
+            max > 0
+                ? (y / max) * 100
+                : 0;
+
+
+        progress.style.width =
+            percent + "%";
+
+    }
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    handleScroll,
+    {passive:true}
+);
+
+handleScroll();
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function closeMenu(){
+
+    if(!mobileMenu){
+        return;
+    }
+
+
+    mobileMenu.classList.remove(
+        "open"
+    );
+
+
+    document.body.classList.remove(
+        "menu-open"
+    );
+
+}
+
+
+if(menuBtn && mobileMenu){
+
+    menuBtn.addEventListener(
+        "click",
+        function(){
+
+            const open =
+                mobileMenu.classList.toggle(
+                    "open"
+                );
+
+
+            document.body.classList.toggle(
+                "menu-open",
+                open
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".mobile-link"
+        )
+        .forEach(
+            function(link){
+
+                link.addEventListener(
+                    "click",
+                    closeMenu
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+const revealItems =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+if(
+    "IntersectionObserver" in window &&
+    !window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches
+){
+
+    const observer =
+        new IntersectionObserver(
+            function(entries){
+
+                entries.forEach(
+                    function(entry){
+
+                        if(
+                            entry.isIntersecting
+                        ){
+
+                            entry.target
+                                .classList
+                                .add(
+                                    "visible"
+                                );
+
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold:.08,
+                rootMargin:
+                    "0px 0px -25px 0px"
+            }
+        );
+
+
+    revealItems.forEach(
+        function(item){
+
+            observer.observe(
+                item
+            );
+
+        }
+    );
+
+}else{
+
+    revealItems.forEach(
+        function(item){
+
+            item.classList.add(
+                "visible"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+const form =
+    document.getElementById(
+        "complaintForm"
+    );
+
+const nameInput =
+    document.getElementById(
+        "name"
+    );
+
+const phoneInput =
+    document.getElementById(
+        "phone"
+    );
+
+const routerInput =
+    document.getElementById(
+        "router"
+    );
+
+const typeInput =
+    document.getElementById(
+        "problemType"
+    );
+
+const detailsInput =
+    document.getElementById(
+        "details"
+    );
+
+const submitBtn =
+    document.getElementById(
+        "submitBtn"
+    );
+
+const submitText =
+    document.getElementById(
+        "submitText"
+    );
+
+const statusBox =
+    document.getElementById(
+        "status"
+    );
+
+
+/* =========================================================
+   NUMERIC FILTER
+========================================================= */
+
+if(phoneInput){
+
+    phoneInput.addEventListener(
+        "input",
+        function(){
+
+            this.value =
+                this.value
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    .slice(
+                        0,
+                        10
+                    );
+
+        }
+    );
+
+}
+
+
+if(routerInput){
+
+    routerInput.addEventListener(
+        "input",
+        function(){
+
+            this.value =
+                this.value
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    .slice(
+                        0,
+                        20
+                    );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function showStatus(
+    type,
+    text
+){
+
+    if(!statusBox){
+        return;
+    }
+
+
+    statusBox.className =
+        "status " + type;
+
+
+    statusBox.textContent =
+        text;
+
+}
+
+
+function clearStatus(){
+
+    if(!statusBox){
+        return;
+    }
+
+
+    statusBox.className =
+        "status";
+
+
+    statusBox.textContent =
+        "";
+
+}
+
+
+/* =========================================================
+   BUTTON STATE
+========================================================= */
+
+function setSending(value){
+
+    if(!submitBtn){
+        return;
+    }
+
+
+    submitBtn.disabled =
+        value;
+
+
+    if(submitText){
+
+        submitText.textContent =
+            value
+                ? "جاري إرسال المشكلة..."
+                : "🚀 إرسال المشكلة إلى الدعم الفني";
+
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
+const successModal =
+    document.getElementById(
+        "successModal"
+    );
+
+const ticketNumber =
+    document.getElementById(
+        "ticketNumber"
+    );
+
+const closeModal =
+    document.getElementById(
+        "closeModal"
+    );
+
+
+function openSuccess(ticket){
+
+    if(ticketNumber){
+
+        ticketNumber.textContent =
+            ticket ||
+            "تم التسجيل";
+
+    }
+
+
+    if(successModal){
+
+        successModal.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function hideSuccess(){
+
+    if(successModal){
+
+        successModal.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+if(closeModal){
+
+    closeModal.addEventListener(
+        "click",
+        hideSuccess
+    );
+
+}
+
+
+if(successModal){
+
+    successModal.addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                successModal
+            ){
+
+                hideSuccess();
+
+            }
+
+        }
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            hideSuccess();
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEND COMPLAINT
+========================================================= */
+
+if(form){
+
+    form.addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+            clearStatus();
+
+
+            const name =
+                nameInput.value.trim();
+
+
+            const phone =
+                phoneInput.value.trim();
+
+
+            const routerNumber =
+                routerInput.value.trim();
+
+
+            const problemType =
+                typeInput.value;
+
+
+            const details =
+                detailsInput.value.trim();
+
+
+            /* VALIDATION */
+
+            if(
+                !name ||
+                !phone ||
+                !routerNumber ||
+                !problemType ||
+                !details
+            ){
+
+                showStatus(
+                    "error",
+                    "يرجى تعبئة جميع الحقول المطلوبة."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !/^0[0-9]{8,9}$/
+                    .test(phone)
+            ){
+
+                showStatus(
+                    "error",
+                    "يرجى إدخال رقم جوال صحيح."
+                );
+
+                phoneInput.focus();
+
+                return;
+
+            }
+
+
+            if(
+                !/^[0-9]+$/
+                    .test(routerNumber)
+            ){
+
+                showStatus(
+                    "error",
+                    "رقم الشبكة يجب أن يحتوي على أرقام فقط."
+                );
+
+                routerInput.focus();
+
+                return;
+
+            }
+
+
+            /* PAYLOAD */
+
+            const payload = {
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                router_number:
+                    routerNumber,
+
+                type:
+                    problemType,
+
+                details:
+                    details,
+
+                hotspot_ip:
+                    "",
+
+                hotspot_mac:
+                    "",
+
+                hotspot_username:
+                    "",
+
+                user_agent:
+                    navigator.userAgent
+
+            };
+
+
+            setSending(true);
+
+
+            try{
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers:{
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+
+                        }
+                    );
+
+
+                let data = {};
+
+
+                try{
+
+                    data =
+                        await response.json();
+
+                }catch(e){
+
+                    data = {};
+
+                }
+
+
+                if(
+                    !response.ok ||
+                    !data.ok
+                ){
+
+                    throw new Error(
+                        data.error ||
+                        "send_failed"
+                    );
+
+                }
+
+
+                form.reset();
+
+                clearStatus();
+
+
+                openSuccess(
+                    data.ticket
+                );
+
+
+            }catch(error){
+
+
+                console.error(
+                    "Complaint error:",
+                    error
+                );
+
+
+                showStatus(
+                    "error",
+                    "تعذر إرسال المشكلة حاليًا. يرجى المحاولة مرة أخرى."
+                );
+
+
+            }finally{
+
+                setSending(false);
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PREMIUM PACKAGES SLIDER
+========================================================= */
+const packagesSlider = document.getElementById("packagesSlider");
+const packagePrev = document.getElementById("packagePrev");
+const packageNext = document.getElementById("packageNext");
+const packageDots = document.getElementById("packageDots");
+
+if (packagesSlider) {
+    const cards = Array.from(packagesSlider.querySelectorAll(".premium-package"));
+    let currentPackage = 1;
+    let autoplay = null;
+    let resumeTimer = null;
+    let scrollFrame = null;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+
+    cards.forEach((card, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "package-slider-dot";
+        dot.setAttribute("aria-label", "عرض الباقة " + (index + 1));
+        dot.addEventListener("click", () => {
+            stopAuto();
+            goToPackage(index);
+            scheduleAuto();
+        });
+        packageDots?.appendChild(dot);
+    });
+
+    function updatePackageUI() {
+        cards.forEach((card, index) => card.classList.toggle("active", index === currentPackage));
+        packageDots?.querySelectorAll(".package-slider-dot").forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentPackage);
+        });
+    }
+
+    function goToPackage(index, smooth = true) {
+        if (!cards.length) return;
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+        currentPackage = index;
+        const card = cards[index];
+        const target = card.offsetLeft - (packagesSlider.clientWidth - card.offsetWidth) / 2;
+        packagesSlider.scrollTo({ left: target, behavior: smooth ? "smooth" : "auto" });
+        updatePackageUI();
+    }
+
+    function detectPackage() {
+        const center = packagesSlider.scrollLeft + packagesSlider.clientWidth / 2;
+        let nearest = 0;
+        let distance = Infinity;
+        cards.forEach((card, index) => {
+            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+            const d = Math.abs(center - cardCenter);
+            if (d < distance) {
+                distance = d;
+                nearest = index;
+            }
+        });
+        if (nearest !== currentPackage) {
+            currentPackage = nearest;
+            updatePackageUI();
+        }
+    }
+
+    function stopAuto() {
+        if (autoplay) clearInterval(autoplay);
+        if (resumeTimer) clearTimeout(resumeTimer);
+        autoplay = null;
+        resumeTimer = null;
+    }
+
+    function startAuto() {
+        stopAuto();
+        autoplay = setInterval(() => goToPackage(currentPackage + 1), 4600);
+    }
+
+    function scheduleAuto() {
+        stopAuto();
+        resumeTimer = setTimeout(startAuto, 6500);
+    }
+
+    packageNext?.addEventListener("click", () => {
+        stopAuto();
+        goToPackage(currentPackage + 1);
+        scheduleAuto();
+    });
+
+    packagePrev?.addEventListener("click", () => {
+        stopAuto();
+        goToPackage(currentPackage - 1);
+        scheduleAuto();
+    });
+
+    packagesSlider.addEventListener("scroll", () => {
+        if (scrollFrame) cancelAnimationFrame(scrollFrame);
+        scrollFrame = requestAnimationFrame(detectPackage);
+    }, { passive: true });
+
+    packagesSlider.addEventListener("mousedown", (event) => {
+        dragging = true;
+        dragStartX = event.pageX;
+        dragStartScroll = packagesSlider.scrollLeft;
+        packagesSlider.classList.add("dragging");
+        stopAuto();
+    });
+
+    window.addEventListener("mousemove", (event) => {
+        if (!dragging) return;
+        event.preventDefault();
+        packagesSlider.scrollLeft = dragStartScroll - (event.pageX - dragStartX);
+    });
+
+    window.addEventListener("mouseup", () => {
+        if (!dragging) return;
+        dragging = false;
+        packagesSlider.classList.remove("dragging");
+        detectPackage();
+        setTimeout(() => goToPackage(currentPackage), 70);
+        scheduleAuto();
+    });
+
+    packagesSlider.addEventListener("touchstart", stopAuto, { passive: true });
+    packagesSlider.addEventListener("touchend", () => {
+        setTimeout(() => {
+            detectPackage();
+            goToPackage(currentPackage);
+        }, 100);
+        scheduleAuto();
+    }, { passive: true });
+
+    packagesSlider.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            stopAuto();
+            goToPackage(currentPackage + 1);
+            scheduleAuto();
+        }
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+            stopAuto();
+            goToPackage(currentPackage - 1);
+            scheduleAuto();
+        }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopAuto();
+        else scheduleAuto();
+    });
+
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            goToPackage(1, false);
+            startAuto();
+        }, 180);
+    });
+
+    window.addEventListener("resize", () => {
+        setTimeout(() => goToPackage(currentPackage, false), 100);
+    });
+
+    updatePackageUI();
+}
+
+})();
+
+</script>
+
+</body>
+</html>
