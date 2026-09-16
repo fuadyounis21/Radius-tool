@@ -3241,11 +3241,9 @@ textarea.form-control{
         width:100%;
     }
 
-    .hero-actions
-    .button-light{
-
-        grid-column:
-            1 / -1;
+    .hero-actions .button-portal,
+    .hero-actions .button-card-tool{
+        grid-column:auto;
     }
 
     .button{
@@ -3837,6 +3835,360 @@ textarea.form-control{
     .story-finale{padding-top:24px}
 }
 
+
+/* Quick access: free card designer */
+.tool-top{
+    display:flex;align-items:center;gap:7px;min-height:44px;padding:9px 15px;border-radius:14px;
+    color:#fff;background:linear-gradient(135deg,#00a9c9,#1267ff 55%,#7357ff);
+    box-shadow:0 12px 30px rgba(18,103,255,.17);font-size:10px;font-weight:750;transition:.25s;white-space:nowrap
+}
+.tool-top:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(18,103,255,.24)}
+.tool-top .free-badge{padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.18);font-size:7px;font-weight:800}
+.mobile-menu .mobile-tool{color:#fff;border:0;background:linear-gradient(135deg,#00a9c9,#1267ff 55%,#7357ff)}
+.button-portal{
+    color:#fff!important;
+    border:1px solid rgba(91,76,255,.16);
+    background:linear-gradient(135deg,#5b4cff 0%,#7b55f6 52%,#9a4de7 100%);
+    box-shadow:0 14px 34px rgba(101,76,232,.22)
+}
+.button-portal:hover{box-shadow:0 18px 42px rgba(101,76,232,.30)}
+
+.button-card-tool{
+    color:#fff!important;
+    border:1px solid rgba(0,183,160,.14);
+    background:linear-gradient(135deg,#00b7a0 0%,#00a7c7 52%,#087ce8 100%);
+    box-shadow:0 14px 34px rgba(0,155,176,.22)
+}
+.button-card-tool:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(0,155,176,.30)}
+
+
+/* HERO QUICK ACTIONS — balanced mobile layout */
+@media (max-width:650px){
+    .hero-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+    }
+    .hero-actions .button{
+        width:100%;
+        min-height:56px;
+        padding:10px 7px;
+        border-radius:16px;
+        font-size:9px;
+        line-height:1.45;
+        text-align:center;
+        white-space:normal;
+    }
+    .hero-actions .button-portal,
+    .hero-actions .button-card-tool{
+        grid-column:auto;
+    }
+}
+@media (max-width:390px){
+    .hero-actions{gap:8px}
+    .hero-actions .button{font-size:8px;padding-inline:5px}
+}
+
+
+/* Subscriber portal — premium login button */
+.hero-actions .button-portal{
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.28);
+    background:linear-gradient(135deg,#073b9a 0%,#075fce 48%,#008fc7 100%);
+    box-shadow:0 14px 32px rgba(5,76,160,.23), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.hero-actions .button-portal::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    width:90px;height:90px;
+    top:-58px;left:-20px;
+    border-radius:50%;
+    background:rgba(88,229,255,.28);
+    filter:blur(12px);
+}
+.hero-actions .button-portal::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.16) 48%,transparent 72%);
+    transform:translateX(130%);
+    transition:transform .65s ease;
+}
+.hero-actions .button-portal:hover::after{transform:translateX(-130%)}
+.hero-actions .button-portal:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px rgba(5,76,160,.30), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.portal-login-icon{
+    width:30px;height:30px;
+    flex:0 0 30px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    color:#fff;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+}
+.portal-login-icon svg{display:block}
+@media(max-width:650px){
+    .hero-actions .button-portal{gap:7px}
+    .portal-login-icon{
+        width:28px;height:28px;
+        flex-basis:28px;
+        border-radius:9px
+    }
+    .portal-login-icon svg{width:17px;height:17px}
+}
+
+
+/* =========================================================
+   AL-NASIM HERO ACTIONS — UNIFIED VISUAL IDENTITY
+   One continuous spectrum: Cyan → Blue → Indigo → Violet
+========================================================= */
+.hero-actions{
+    --action-shadow:0 14px 34px rgba(32,92,205,.18);
+}
+.hero-actions .button{
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.30)!important;
+    box-shadow:var(--action-shadow),inset 0 1px 0 rgba(255,255,255,.22)!important;
+    transition:transform .25s ease,box-shadow .25s ease,filter .25s ease!important;
+}
+.hero-actions .button::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:linear-gradient(110deg,transparent 18%,rgba(255,255,255,.18) 48%,transparent 76%);
+    transform:translateX(135%);
+    transition:transform .7s ease;
+}
+.hero-actions .button:hover::after{transform:translateX(-135%)}
+.hero-actions .button:hover{
+    transform:translateY(-2px)!important;
+    filter:saturate(1.05);
+    box-shadow:0 18px 42px rgba(32,92,205,.25),inset 0 1px 0 rgba(255,255,255,.24)!important;
+}
+
+/* 1 — Packages: cyan / azure */
+.hero-actions a[href="#packages"]{
+    background:linear-gradient(135deg,#08c7df 0%,#079de8 48%,#1377ee 100%)!important;
+}
+/* 2 — Support: azure / royal blue */
+.hero-actions a[href="#support"]{
+    background:linear-gradient(135deg,#079de8 0%,#1479ee 48%,#315ff0 100%)!important;
+}
+/* 3 — Portal: royal blue / indigo */
+.hero-actions .button-portal{
+    background:linear-gradient(135deg,#1479ee 0%,#315ff0 50%,#554fe9 100%)!important;
+}
+/* 4 — Card maker: indigo / violet */
+.hero-actions .button-card-tool{
+    background:linear-gradient(135deg,#315ff0 0%,#5b50e9 50%,#7b4ee5 100%)!important;
+}
+
+/* shared subtle glow, same geometry across all four */
+.hero-actions .button::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    width:92px;height:92px;
+    top:-66px;left:-22px;
+    border-radius:50%;
+    background:rgba(255,255,255,.20);
+    filter:blur(13px);
+}
+
+/* portal icon follows the same glass language */
+.hero-actions .portal-login-icon{
+    width:29px;height:29px;
+    flex:0 0 29px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    color:#fff;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.20);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.13);
+}
+
+@media(max-width:650px){
+    .hero-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr))!important;
+        gap:10px!important;
+    }
+    .hero-actions .button{
+        min-height:58px!important;
+        border-radius:17px!important;
+    }
+}
+
+
+/* =========================================================
+   HERO ACTIONS — FINAL BALANCED AL-NASIM IDENTITY
+========================================================= */
+.hero-actions{
+    gap:10px!important;
+}
+.hero-actions .button{
+    min-height:60px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:9px!important;
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.26)!important;
+    border-radius:18px!important;
+    box-shadow:0 13px 30px rgba(20,89,190,.18),inset 0 1px 0 rgba(255,255,255,.18)!important;
+    text-shadow:0 1px 1px rgba(0,40,100,.08);
+}
+.hero-actions a[href="#packages"]{
+    background:linear-gradient(135deg,#08bfe0 0%,#078fdc 48%,#1679e6 100%)!important;
+}
+.hero-actions a[href="#support"]{
+    background:linear-gradient(135deg,#079fdd 0%,#147fdc 48%,#286ddd 100%)!important;
+}
+.hero-actions .button-portal{
+    background:linear-gradient(135deg,#1686df 0%,#266edb 50%,#405fd8 100%)!important;
+}
+.hero-actions .button-card-tool{
+    background:linear-gradient(135deg,#2876dd 0%,#3c67da 50%,#505bd5 100%)!important;
+}
+.hero-actions .button::before{
+    content:""!important;
+    position:absolute!important;
+    z-index:-1!important;
+    width:110px!important;height:110px!important;
+    top:-82px!important;left:-24px!important;
+    border-radius:50%!important;
+    background:rgba(255,255,255,.16)!important;
+    filter:blur(15px)!important;
+}
+.hero-actions .button::after{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:-1!important;
+    background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.12) 48%,transparent 75%)!important;
+    transform:translateX(140%);
+    transition:transform .7s ease;
+}
+.hero-actions .button:hover::after{transform:translateX(-140%)}
+.hero-actions .button:hover{
+    transform:translateY(-2px)!important;
+    box-shadow:0 17px 38px rgba(20,89,190,.24),inset 0 1px 0 rgba(255,255,255,.2)!important;
+}
+
+.action-icon{
+    width:31px;height:31px;flex:0 0 31px;
+    display:grid;place-items:center;
+    border-radius:10px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+.action-icon svg{
+    width:17px;height:17px;display:block;
+    fill:none;stroke:currentColor;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;
+}
+.hero-actions a[href="#packages"] .action-icon svg path:first-child{
+    fill:currentColor;stroke:none;
+}
+.action-label{font-weight:750;white-space:nowrap}
+.free-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:3px 6px;border-radius:999px;
+    font-size:6px;font-weight:800;line-height:1;
+    color:#fff;background:rgba(255,255,255,.17);
+    border:1px solid rgba(255,255,255,.20);
+}
+
+@media(max-width:650px){
+    .hero-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr))!important;
+        gap:9px!important;
+    }
+    .hero-actions .button{
+        width:100%!important;
+        min-height:61px!important;
+        padding:10px 7px!important;
+        border-radius:17px!important;
+        gap:7px!important;
+        font-size:8.5px!important;
+    }
+    .action-icon{
+        width:28px;height:28px;flex-basis:28px;border-radius:9px;
+    }
+    .action-icon svg{width:15px;height:15px}
+    .free-badge{font-size:5.5px;padding:3px 5px}
+}
+@media(max-width:390px){
+    .hero-actions .button{font-size:8px!important;gap:5px!important}
+    .action-icon{width:26px;height:26px;flex-basis:26px}
+}
+
+
+/* HERO ACTION TYPOGRAPHY — larger & more premium */
+.hero-actions .action-label{
+    font-family:'Alexandria','IBM Plex Sans Arabic',sans-serif!important;
+    font-size:12px!important;
+    font-weight:700!important;
+    line-height:1.35!important;
+    letter-spacing:-.15px!important;
+    white-space:nowrap!important;
+}
+.hero-actions .free-badge{
+    font-family:'Alexandria','IBM Plex Sans Arabic',sans-serif!important;
+    font-size:7px!important;
+    font-weight:700!important;
+}
+@media(max-width:650px){
+    .hero-actions .action-label{
+        font-size:10.5px!important;
+        letter-spacing:-.1px!important;
+    }
+    .hero-actions .free-badge{font-size:6px!important}
+}
+@media(max-width:390px){
+    .hero-actions .action-label{font-size:9.7px!important}
+}
+
+
+/* DESKTOP HERO ACTIONS — balanced 2×2 grid; mobile remains unchanged */
+@media (min-width:651px){
+  .hero-actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px!important;
+    max-width:620px!important;
+    margin-inline-start:0!important;
+  }
+  .hero-actions .button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:60px!important;
+  }
+}
 </style>
 </head>
 
@@ -3958,6 +4310,11 @@ textarea.form-control{
             الدعم والشكاوى
         </a>
 
+        <a href="index2.html" class="tool-top" aria-label="فتح مصمم بطاقات الشبكات المجاني">
+            🎨 مصمم البطاقات
+            <span class="free-badge">مجاني</span>
+        </a>
+
         <a
             href="https://pppoe.abuyounis.net"
             class="portal-top"
@@ -4045,11 +4402,15 @@ textarea.form-control{
     </a>
 
 
+    <a href="index2.html" class="mobile-portal mobile-tool">
+        🎨 مصمم بطاقات الشبكات — مجاني
+    </a>
+
     <a
         href="https://pppoe.abuyounis.net"
         class="mobile-portal"
     >
-        👤 بوابة المشتركين
+        <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4.5H7.8A2.3 2.3 0 0 0 5.5 6.8v10.4a2.3 2.3 0 0 0 2.3 2.3h6.7"/><path d="m13 8.5 3.5 3.5-3.5 3.5M9.5 12h7"/></svg></span><span class="action-label">بوابة المشتركين</span>
     </a>
 
 </div>
@@ -4119,7 +4480,7 @@ textarea.form-control{
                 href="#packages"
                 class="button button-primary"
             >
-                ⚡ اكتشف الباقات
+                <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.2 2.8 5.8 13h5.4l-.4 8.2L18.2 11h-5.4l.4-8.2Z"/></svg></span><span class="action-label">اكتشف الباقات</span>
             </a>
 
 
@@ -4127,16 +4488,22 @@ textarea.form-control{
                 href="#support"
                 class="button button-support"
             >
-                🎧 أرسل مشكلة
+                <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><path d="M4 13h3v6H5.5A1.5 1.5 0 0 1 4 17.5V13ZM20 13h-3v6h1.5a1.5 1.5 0 0 0 1.5-1.5V13ZM17 19c-.8 1.3-2.2 2-4 2h-1"/></svg></span><span class="action-label">أرسل مشكلة</span>
             </a>
 
 
             <a
                 href="https://pppoe.abuyounis.net"
-                class="button button-light"
+                class="button button-portal"
             >
-                👤 بوابة المشتركين
+                <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4.5H7.8A2.3 2.3 0 0 0 5.5 6.8v10.4a2.3 2.3 0 0 0 2.3 2.3h6.7"/><path d="m13 8.5 3.5 3.5-3.5 3.5M9.5 12h7"/></svg></span><span class="action-label">بوابة المشتركين</span>
             </a>
+
+            <a href="index2.html" class="button button-card-tool">
+                <span class="action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M7 9h10M7 13h6M7 16h4"/></svg></span><span class="action-label">مصمم البطاقات</span><span class="free-badge">مجاني</span>
+            </a>
+
+
 
         </div>
 
@@ -4955,7 +5322,7 @@ textarea.form-control{
             <div class="jawwal-pride-icon">📡</div>
             <div class="jawwal-pride-content">
                 <span>مصدر خدمة الإنترنت</span>
-                <strong> بكل فخر مصدرنا شركة جوال ضمن مشروع المبادرة</strong>
+                <strong>بكل فخر — شركة جوال ضمن مشروع المبادرة</strong>
                 <p>
                     نفخر بأن مصدر خدمة الإنترنت لدينا هو شركة جوال ضمن مشروع المبادرة،
                     بما يدعم استمرارنا في تقديم الخدمة وتطويرها، ويمنحنا دافعًا أكبر
