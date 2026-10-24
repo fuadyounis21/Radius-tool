@@ -12,7 +12,7 @@
     <meta name="application-name" content="مخبز ابويونس">
     <meta name="theme-color" content="#f8fafc">
 
-    <!-- 📌 ربط أيقونة التطبيق بصورة شعار المخبز المرفوعة icon.png -->
+    <!-- أيقونة التطبيق -->
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/png" href="icon.png">
 
@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* الوضع الفاتح هو الوضع الافتراضي الآن */
+        /* الوضع الفاتح الافتراضي */
         :root {
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
@@ -36,7 +36,7 @@
             --shadow-ui: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
         }
 
-        /* الوضع الداكن عند تفعيله */
+        /* الوضع الداكن */
         .dark-theme {
             --bg-color: #0b1329;
             --card-bg: rgba(23, 32, 54, 0.85);
@@ -590,7 +590,7 @@
         if (isChecked('chk_flour')) detailsHtml += `<tr><td>طحين (25 كجم)</td><td>${flourPrice.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_sugar')) detailsHtml += `<tr><td>سكر (${sugarQty} كجم)</td><td>${sugarCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_salt')) detailsHtml += `<tr><td>ملح (${saltQty} كجم)</td><td>${saltCost.toFixed(2)} شيكل</td></tr>`;
-        if, isChecked('chk_yeast') detailsHtml += `<tr><td>خميرة (${yeastQty} كجم)</td><td>${yeastCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_yeast')) detailsHtml += `<tr><td>خميرة (${yeastQty} كجم)</td><td>${yeastCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_water')) detailsHtml += `<tr><td>ماء (${waterQty} لتر)</td><td>${waterCost.toFixed(3)} شيكل</td></tr>`;
         if (isChecked('chk_nylon')) detailsHtml += `<tr><td>نايلون (${loavesPerBag} كيس للربطة)</td><td>${nylonCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselPerBag} لتر)</td><td>${dieselCost.toFixed(2)} شيكل</td></tr>`;
