@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مخبز ابو يونس الاوتوماتيكي - حساب تكاليف انتاج الخبز</title>
+    <title>مخبز ابويونس - حساب تكاليف انتاج الخبز</title>
     
-    <!-- إعدادات PWA والتطبيق -->
+    <!-- إعدادات PWA وتسمية التطبيق بدقة -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="مخبز ابو يونس">
-    <meta name="application-name" content="مخبز ابو يونس">
+    <meta name="apple-mobile-web-app-title" content="مخبز ابويونس">
+    <meta name="application-name" content="مخبز ابويونس">
     <meta name="theme-color" content="#0b1329">
 
-    <!-- 📌 شعار المخبز الحقيقي مُحول ومنسق بدقة ليصبح أيقونة التطبيق الرسمية -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23ffffff'/><g transform='translate(40, 20) scale(0.85)'><path d='M256 12C130 12 28 114 28 240c0 55 20 105 54 144l-14 54 58-18c35 24 78 38 124 38 126 0 228-102 228-228S382 12 256 12zm0 410c-39 0-76-12-107-33l-41 13 13-40c-23-31-37-69-37-110 0-104 85-189 189-189s189 85 189 189-85 189-189 189zm103-138c-6-3-37-18-43-20-6-2-10-3-14 3-4 6-16 20-20 24-4 4-7 5-13 2-35-18-58-32-81-71-6-10 6-9 17-29 2-4 1-8-1-12s-14-34-19-47c-5-12-10-10-14-10h-12c-4 0-11 1-17 8s-22 21-22 52c0 31 22 61 25 65 3 4 44 68 107 95 15 7 27 11 36 15 15 5 29 4 40 2 12-2 37-15 42-30 5-15 5-28 4-31-2-3-6-5-12-8z' fill='%230b1329'/></g></svg>">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%23ffffff'/><g transform='translate(40, 20) scale(0.85)'><path d='M256 12C130 12 28 114 28 240c0 55 20 105 54 144l-14 54 58-18c35 24 78 38 124 38 126 0 228-102 228-228S382 12 256 12zm0 410c-39 0-76-12-107-33l-41 13 13-40c-23-31-37-69-37-110 0-104 85-189 189-189s189 85 189 189-85 189-189 189zm103-138c-6-3-37-18-43-20-6-2-10-3-14 3-4 6-16 20-20 24-4 4-7 5-13 2-35-18-58-32-81-71-6-10 6-9 17-29 2-4 1-8-1-12s-14-34-19-47c-5-12-10-10-14-10h-12c-4 0-11 1-17 8s-22 21-22 52c0 31 22 61 25 65 3 4 44 68 107 95 15 7 27 11 36 15 15 5 29 4 40 2 12-2 37-15 42-30 5-15 5-28 4-31-2-3-6-5-12-8z' fill='%230b1329'/></g></svg>">
+    <!-- أيقونة نظيفة ومخصصة لمخبز أبو يونس -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230b1329'/><circle cx='256' cy='256' r='180' fill='none' stroke='%23f59e0b' stroke-width='16'/><text x='256' y='270' font-family='sans-serif' font-weight='bold' font-size='90' fill='%23f59e0b' text-anchor='middle'>🍞</text><text x='256' y='365' font-family='sans-serif' font-weight='bold' font-size='42' fill='%23ffffff' text-anchor='middle'>أبو يونس</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='110' fill='%230b1329'/><text x='256' y='270' font-family='sans-serif' font-size='90' text-anchor='middle'>🍞</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,20 +85,14 @@
         .brand-logo {
             width: 48px;
             height: 48px;
-            background: #ffffff;
+            background: var(--input-bg);
             border: 1px solid var(--accent-gold);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
             box-shadow: 0 2px 10px var(--accent-glow);
-            overflow: hidden;
-            padding: 4px;
-        }
-
-        .brand-logo svg {
-            width: 100%;
-            height: 100%;
         }
 
         .header h1 { margin: 0; font-size: 18px; font-weight: 700; color: var(--accent-gold); }
@@ -232,7 +226,64 @@
             box-shadow: 0 3px 10px var(--accent-glow);
         }
 
-        #print-area { display: none; }
+        /* نافذة التقرير الداخلية (Modal) لحل مشكلة الإغلاق نهائياً */
+        #report-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            color: #000000;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            border-radius: 20px;
+            padding: 25px;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .modal-header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .modal-header-actions button {
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-family: 'Readex Pro', sans-serif;
+            cursor: pointer;
+            font-size: 13px;
+            border: none;
+        }
+
+        .btn-close-modal { background: #ef4444; color: #fff; }
+        .btn-print-modal { background: #10b981; color: #fff; }
+
+        .modal-card table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .modal-card th, .modal-card td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
+        .modal-card th { background-color: #f8fafc; font-weight: 600; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #report-modal, #report-modal * { visibility: visible; }
+            #report-modal { position: absolute; left: 0; top: 0; background: #fff; padding: 0; }
+            .modal-header-actions { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -240,13 +291,9 @@
 <div class="container">
     <div class="header">
         <div class="brand-box">
-            <div class="brand-logo">
-                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M256 12C130 12 28 114 28 240c0 55 20 105 54 144l-14 54 58-18c35 24 78 38 124 38 126 0 228-102 228-228S382 12 256 12zm0 410c-39 0-76-12-107-33l-41 13 13-40c-23-31-37-69-37-110 0-104 85-189 189-189s189 85 189 189-85 189-189 189zm103-138c-6-3-37-18-43-20-6-2-10-3-14 3-4 6-16 20-20 24-4 4-7 5-13 2-35-18-58-32-81-71-6-10 6-9 17-29 2-4 1-8-1-12s-14-34-19-47c-5-12-10-10-14-10h-12c-4 0-11 1-17 8s-22 21-22 52c0 31 22 61 25 65 3 4 44 68 107 95 15 7 27 11 36 15 15 5 29 4 40 2 12-2 37-15 42-30 5-15 5-28 4-31-2-3-6-5-12-8z" fill="#0b1329"/>
-                </svg>
-            </div>
+            <div class="brand-logo">🍞</div>
             <div>
-                <h1>مخبز ابو يونس الاوتوماتيكي</h1>
+                <h1>مخبز ابويونس</h1>
                 <p>حساب تكاليف انتاج الخبز</p>
             </div>
         </div>
@@ -431,30 +478,36 @@
             <div class="val" id="res-profit">0.00</div>
         </div>
     </div>
-    <button class="btn-pdf" onclick="printReport()">🖨️ طباعة / PDF</button>
+    <button class="btn-pdf" onclick="openReportModal()">🖨️ طباعة / PDF</button>
 </div>
 
-<!-- محتوى التقرير للطباعة بدون إغلاق تلقائي -->
-<div id="print-area">
-    <h2 style="text-align:center; margin-bottom:4px;">مخبز ابو يونس الاوتوماتيكي</h2>
-    <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
-    <hr style="border: 0; border-top: 1px solid #e2e8f0;">
-    <h3>📌 ملخص النتائج والتشغيل:</h3>
-    <table>
-        <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
-        <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
-        <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
-        <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
-        <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
-    </table>
+<!-- نافذة العرض الداخلية للتقرير (Modal) مع زر إغلاق وطباعة مضمون 100% -->
+<div id="report-modal">
+    <div class="modal-card">
+        <div class="modal-header-actions">
+            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق التقرير</button>
+            <button class="btn-print-modal" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+        </div>
+        <h2 style="text-align:center; margin-bottom:4px;">مخبز ابويونس</h2>
+        <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0;">
+        <h3>📌 ملخص النتائج والتشغيل:</h3>
+        <table>
+            <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
+            <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
+            <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
+            <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
+            <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
+        </table>
 
-    <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
-    <table>
-        <thead>
-            <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
-        </thead>
-        <tbody id="pdf-details-body"></tbody>
-    </table>
+        <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
+        <table>
+            <thead>
+                <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
+            </thead>
+            <tbody id="pdf-details-body"></tbody>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -537,41 +590,12 @@
         document.getElementById("pdf-details-body").innerHTML = detailsHtml;
     }
 
-    function printReport() {
-        let printContents = document.getElementById('print-area').innerHTML;
-        let printWindow = window.open('', '_blank', 'width=800,height=900');
-        
-        if (printWindow) {
-            printWindow.document.write(`
-                <html dir="rtl" lang="ar">
-                <head>
-                    <title>تقرير - مخبز ابو يونس الاوتوماتيكي</title>
-                    <link rel="preconnect" href="https://fonts.googleapis.com">
-                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-                    <style>
-                        body { font-family: 'Readex Pro', sans-serif; padding: 25px; color: #000; background: #fff; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-                        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
-                        th { background-color: #f8fafc; font-weight: 600; }
-                    </style>
-                </head>
-                <body>
-                    ${printContents}
-                    <script>
-                        window.onload = function() {
-                            setTimeout(function() {
-                                window.print();
-                            }, 300);
-                        };
-                    <\/script>
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-        } else {
-            window.print();
-        }
+    function openReportModal() {
+        document.getElementById("report-modal").style.display = "flex";
+    }
+
+    function closeReportModal() {
+        document.getElementById("report-modal").style.display = "none";
     }
 
     if ('serviceWorker' in navigator) {
