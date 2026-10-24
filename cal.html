@@ -247,42 +247,43 @@
         .btn-print-modal { background: var(--success); color: #fff; }
         .btn-print-modal:disabled { background: #94a3b8; cursor: not-allowed; }
 
-        /* 📄 تنسيق تقرير الـ PDF الاحترافي */
+        /* 📄 تنسيق تقرير الـ PDF الاحترافي (مضبوط المساحات لكي يظهر كاملاً بدون قص) */
         #printable-report-content {
             background-color: #ffffff;
             color: #0f172a;
-            padding: 20px;
+            padding: 15px;
             font-family: 'Readex Pro', sans-serif;
             text-align: right;
             direction: rtl;
+            width: 100%;
         }
         .pdf-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
-        .pdf-header h2 { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
-        .pdf-header p { color: #64748b; font-size: 13px; }
+        .pdf-header h2 { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+        .pdf-header p { color: #64748b; font-size: 12px; }
         
         .pdf-section-title {
-            font-size: 16px; font-weight: 700; color: #1e293b;
-            margin-top: 20px; margin-bottom: 10px;
+            font-size: 14px; font-weight: 700; color: #1e293b;
+            margin-top: 12px; margin-bottom: 6px;
         }
         
         .pdf-table {
-            width: 100%; border-collapse: collapse; margin-bottom: 15px;
-            border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;
+            width: 100%; border-collapse: collapse; margin-bottom: 10px;
+            border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;
         }
         .pdf-table th, .pdf-table td {
-            border: 1px solid #cbd5e1; padding: 10px 14px; text-align: right; font-size: 13px;
+            border: 1px solid #cbd5e1; padding: 7px 10px; text-align: right; font-size: 12px;
         }
         .pdf-table th { background-color: #f8fafc; font-weight: 700; color: #334155; }
         .pdf-table td { color: #0f172a; background-color: #ffffff; }
 
         .pdf-footer {
-            margin-top: 30px; text-align: center; border-top: 1px dashed #cbd5e1;
-            padding-top: 15px; font-size: 12px; color: #64748b; font-weight: 600;
+            margin-top: 15px; text-align: center; border-top: 1px dashed #cbd5e1;
+            padding-top: 10px; font-size: 11px; color: #64748b; font-weight: 600;
         }
         
         @media (max-width: 450px) {
@@ -343,7 +344,7 @@
                     <div class="card-title"><span class="card-icon">📈</span> عدد أكياس الطحين المتوقعة يومياً <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين (25 كجم) المتوقع استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="bags" value="200" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
@@ -353,7 +354,7 @@
                     <div class="card-title"><span class="card-icon">💰</span> هامش الربح <span class="info-btn" onclick="showHelp('نسبة الربح المئوية التي تريد إضافتها فوق التكلفة لتحديد سعر بيع الربطة.')">i</span></div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="margin" value="100" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="margin" value="30" oninput="calculate()">
                     <span class="unit">%</span>
                 </div>
             </div>
@@ -610,6 +611,7 @@
             
             <div class="pdf-section-title">📌 ملخص النتائج والتشغيل</div>
             <table class="pdf-table">
+                <tr><th>إجمالي الإنتاج اليومي (ربطة)</th><td id="pdf-total-loaves" style="font-weight:bold; color:#d97706;"></td></tr>
                 <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
                 <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
                 <tr><th>هامش الربح المطلوب</th><td id="pdf-margin"></td></tr>
@@ -617,7 +619,7 @@
                 <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily" style="color:#059669; font-weight:bold;"></td></tr>
             </table>
 
-            <div class="pdf-section-title" style="margin-top: 20px;">📋 تفصيل التكاليف لكل كيس طحين 25 كجم</div>
+            <div class="pdf-section-title">📋 تفصيل التكاليف لكل كيس طحين 25 كجم</div>
             <table class="pdf-table">
                 <thead>
                     <tr><th>المكون / العنصر</th><th>التكلفة الفعلية</th></tr>
@@ -660,6 +662,8 @@
         let loavesPerBag = getVal("loavesPerBag") || 16;
         let bagsPerDay = getVal("bags") || 1;
 
+        let totalDailyLoaves = loavesPerBag * bagsPerDay;
+
         let flourPrice = isChecked('chk_flour') ? getVal("flour") : 0;
         
         let sugarPrice = isChecked('chk_sugar') ? getVal("sugar") : 0;
@@ -695,12 +699,13 @@
         let margin = getVal("margin");
         let sellingPrice = costPerLoaf * (1 + margin / 100);
         let profitPerLoaf = sellingPrice - costPerLoaf;
-        let dailyProfit = profitPerLoaf * (loavesPerBag * bagsPerDay);
+        let dailyProfit = profitPerLoaf * totalDailyLoaves;
 
         document.getElementById("res-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
         document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("res-profit").innerText = dailyProfit.toFixed(2) + " ₪";
 
+        document.getElementById("pdf-total-loaves").innerText = totalDailyLoaves.toLocaleString() + " ربطة";
         document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
         document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("pdf-margin").innerText = margin.toFixed(1) + " %";
@@ -733,11 +738,11 @@
         btn.disabled = true;
 
         const opt = {
-            margin:       10,
+            margin:       [5, 5, 5, 5], // هوامش أمان صغيرة لمنع القطع من الأطراف
             filename:     'تقرير_تكاليف_مخبز_ابويونس.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
@@ -755,7 +760,7 @@
 
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v14-instructions';
+            const CACHE_NAME = 'abu-younis-v16-pdf-fix';
             const urlsToCache = [
                 './', 
                 'cal.html', 
@@ -774,7 +779,7 @@
             });
 
             self.addEventListener('fetch', e => {
-                e.respondWith(caches.match(e.request).then(res => res || fetch(e.request).catch(() => caches.match('./cal.html'))));
+                e.respondWith(caches.match(e.request).text().then(res => res || fetch(e.request).catch(() => caches.match('./cal.html'))));
             });
         `;
         const blob = new Blob([swCode], { type: 'text/javascript' });
