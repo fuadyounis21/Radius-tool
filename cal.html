@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🍞 حاسبة تكلفة الخبز - مخبز أبو يونس</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="حاسبة أبو يونس">
+    <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at top right, #1e293b, #0f172a);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-gold: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --input-bg: rgba(15, 23, 42, 0.5);
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --shadow-ui: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .light-theme {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent-gold: #d97706;
+            --accent-glow: rgba(217, 119, 6, 0.15);
+            --input-bg: rgba(241, 245, 249, 0.9);
+            --success-color: #059669;
+            --danger-color: #dc2626;
+            --shadow-ui: 0 20px 35px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 130px;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            padding: 20px 28px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-ui);
+        }
+
+        .header h1 { margin: 0; font-size: 24px; color: var(--accent-gold); text-shadow: 0 2px 12px var(--accent-glow); }
+        .header p { margin: 5px 0 0 0; font-size: 14px; color: var(--text-muted); }
+
+        .btn-toggle {
+            background: var(--input-bg);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            padding: 10px 18px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-toggle:hover { border-color: var(--accent-gold); }
+
+        .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            color: var(--text-muted);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-ui);
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: #ffffff;
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 25px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            padding: 28px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-ui);
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .input-card {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            padding: 18px;
+            border-radius: 18px;
+            transition: border-color 0.2s;
+        }
+        .input-card:hover { border-color: rgba(245, 158, 11, 0.3); }
+
+        .input-card label { display: block; font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 10px; }
+
+        .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .input-row:last-child { margin-bottom: 0; }
+
+        .input-row input[type="number"] {
+            width: 100%;
+            padding: 11px 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-row input[type="number"]:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .unit { font-size: 13px; color: var(--text-muted); white-space: nowrap; min-width: 70px; font-weight: 500; }
+
+        .chk-container { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .chk-container input[type="checkbox"] { transform: scale(1.4); cursor: pointer; accent-color: var(--accent-gold); }
+        .chk-container label { font-size: 15px; font-weight: bold; color: var(--text-main); cursor: pointer; margin: 0; }
+
+        .sticky-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-top: 2px solid var(--accent-gold);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-item .val { font-size: 22px; font-weight: 800; color: var(--success-color); }
+        .stat-item .lbl { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; }
+
+        .btn-pdf {
+            background: var(--accent-gold);
+            color: #ffffff;
+            border: none;
+            padding: 13px 24px;
+            border-radius: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 6px 20px var(--accent-glow);
+            transition: transform 0.2s;
+        }
+        .btn-pdf:hover { transform: scale(1.03); }
+
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0; }
+            .container, .sticky-bar, .tabs, .btn-toggle { display: none !important; }
+            #print-area { display: block !important; }
+        }
+
+        #print-area {
+            display: none;
+            background: #ffffff;
+            color: #000000;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+        }
+
+        #print-area table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        #print-area th, #print-area td { border: 1px solid #cbd5e1; padding: 12px; text-align: right; font-size: 15px; }
+        #print-area th { background-color: #f1f5f9; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div>
+            <h1>🍞 حاسبة تكلفة الخبز</h1>
+            <p>مخبز أبو يونس الأوتوماتيكي</p>
+        </div>
+        <button class="btn-toggle" onclick="toggleTheme()">🌓 الوضع العائم</button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">📦 الإنتاج والكميات</button>
+        <button class="tab-btn" onclick="switchTab(1)">🌾 المكونات الأساسية</button>
+        <button class="tab-btn" onclick="switchTab(2)">⚙️ المصاريف والتشغيل</button>
+    </div>
+
+    <!-- Tab 1 -->
+    <div class="tab-content active">
+        <div class="grid-inputs">
+            <div class="input-card">
+                <label>ربطات الكيس (25 كجم)</label>
+                <div class="input-row">
+                    <input type="number" id="loavesPerBag" value="16" step="1" oninput="calculate()">
+                    <span class="unit">ربطة</span>
+                </div>
+            </div>
+            <div class="input-card">
+                <label>وزن الربطة الواحدة</label>
+                <div class="input-row">
+                    <input type="number" id="loafWeight" value="2" step="0.1" oninput="calculate()">
+                    <span class="unit">كجم</span>
+                </div>
+            </div>
+            <div class="input-card">
+                <label>أكياس الإنتاج اليومي</label>
+                <div class="input-row">
+                    <input type="number" id="bags" value="100" step="1" oninput="calculate()">
+                    <span class="unit">كيس/يوم</span>
+                </div>
+            </div>
+            <div class="input-card">
+                <label>هامش الربح المطلوب</label>
+                <div class="input-row">
+                    <input type="number" id="margin" value="30" step="0.1" oninput="calculate()">
+                    <span class="unit">%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 2 -->
+    <div class="tab-content">
+        <div class="grid-inputs">
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_flour" checked onclick="calculate()">
+                    <label for="chk_flour">طحين</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="flour" value="65" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كيس</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_sugar" checked onclick="calculate()">
+                    <label for="chk_sugar">سكر</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="sugar" value="4.5" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كجم</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="sugar_qty" value="0.5" step="0.01" oninput="calculate()">
+                    <span class="unit">كجم/كيس</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_salt" checked onclick="calculate()">
+                    <label for="chk_salt">ملح</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="salt" value="4.5" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كجم</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="salt_qty" value="0.25" step="0.01" oninput="calculate()">
+                    <span class="unit">كجم/كيس</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_yeast" checked onclick="calculate()">
+                    <label for="chk_yeast">خميرة</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="yeast" value="16" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كجم</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="yeast_qty" value="0.25" step="0.01" oninput="calculate()">
+                    <span class="unit">كجم/كيس</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 3 -->
+    <div class="tab-content">
+        <div class="grid-inputs">
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_overhead" checked onclick="calculate()">
+                    <label for="chk_overhead">مصروفات يومية ثابتة</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="daily" value="1500" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/يوم</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_water" checked onclick="calculate()">
+                    <label for="chk_water">ماء</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="water_cup" value="120" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كوب</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="water_qty" value="11" step="0.1" oninput="calculate()">
+                    <span class="unit">لتر/كيس</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_nylon" checked onclick="calculate()">
+                    <label for="chk_nylon">نايلون</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="nylon_price" value="15" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/كجم</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="nylon_bags_per_kg" value="200" step="1" oninput="calculate()">
+                    <span class="unit">كيس/كجم</span>
+                </div>
+            </div>
+
+            <div class="input-card">
+                <div class="chk-container">
+                    <input type="checkbox" id="chk_diesel" onclick="calculate()">
+                    <label for="chk_diesel">سولار</label>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="diesel_price" value="0" step="0.01" oninput="calculate()">
+                    <span class="unit">شيكل/لتر</span>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="diesel_liter" value="4.5" step="0.1" oninput="calculate()">
+                    <span class="unit">لتر/كيس</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- شريط النتائج العائم -->
+<div class="sticky-bar">
+    <div class="stat-item">
+        <div class="lbl">تكلفة الربطة</div>
+        <div class="val" id="res-cost" style="color:var(--danger-color)">0.00</div>
+    </div>
+    <div class="stat-item">
+        <div class="lbl">سعر البيع المقترح</div>
+        <div class="val" id="res-price">0.00</div>
+    </div>
+    <div class="stat-item">
+        <div class="lbl">الربح اليومي الصافي</div>
+        <div class="val" id="res-profit">0.00</div>
+    </div>
+    <button class="btn-pdf" onclick="printReport()">🖨️ طباعة / PDF</button>
+</div>
+
+<!-- قالب التقرير المخصص للطباعة -->
+<div id="print-area">
+    <h2 style="text-align:center; margin-bottom:5px;">🍞 مخبز أبو يونس الأوتوماتيكي</h2>
+    <p style="text-align:center; color:#555; margin-top:0;">تقرير حساب تكلفة الخبز والأرباح التشغيلية</p>
+    <hr>
+    <h3>📌 ملخص النتائج والتشغيل:</h3>
+    <table>
+        <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
+        <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
+        <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
+        <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
+        <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
+    </table>
+
+    <h3 style="margin-top:25px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
+    <table>
+        <thead>
+            <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
+        </thead>
+        <tbody id="pdf-details-body"></tbody>
+    </table>
+</div>
+
+<script>
+    function toggleTheme() { document.body.classList.toggle('light-theme'); }
+
+    function switchTab(index) {
+        let tabs = document.querySelectorAll('.tab-btn');
+        let contents = document.querySelectorAll('.tab-content');
+        tabs.forEach((tab, i) => {
+            tab.classList.toggle('active', i === index);
+            contents[i].classList.toggle('active', i === index);
+        });
+    }
+
+    function calculate() {
+        const isChecked = id => document.getElementById(id).checked;
+        const getVal = id => parseFloat(document.getElementById(id).value) || 0;
+
+        let loavesPerBag = getVal("loavesPerBag") || 16;
+        let bagsPerDay = getVal("bags") || 1;
+
+        let flourPrice = isChecked('chk_flour') ? getVal("flour") : 0;
+
+        let sugarPrice = isChecked('chk_sugar') ? getVal("sugar") : 0;
+        let sugarQty = getVal("sugar_qty");
+        let sugarCost = sugarPrice * sugarQty;
+
+        let saltPrice = isChecked('chk_salt') ? getVal("salt") : 0;
+        let saltQty = getVal("salt_qty");
+        let saltCost = saltPrice * saltQty;
+
+        let yeastPrice = isChecked('chk_yeast') ? getVal("yeast") : 0;
+        let yeastQty = getVal("yeast_qty");
+        let yeastCost = yeastPrice * yeastQty;
+
+        let dailyOverhead = isChecked('chk_overhead') ? getVal("daily") : 0;
+        let overheadPerBag = dailyOverhead / bagsPerDay;
+
+        let waterPrice = isChecked('chk_water') ? getVal("water_cup") : 0;
+        let waterQty = getVal("water_qty");
+        let waterCost = (waterPrice / 1000) * waterQty;
+
+        let nylonKgPrice = isChecked('chk_nylon') ? getVal("nylon_price") : 0;
+        let nylonBagsPerKg = getVal("nylon_bags_per_kg") || 200;
+        let nylonCost = (nylonKgPrice / nylonBagsPerKg) * loavesPerBag;
+
+        let dieselPrice = isChecked('chk_diesel') ? getVal("diesel_price") : 0;
+        let dieselPerBag = getVal("diesel_liter");
+        let dieselCost = dieselPrice * dieselPerBag;
+
+        let totalBatchCost = flourPrice + sugarCost + saltCost + yeastCost + waterCost + nylonCost + dieselCost + overheadPerBag;
+        let costPerLoaf = totalBatchCost / loavesPerBag;
+
+        let margin = getVal("margin");
+        let sellingPrice = costPerLoaf * (1 + margin / 100);
+        let profitPerLoaf = sellingPrice - costPerLoaf;
+        let dailyLoaves = loavesPerBag * bagsPerDay;
+        let dailyProfit = profitPerLoaf * dailyLoaves;
+
+        document.getElementById("res-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
+        document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
+        document.getElementById("res-profit").innerText = dailyProfit.toFixed(2) + " ₪";
+
+        document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " شيكل";
+        document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " شيكل";
+        document.getElementById("pdf-margin").innerText = margin.toFixed(1) + " %";
+        document.getElementById("pdf-profit-loaf").innerText = profitPerLoaf.toFixed(2) + " شيكل";
+        document.getElementById("pdf-profit-daily").innerText = dailyProfit.toFixed(2) + " شيكل";
+
+        let detailsHtml = "";
+        if (isChecked('chk_flour')) detailsHtml += `<tr><td>طحين (25 كجم)</td><td>${flourPrice.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_sugar')) detailsHtml += `<tr><td>سكر (${sugarQty} كجم)</td><td>${sugarCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_salt')) detailsHtml += `<tr><td>ملح (${saltQty} كجم)</td><td>${saltCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_yeast')) detailsHtml += `<tr><td>خميرة (${yeastQty} كجم)</td><td>${yeastCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_water')) detailsHtml += `<tr><td>ماء (${waterQty} لتر)</td><td>${waterCost.toFixed(3)} شيكل</td></tr>`;
+        if (isChecked('chk_nylon')) detailsHtml += `<tr><td>نايلون (${loavesPerBag} كيس للربطة)</td><td>${nylonCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselPerBag} لتر)</td><td>${dieselCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_overhead')) detailsHtml += `<tr><td>مصروفات يومية ثابتة (${bagsPerDay} كيس/يوم)</td><td>${overheadPerBag.toFixed(2)} شيكل</td></tr>`;
+        detailsHtml += `<tr style="font-weight:bold; background:#f1f5f9;"><td>المجموع الكلي للتكلفة لكيس الطحين الواحد</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
+
+        document.getElementById("pdf-details-body").innerHTML = detailsHtml;
+    }
+
+    function printReport() { window.print(); }
+
+    if ('serviceWorker' in navigator) {
+        const swCode = `
+            self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+            self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('PWA Active'))));
+        `;
+        const blob = new Blob([swCode], { type: 'text/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+    }
+
+    window.onload = calculate;
+</script>
+</body>
+</html>
