@@ -37,6 +37,9 @@
         document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
     </script>
 
+    <!-- مكتبة تحويل HTML إلى PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -208,10 +211,11 @@
         }
         .modal-header-actions button {
             padding: 10px 18px; border-radius: 14px; font-weight: 700;
-            font-family: inherit; cursor: pointer; font-size: 13px; border: none;
+            font-family: inherit; cursor: pointer; font-size: 13px; border: none; transition: 0.3s;
         }
         .btn-close-modal { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); }
         .btn-print-modal { background: var(--success); color: #fff; }
+        .btn-print-modal:disabled { background: #94a3b8; cursor: not-allowed; }
 
         .modal-card table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 12px; overflow: hidden; }
         .modal-card th, .modal-card td { border: 1px solid var(--border-color); padding: 12px; text-align: right; font-size: 14px; }
@@ -224,27 +228,15 @@
             .fields-row { grid-template-columns: 1fr; gap: 10px; }
         }
 
-        /* 🖨️ الكود السحري للطباعة المباشرة وحفظ الـ PDF في نفس الشاشة */
-        @media print {
-            body { background: #ffffff !important; margin: 0; padding: 0; }
-            /* إخفاء كل التطبيق باستثناء نافذة التقرير */
-            body > *:not(#report-modal) { display: none !important; }
-            
-            #report-modal {
-                position: absolute; left: 0; top: 0; width: 100%; height: auto;
-                background: #ffffff !important; display: block !important;
-                padding: 10px; padding-top: 0; align-items: flex-start;
-            }
-            .modal-card {
-                box-shadow: none !important; border: none !important; padding: 0 !important;
-                max-width: 100% !important; background: #ffffff !important; color: #000000 !important;
-            }
-            /* إخفاء الأزرار العلوية (إغلاق وطباعة) عند استخراج الـ PDF */
-            .modal-header-actions { display: none !important; }
-            
-            table th, table td { color: #000 !important; border-color: #ccc !important; }
-            table th { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
+        /* تنسيق خاص بملف الـ PDF عند الحفظ ليكون تصميمه أبيض ومرتب كالفاتورة */
+        #printable-report-content {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
         }
+        #printable-report-content h2, #printable-report-content h3 { color: #000000 !important; }
+        #printable-report-content table th { background-color: #f1f5f9 !important; color: #000 !important; }
+        #printable-report-content table td { color: #000 !important; }
     </style>
 </head>
 <body>
@@ -274,7 +266,7 @@
         <div class="grid-inputs">
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🥖</span> عدد ربطات الكيس (25 كجم)</div>
+                    <div class="card-title"><span class="card-icon">🥖</span> ربطات الكيس (25 كجم)</div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
@@ -542,16 +534,17 @@
 <div id="report-modal">
     <div class="modal-card">
         <div class="modal-header-actions">
-            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق التقرير</button>
-            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة / حفظ PDF</button>
+            <button class="btn-close-modal" onclick="closeReportModal()">✕ رجوع</button>
+            <button class="btn-print-modal" id="pdfBtn" onclick="downloadPDF()">⬇️ تحميل كملف PDF</button>
         </div>
         <div id="printable-report-content">
             <div style="text-align:center; margin-bottom: 20px;">
-                <h2 style="margin-bottom:4px; color:#0f172a;">مخبز ابويونس الاوتوماتيكي</h2>
+                <h2 style="margin-bottom:4px; font-weight:700;">مخبز ابويونس الاوتوماتيكي</h2>
                 <p style="color:#64748b; margin-top:0; font-size: 14px;">تقرير تفصيلي لحساب تكاليف انتاج الخبز والتشغيل</p>
+                <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-top:10px;">
             </div>
             
-            <h3 style="color:#0f172a; font-size: 16px;">📌 ملخص النتائج:</h3>
+            <h3 style="font-size: 16px; margin-bottom:10px;">📌 ملخص النتائج:</h3>
             <table>
                 <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
                 <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
@@ -560,7 +553,7 @@
                 <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily" style="color:#10b981; font-weight:bold;"></td></tr>
             </table>
 
-            <h3 style="margin-top:24px; color:#0f172a; font-size: 16px;">📋 تفصيل التكاليف لكل كيس طحين (25 كجم):</h3>
+            <h3 style="margin-top:24px; font-size: 16px; margin-bottom:10px;">📋 تفصيل التكاليف لكل كيس طحين (25 كجم):</h3>
             <table>
                 <thead>
                     <tr><th>المكون / العنصر</th><th>التكلفة الفعلية</th></tr>
@@ -654,15 +647,48 @@
     function openReportModal() { document.getElementById("report-modal").style.display = "flex"; }
     function closeReportModal() { document.getElementById("report-modal").style.display = "none"; }
 
-    // الطباعة واستخراج الـ PDF الذكي في نفس الشاشة
-    function triggerPrint() {
-        window.print();
+    // دالة إنشاء وتحميل ملف الـ PDF مباشرة للجهاز
+    function downloadPDF() {
+        const element = document.getElementById('printable-report-content');
+        const btn = document.getElementById('pdfBtn');
+        const originalText = btn.innerText;
+        
+        // تغيير شكل الزر أثناء المعالجة
+        btn.innerText = "⏳ جاري التحميل...";
+        btn.disabled = true;
+
+        const opt = {
+            margin:       10,
+            filename:     'تقرير_مخبز_ابويونس.pdf',
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // توليد الـ PDF وتنزيله
+        html2pdf().set(opt).from(element).save().then(() => {
+            btn.innerText = "✅ تم التحميل";
+            setTimeout(() => { 
+                btn.innerText = originalText; 
+                btn.disabled = false; 
+            }, 2000);
+        }).catch(err => {
+            alert("حدث خطأ أثناء إنشاء الملف.");
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
     }
 
+    // Service Worker - متضمن مكتبة الـ PDF لتعمل أوفلاين
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v8-pdf-fix';
-            const urlsToCache = ['./', 'cal.html', 'icon.png'];
+            const CACHE_NAME = 'abu-younis-v10-pdf-download';
+            const urlsToCache = [
+                './', 
+                'cal.html', 
+                'icon.png',
+                'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
+            ];
 
             self.addEventListener('install', e => {
                 e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)).then(() => self.skipWaiting()));
