@@ -320,7 +320,7 @@
         <div class="grid-inputs">
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🥖</span> ربطات الكيس <span class="info-btn" onclick="showHelp('عدد ربطات الخبز الناتجة عن كيس الطحين الواحد (25 كجم).')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🥖</span> عدد الربطات كيس الطحين <span class="info-btn" onclick="showHelp('عدد ربطات الخبز الناتجة عن كيس الطحين الواحد (25 كجم).')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
@@ -340,7 +340,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين التي يتم استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">📈</span> الانتاج اليومي المتوقع بالكيس <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين 25 كيلو التي يتم استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
@@ -353,7 +353,7 @@
                     <div class="card-title"><span class="card-icon">💰</span> هامش الربح <span class="info-btn" onclick="showHelp('نسبة الربح المئوية التي تريد إضافتها فوق التكلفة لتحديد سعر بيع الربطة.')">i</span></div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="margin" value="30" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="margin" value="100" oninput="calculate()">
                     <span class="unit">%</span>
                 </div>
             </div>
