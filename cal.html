@@ -12,7 +12,6 @@
     <meta name="application-name" content="مخبز ابويونس">
     <meta name="theme-color" content="#f8fafc">
 
-    <!-- أيقونة التطبيق -->
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/png" href="icon.png">
 
@@ -21,7 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* المتغيرات الأساسية للوضع الفاتح */
         :root {
             --bg-body: #f1f5f9;
             --bg-card: #ffffff;
@@ -39,7 +37,6 @@
             --glass-bg: rgba(255, 255, 255, 0.85);
         }
 
-        /* الوضع الداكن المطور */
         .dark-theme {
             --bg-body: #0b1120;
             --bg-card: #1e293b;
@@ -63,120 +60,66 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 950px; margin: 0 auto; }
 
-        /* ترويسة التطبيق */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 16px 20px;
-            border-radius: 24px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-md);
-            transition: all 0.4s ease;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 16px 20px; border-radius: 24px; margin-bottom: 24px;
+            box-shadow: var(--shadow-md); transition: all 0.4s ease;
         }
 
         .brand-box { display: flex; align-items: center; gap: 16px; }
-        
         .brand-logo {
-            width: 52px; height: 52px;
-            background: var(--bg-card);
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px var(--accent-glow);
-            border: 2px solid var(--accent);
+            width: 52px; height: 52px; background: var(--bg-card);
+            border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px var(--accent-glow); border: 2px solid var(--accent);
         }
         .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
-
         .header h1 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
         .header p { font-size: 13px; color: var(--accent); font-weight: 500; }
 
         .btn-theme {
-            background: var(--bg-input);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 10px 14px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 13px;
-            font-family: inherit;
-            font-weight: 600;
-            transition: 0.3s;
+            background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color);
+            padding: 10px 14px; border-radius: 14px; cursor: pointer; font-size: 13px;
+            font-weight: 600; transition: 0.3s;
         }
         .btn-theme:hover { background: var(--border-color); }
 
-        /* أزرار التبويبات العصرية (Segmented Control) */
         .tabs-container {
-            background: var(--bg-card);
-            padding: 6px;
-            border-radius: 20px;
-            display: flex;
-            gap: 4px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
+            background: var(--bg-card); padding: 6px; border-radius: 20px;
+            display: flex; gap: 4px; margin-bottom: 24px;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);
         }
-
         .tab-btn {
-            flex: 1;
-            padding: 12px 8px;
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            border-radius: 14px;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            flex: 1; padding: 12px 8px; background: transparent; color: var(--text-muted);
+            border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;
         }
-
         .tab-btn.active {
-            background: var(--accent);
-            color: #ffffff;
-            box-shadow: 0 4px 12px var(--accent-glow);
+            background: var(--accent); color: #ffffff; box-shadow: 0 4px 12px var(--accent-glow);
         }
 
-        /* المحتوى والبطاقات */
         .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
         .tab-content.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .grid-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 16px;
         }
 
         .input-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 20px; border-radius: 24px; box-shadow: var(--shadow-sm); transition: all 0.3s ease;
         }
         .input-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
+        .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .card-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--text-main); }
         .card-icon { font-size: 20px; background: var(--bg-input); padding: 6px; border-radius: 10px; }
 
-        /* مفتاح التشغيل العصري (iOS Toggle Switch) */
         .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-color); transition: .4s; border-radius: 24px; }
@@ -184,79 +127,52 @@
         input:checked + .slider { background-color: var(--success); }
         input:checked + .slider:before { transform: translateX(-20px); }
 
-        /* حقول الإدخال */
+        .fields-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .field-col { display: flex; flex-direction: column; gap: 6px; }
+        .field-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+
         .input-group {
-            display: flex;
-            align-items: center;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 4px 12px;
-            margin-bottom: 10px;
-            transition: 0.3s;
+            display: flex; align-items: center; background: var(--bg-input);
+            border: 1px solid var(--border-color); border-radius: 14px;
+            padding: 2px 10px; transition: 0.3s;
         }
         .input-group:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .input-group:last-child { margin-bottom: 0; }
-
+        
         .input-group input {
-            flex: 1;
-            width: 100%;
-            padding: 12px 8px;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-size: 16px;
-            font-weight: 700;
-            font-family: inherit;
-            outline: none;
-            text-align: left;
+            flex: 1; width: 100%; padding: 10px 4px; background: transparent;
+            border: none; color: var(--text-main); font-size: 15px; font-weight: 700;
+            outline: none; text-align: left;
         }
+        .unit { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-right: 6px; white-space: nowrap; }
 
-        .unit { font-size: 13px; color: var(--text-muted); font-weight: 600; white-space: nowrap; margin-right: 12px; }
-
-        /* الشريط السفلي الزجاجي (Glassmorphism Sticky Bar) */
         .sticky-bar {
-            position: fixed;
-            bottom: 20px; left: 20px; right: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            padding: 16px 20px;
-            border-radius: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            z-index: 1000;
-            max-width: 800px;
-            margin: 0 auto;
+            position: fixed; bottom: 20px; left: 20px; right: 20px;
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color); padding: 16px 20px; border-radius: 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 1000;
+            max-width: 950px; margin: 0 auto;
         }
 
-        .stats-group { display: flex; gap: 20px; align-items: center; }
-
+        .stats-group { display: flex; gap: 24px; align-items: center; }
         .stat-item { display: flex; flex-direction: column; }
         .stat-item .lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; }
-        .stat-item .val { font-size: 17px; font-weight: 700; color: var(--text-main); }
+        .stat-item .val { font-size: 18px; font-weight: 700; color: var(--text-main); }
         .stat-item .val.highlight { color: var(--success); }
         .stat-item .val.danger { color: var(--danger); }
 
         .btn-print {
             background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: #ffffff;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: inherit;
-            box-shadow: 0 4px 15px var(--accent-glow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: #ffffff; border: none; padding: 14px 20px; border-radius: 16px;
+            font-weight: 700; cursor: pointer; font-size: 14px; box-shadow: 0 4px 15px var(--accent-glow);
+            transition: transform 0.2s ease;
         }
         .btn-print:active { transform: scale(0.95); }
 
-        /* نافذة الطباعة (Modal) */
         #report-modal {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
@@ -266,7 +182,7 @@
             background: var(--bg-card); color: var(--text-main);
             width: 100%; max-width: 700px; max-height: 90vh;
             border-radius: 24px; padding: 30px; overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
         }
         .modal-header-actions {
             display: flex; justify-content: space-between; align-items: center;
@@ -274,24 +190,30 @@
         }
         .modal-header-actions button {
             padding: 10px 18px; border-radius: 14px; font-weight: 700;
-            font-family: 'Readex Pro', sans-serif; cursor: pointer; font-size: 13px; border: none;
+            font-family: inherit; cursor: pointer; font-size: 13px; border: none;
         }
         .btn-close-modal { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); }
-        .btn-print-modal { background: var(--success); color: #fff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
+        .btn-print-modal { background: var(--success); color: #fff; }
 
         .modal-card table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 12px; overflow: hidden; }
         .modal-card th, .modal-card td { border: 1px solid var(--border-color); padding: 12px; text-align: right; font-size: 14px; }
-        .modal-card th { background-color: var(--bg-input); font-weight: 700; color: var(--text-main); }
+        .modal-card th { background-color: var(--bg-input); font-weight: 700; }
+        
+        @media (max-width: 450px) {
+            .stats-group { gap: 12px; }
+            .stat-item .val { font-size: 15px; }
+            .btn-print { padding: 12px 14px; font-size: 12px; }
+            .fields-row { grid-template-columns: 1fr; gap: 10px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- الترويسة العلوية -->
     <div class="header">
         <div class="brand-box">
             <div class="brand-logo">
-                <img src="icon.png" alt="شعار مخبز ابويونس">
+                <img src="icon.png" alt="شعار المخبز">
             </div>
             <div>
                 <h1>مخبز ابويونس</h1>
@@ -301,11 +223,10 @@
         <button class="btn-theme" onclick="toggleTheme()">🌓 الوضع</button>
     </div>
 
-    <!-- أزرار التبويبات -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab(0)">📦 الإنتاج والكميات</button>
         <button class="tab-btn" onclick="switchTab(1)">🌾 المكونات الأساسية</button>
-        <button class="tab-btn" onclick="switchTab(2)">⚙️ المصاريف</button>
+        <button class="tab-btn" onclick="switchTab(2)">⚙️ المصاريف والتشغيل</button>
     </div>
 
     <!-- Tab 1: الإنتاج -->
@@ -320,6 +241,7 @@
                     <span class="unit">ربطة</span>
                 </div>
             </div>
+            
             <div class="input-card">
                 <div class="card-header">
                     <div class="card-title"><span class="card-icon">⚖️</span> وزن الربطة الواحدة</div>
@@ -329,15 +251,17 @@
                     <span class="unit">كجم</span>
                 </div>
             </div>
+
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي</div>
+                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي المستهدف</div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
+
             <div class="input-card">
                 <div class="card-header">
                     <div class="card-title"><span class="card-icon">💰</span> هامش الربح المطلوب</div>
@@ -353,146 +277,204 @@
     <!-- Tab 2: المكونات -->
     <div class="tab-content">
         <div class="grid-inputs">
+            
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🌾</span> طحين</div>
+                    <div class="card-title"><span class="card-icon">🌾</span> الطحين (دقيق)</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_flour" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="flour" value="65" oninput="calculate()">
-                    <span class="unit">شيكل/كيس</span>
+                <div class="field-col">
+                    <label class="field-label">سعر كيس الطحين</label>
+                    <div class="input-group">
+                        <input type="text" inputmode="decimal" id="flour" value="65" oninput="calculate()">
+                        <span class="unit">₪ / كيس</span>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> سكر</div>
+                    <div class="card-title"><span class="card-icon">🧂</span> السكر</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_sugar" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="sugar" value="4.5" oninput="calculate()">
-                    <span class="unit">شيكل/كجم</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="sugar_qty" value="0.5" oninput="calculate()">
-                    <span class="unit">كجم/كيس</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر الكيلو</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="sugar" value="4.5" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">الكمية لكل كيس</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="sugar_qty" value="0.5" oninput="calculate()">
+                            <span class="unit">كجم</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> ملح</div>
+                    <div class="card-title"><span class="card-icon">🧂</span> الملح</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_salt" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="salt" value="4.5" oninput="calculate()">
-                    <span class="unit">شيكل/كجم</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="salt_qty" value="0.25" oninput="calculate()">
-                    <span class="unit">كجم/كيس</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر الكيلو</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="salt" value="4.5" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">الكمية لكل كيس</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="salt_qty" value="0.25" oninput="calculate()">
+                            <span class="unit">كجم</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🦠</span> خميرة</div>
+                    <div class="card-title"><span class="card-icon">🦠</span> الخميرة</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_yeast" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="yeast" value="16" oninput="calculate()">
-                    <span class="unit">شيكل/كجم</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="yeast_qty" value="0.25" oninput="calculate()">
-                    <span class="unit">كجم/كيس</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر الكيلو</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="yeast" value="16" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">الكمية لكل كيس</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="yeast_qty" value="0.25" oninput="calculate()">
+                            <span class="unit">كجم</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
     </div>
 
     <!-- Tab 3: المصاريف -->
     <div class="tab-content">
         <div class="grid-inputs">
+            
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية ثابتة</div>
+                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية (عمال وإيجار)</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_overhead" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="daily" value="1500" oninput="calculate()">
-                    <span class="unit">شيكل/يوم</span>
+                <div class="field-col">
+                    <label class="field-label">الإجمالي اليومي</label>
+                    <div class="input-group">
+                        <input type="text" inputmode="decimal" id="daily" value="1500" oninput="calculate()">
+                        <span class="unit">₪ / يوم</span>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">💧</span> ماء</div>
+                    <div class="card-title"><span class="card-icon">💧</span> المياه</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_water" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="water_cup" value="120" oninput="calculate()">
-                    <span class="unit">شيكل/كوب</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="water_qty" value="11" oninput="calculate()">
-                    <span class="unit">لتر/كيس</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر الكوب (م³)</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="water_cup" value="120" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">الكمية لكل كيس</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="water_qty" value="11" oninput="calculate()">
+                            <span class="unit">لتر</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🛍️</span> نايلون التغليف</div>
+                    <div class="card-title"><span class="card-icon">🛍️</span> أكياس التغليف (النايلون)</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_nylon" checked onchange="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="nylon_price" value="15" oninput="calculate()">
-                    <span class="unit">شيكل/كجم</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="nylon_bags_per_kg" value="200" oninput="calculate()">
-                    <span class="unit">كيس/كجم</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر الكيلو</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="nylon_price" value="15" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">عدد الأكياس بالكيلو</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="nylon_bags_per_kg" value="200" oninput="calculate()">
+                            <span class="unit">كيس</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">⛽</span> سولار (وقود)</div>
+                    <div class="card-title"><span class="card-icon">⛽</span> السولار (الوقود)</div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_diesel" onclick="calculate()">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="diesel_price" value="0" oninput="calculate()">
-                    <span class="unit">شيكل/لتر</span>
-                </div>
-                <div class="input-group">
-                    <input type="text" inputmode="decimal" id="diesel_liter" value="4.5" oninput="calculate()">
-                    <span class="unit">لتر/كيس</span>
+                <div class="fields-row">
+                    <div class="field-col">
+                        <label class="field-label">سعر اللتر</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="diesel_price" value="0" oninput="calculate()">
+                            <span class="unit">₪</span>
+                        </div>
+                    </div>
+                    <div class="field-col">
+                        <label class="field-label">الكمية لكل كيس</label>
+                        <div class="input-group">
+                            <input type="text" inputmode="decimal" id="diesel_liter" value="4.5" oninput="calculate()">
+                            <span class="unit">لتر</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -550,12 +532,8 @@
 </div>
 
 <script>
-    // تغيير الثيم
-    function toggleTheme() { 
-        document.body.classList.toggle('dark-theme'); 
-    }
+    function toggleTheme() { document.body.classList.toggle('dark-theme'); }
 
-    // التنقل بين التبويبات
     function switchTab(index) {
         let tabs = document.querySelectorAll('.tab-btn');
         let contents = document.querySelectorAll('.tab-content');
@@ -565,7 +543,6 @@
         });
     }
 
-    // دالة الحساب الرئيسية
     function calculate() {
         const isChecked = id => document.getElementById(id).checked;
         const getVal = id => parseFloat(document.getElementById(id).value.replace(',', '.')) || 0;
@@ -574,6 +551,7 @@
         let bagsPerDay = getVal("bags") || 1;
 
         let flourPrice = isChecked('chk_flour') ? getVal("flour") : 0;
+        
         let sugarPrice = isChecked('chk_sugar') ? getVal("sugar") : 0;
         let sugarQty = getVal("sugar_qty");
         let sugarCost = sugarPrice * sugarQty;
@@ -593,13 +571,14 @@
         let waterQty = getVal("water_qty");
         let waterCost = (waterPrice / 1000) * waterQty;
 
-        let nylonKgPrice = isChecked('chk_nylon') ? getVal("nylon_price") : 0;
-        let nylonBagsPerKg = getVal("nylon_bags_per_kg") || 200;
-        let nylonCost = (nylonKgPrice / nylonBagsPerKg) * loavesPerBag;
+        let nylonPrice = isChecked('chk_nylon') ? getVal("nylon_price") : 0;
+        let nylonBagsPerKg = getVal("nylon_bags_per_kg") || 1; // تفادي القسمة على صفر
+        // تكلفة النايلون = (سعر الكيلو / عدد الأكياس بالكيلو) × عدد الربطات المطلوبة لكيس الطحين
+        let nylonCost = (nylonPrice / nylonBagsPerKg) * loavesPerBag;
 
         let dieselPrice = isChecked('chk_diesel') ? getVal("diesel_price") : 0;
-        let dieselPerBag = getVal("diesel_liter");
-        let dieselCost = dieselPrice * dieselPerBag;
+        let dieselLiter = getVal("diesel_liter");
+        let dieselCost = dieselPrice * dieselLiter;
 
         let totalBatchCost = flourPrice + sugarCost + saltCost + yeastCost + waterCost + nylonCost + dieselCost + overheadPerBag;
         let costPerLoaf = totalBatchCost / loavesPerBag;
@@ -609,12 +588,10 @@
         let profitPerLoaf = sellingPrice - costPerLoaf;
         let dailyProfit = profitPerLoaf * (loavesPerBag * bagsPerDay);
 
-        // تحديث الواجهة الرئيسية
         document.getElementById("res-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
         document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("res-profit").innerText = dailyProfit.toFixed(2) + " ₪";
 
-        // تحديث التقرير
         document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " شيكل";
         document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " شيكل";
         document.getElementById("pdf-margin").innerText = margin.toFixed(1) + " %";
@@ -622,20 +599,19 @@
         document.getElementById("pdf-profit-daily").innerText = dailyProfit.toFixed(2) + " شيكل";
 
         let detailsHtml = "";
-        if (isChecked('chk_flour')) detailsHtml += `<tr><td>طحين (25 كجم)</td><td>${flourPrice.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_sugar')) detailsHtml += `<tr><td>سكر (${sugarQty} كجم)</td><td>${sugarCost.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_salt')) detailsHtml += `<tr><td>ملح (${saltQty} كجم)</td><td>${saltCost.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_yeast')) detailsHtml += `<tr><td>خميرة (${yeastQty} كجم)</td><td>${yeastCost.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_water')) detailsHtml += `<tr><td>ماء (${waterQty} لتر)</td><td>${waterCost.toFixed(3)} شيكل</td></tr>`;
-        if (isChecked('chk_nylon')) detailsHtml += `<tr><td>نايلون (${loavesPerBag} كيس للربطة)</td><td>${nylonCost.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselPerBag} لتر)</td><td>${dieselCost.toFixed(2)} شيكل</td></tr>`;
-        if (isChecked('chk_overhead')) detailsHtml += `<tr><td>مصروفات يومية ثابتة (${bagsPerDay} كيس/يوم)</td><td>${overheadPerBag.toFixed(2)} شيكل</td></tr>`;
-        detailsHtml += `<tr style="font-weight:700; background-color:#f1f5f9; color:#0f172a;"><td>المجموع الكلي لتكلفة كيس الطحين</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
+        if (isChecked('chk_flour')) detailsHtml += `<tr><td>طحين (كيس 25 كجم)</td><td>${flourPrice.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_sugar')) detailsHtml += `<tr><td>سكر (${sugarQty} كجم)</td><td>${sugarCost.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_salt')) detailsHtml += `<tr><td>ملح (${saltQty} كجم)</td><td>${saltCost.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_yeast')) detailsHtml += `<tr><td>خميرة (${yeastQty} كجم)</td><td>${yeastCost.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_water')) detailsHtml += `<tr><td>ماء (${waterQty} لتر)</td><td>${waterCost.toFixed(3)} ₪</td></tr>`;
+        if (isChecked('chk_nylon')) detailsHtml += `<tr><td>أكياس نايلون (${loavesPerBag} كيس)</td><td>${nylonCost.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselLiter} لتر)</td><td>${dieselCost.toFixed(2)} ₪</td></tr>`;
+        if (isChecked('chk_overhead')) detailsHtml += `<tr><td>مصروفات تشغيل (${bagsPerDay} كيس/يوم)</td><td>${overheadPerBag.toFixed(2)} ₪</td></tr>`;
+        detailsHtml += `<tr style="font-weight:700; background-color:#f1f5f9; color:#0f172a;"><td>إجمالي تكلفة كيس الطحين</td><td>${totalBatchCost.toFixed(2)} ₪</td></tr>`;
 
         document.getElementById("pdf-details-body").innerHTML = detailsHtml;
     }
 
-    // نوافذ التقرير والطباعة
     function openReportModal() { document.getElementById("report-modal").style.display = "flex"; }
     function closeReportModal() { document.getElementById("report-modal").style.display = "none"; }
 
@@ -671,10 +647,9 @@
         }
     }
 
-    // Service Worker (Cache-First) لضمان العمل بدون انترنت للأبد
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v4-premium';
+            const CACHE_NAME = 'abu-younis-v6-pro';
             const urlsToCache = ['./', 'cal.html', 'icon.png'];
 
             self.addEventListener('install', e => {
@@ -695,7 +670,6 @@
         navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
     }
 
-    // التشغيل الأولي
     window.onload = calculate;
 </script>
 </body>
