@@ -320,7 +320,7 @@
         <div class="grid-inputs">
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🥖</span> عدد الربطات كيس الطحين <span class="info-btn" onclick="showHelp('عدد ربطات الخبز الناتجة عن كيس الطحين الواحد (25 كجم).')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🥖</span> عدد ربطات كيس الطحين (25 كجم) <span class="info-btn" onclick="showHelp('عدد ربطات الخبز الناتجة عن كيس الطحين الواحد (25 كجم).')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
@@ -340,10 +340,10 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">📈</span> الانتاج اليومي المتوقع بالكيس <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين 25 كيلو التي يتم استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">📈</span> عدد أكياس الطحين المتوقعة يومياً <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين (25 كجم) المتوقع استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="bags" value="200" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
@@ -366,7 +366,7 @@
             
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🌾</span> الطحين <span class="info-btn" onclick="showHelp('ادخل سعر شراء كيس الطحين الواحد سعة 25 كجم.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🌾</span> الطحين <span class="info-btn" onclick="showHelp('ادخل سعر شراء كيس الطحين الواحد سعة 25 كجم. يمكنك عدم تفعيل هذا الصنف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_flour" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -383,7 +383,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> السكر <span class="info-btn" onclick="showHelp('ادخل سعر كيلو السكر اليوم، وكمية السكر اللازمة لكل كيس طحين 25 كجم.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🧂</span> السكر <span class="info-btn" onclick="showHelp('ادخل سعر كيلو السكر والكمية اللازمة لكل كيس طحين 25 كجم. يمكنك عدم تفعيل هذا الصنف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_sugar" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -409,7 +409,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> الملح <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الملح والكمية المستخدمة منه لكل كيس طحين.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🧂</span> الملح <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الملح والكمية المستخدمة منه لكل كيس طحين. يمكنك عدم تفعيل هذا الصنف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_salt" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -435,7 +435,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🦠</span> الخميرة <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الخميرة والكمية اللازمة لكل كيس طحين.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🦠</span> الخميرة <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الخميرة والكمية اللازمة لكل كيس طحين. يمكنك عدم تفعيل هذا الصنف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_yeast" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -468,7 +468,7 @@
             
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية <span class="info-btn" onclick="showHelp('إجمالي المصروفات الثابتة اليومية مثل أجور العمال، الإيجار، والكهرباء موزعة على اليوم.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية <span class="info-btn" onclick="showHelp('إجمالي المصروفات الثابتة اليومية مثل أجور العمال، الإيجار، والكهرباء. يمكنك عدم تفعيل هذا المصروف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_overhead" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -485,7 +485,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">💧</span> المياه <span class="info-btn" onclick="showHelp('ادخل سعر كوب الماء م³ وعدد اللترات المستهلكة لعجن كيس الطحين الواحد.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">💧</span> المياه <span class="info-btn" onclick="showHelp('ادخل سعر كوب الماء م³ وعدد اللترات المستهلكة لعجن كيس الطحين. يمكنك عدم تفعيل هذا المصروف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_water" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -511,7 +511,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🛍️</span> أكياس النايلون <span class="info-btn" onclick="showHelp('ادخل سعر كيلو النايلون وكم عدد الأكياس التي ينتجها الكيلو الواحد لحساب التكلفة بدقة.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">🛍️</span> أكياس النايلون <span class="info-btn" onclick="showHelp('ادخل سعر كيلو النايلون وعدد الأكياس التي ينتجها الكيلو. يمكنك عدم تفعيل هذا المصروف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_nylon" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -537,7 +537,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">⛽</span> السولار (الوقود) <span class="info-btn" onclick="showHelp('ادخل سعر لتر السولار وعدد اللترات المستهلكة لكل كيس طحين.')">i</span></div>
+                    <div class="card-title"><span class="card-icon">⛽</span> السولار (الوقود) <span class="info-btn" onclick="showHelp('ادخل سعر لتر السولار وعدد اللترات المستهلكة لكل كيس طحين. يمكنك عدم تفعيل هذا المصروف ولن يتم احتسابه في التكلفة النهائية.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_diesel" onclick="calculate()">
                         <span class="slider"></span>
@@ -755,7 +755,7 @@
 
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v13-tooltips';
+            const CACHE_NAME = 'abu-younis-v14-instructions';
             const urlsToCache = [
                 './', 
                 'cal.html', 
