@@ -172,21 +172,21 @@
         .input-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
         .input-row:last-child { margin-bottom: 0; }
 
-        .input-row input[type="number"] {
+        .input-row input {
             width: 100%;
-            padding: 7px 10px;
+            padding: 10px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-main);
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             font-family: inherit;
             text-align: center;
             outline: none;
         }
 
-        .input-row input[type="number"]:focus {
+        .input-row input:focus {
             border-color: var(--accent-gold);
         }
 
@@ -322,28 +322,28 @@
             <div class="input-card">
                 <label>ربطات الكيس (25 كجم)</label>
                 <div class="input-row">
-                    <input type="number" id="loavesPerBag" value="16" step="1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
                     <span class="unit">ربطة</span>
                 </div>
             </div>
             <div class="input-card">
                 <label>وزن الربطة الواحدة</label>
                 <div class="input-row">
-                    <input type="number" id="loafWeight" value="2" step="0.1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="loafWeight" value="2" oninput="calculate()">
                     <span class="unit">كجم</span>
                 </div>
             </div>
             <div class="input-card">
                 <label>أكياس الإنتاج اليومي</label>
                 <div class="input-row">
-                    <input type="number" id="bags" value="100" step="1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
             <div class="input-card">
                 <label>هامش الربح المطلوب</label>
                 <div class="input-row">
-                    <input type="number" id="margin" value="30" step="0.1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="margin" value="30" oninput="calculate()">
                     <span class="unit">%</span>
                 </div>
             </div>
@@ -359,7 +359,7 @@
                     <label for="chk_flour">طحين</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="flour" value="65" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="flour" value="65" oninput="calculate()">
                     <span class="unit">شيكل/كيس</span>
                 </div>
             </div>
@@ -370,11 +370,11 @@
                     <label for="chk_sugar">سكر</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="sugar" value="4.5" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="sugar" value="4.5" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="sugar_qty" value="0.5" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="sugar_qty" value="0.5" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
             </div>
@@ -385,11 +385,11 @@
                     <label for="chk_salt">ملح</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="salt" value="4.5" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="salt" value="4.5" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="salt_qty" value="0.25" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="salt_qty" value="0.25" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
             </div>
@@ -400,11 +400,11 @@
                     <label for="chk_yeast">خميرة</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="yeast" value="16" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="yeast" value="16" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="yeast_qty" value="0.25" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="yeast_qty" value="0.25" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
             </div>
@@ -420,7 +420,7 @@
                     <label for="chk_overhead">مصروفات يومية ثابتة</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="daily" value="1500" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="daily" value="1500" oninput="calculate()">
                     <span class="unit">شيكل/يوم</span>
                 </div>
             </div>
@@ -431,11 +431,11 @@
                     <label for="chk_water">ماء</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="water_cup" value="120" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="water_cup" value="120" oninput="calculate()">
                     <span class="unit">شيكل/كوب</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="water_qty" value="11" step="0.1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="water_qty" value="11" oninput="calculate()">
                     <span class="unit">لتر/كيس</span>
                 </div>
             </div>
@@ -446,11 +446,11 @@
                     <label for="chk_nylon">نايلون</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="nylon_price" value="15" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="nylon_price" value="15" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="nylon_bags_per_kg" value="200" step="1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="nylon_bags_per_kg" value="200" oninput="calculate()">
                     <span class="unit">كيس/كجم</span>
                 </div>
             </div>
@@ -461,11 +461,11 @@
                     <label for="chk_diesel">سولار</label>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="diesel_price" value="0" step="0.01" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="diesel_price" value="0" oninput="calculate()">
                     <span class="unit">شيكل/لتر</span>
                 </div>
                 <div class="input-row">
-                    <input type="number" id="diesel_liter" value="4.5" step="0.1" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="diesel_liter" value="4.5" oninput="calculate()">
                     <span class="unit">لتر/كيس</span>
                 </div>
             </div>
@@ -521,7 +521,9 @@
 </div>
 
 <script>
-    function toggleTheme() { document.body.classList.toggle('dark-theme'); }
+    function toggleTheme() { 
+        document.body.classList.toggle('dark-theme'); 
+    }
 
     function switchTab(index) {
         let tabs = document.querySelectorAll('.tab-btn');
@@ -534,7 +536,7 @@
 
     function calculate() {
         const isChecked = id => document.getElementById(id).checked;
-        const getVal = id => parseFloat(document.getElementById(id).value) || 0;
+        const getVal = id => parseFloat(document.getElementById(id).value.replace(',', '.')) || 0;
 
         let loavesPerBag = getVal("loavesPerBag") || 16;
         let bagsPerDay = getVal("bags") || 1;
