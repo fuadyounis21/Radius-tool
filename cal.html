@@ -3,207 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🍞 حاسبة تكلفة الخبز - مخبز أبو يونس</title>
+    <title>مخبز ابو يونس الاوتوماتيكي - حساب تكاليف انتاج الخبز</title>
+    <!-- استدعاء خط حديث وأنيق جداً (Readex Pro) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="حاسبة أبو يونس">
     <style>
         :root {
-            --bg-gradient: radial-gradient(circle at top right, #1e293b, #0f172a);
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
+            --bg-color: #0b1329;
+            --card-bg: rgba(23, 32, 54, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --accent-gold: #f59e0b;
-            --accent-glow: rgba(245, 158, 11, 0.2);
-            --input-bg: rgba(15, 23, 42, 0.5);
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --input-bg: #0f172a;
             --success-color: #10b981;
-            --danger-color: #ef4444;
-            --shadow-ui: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            --danger-color: #f43f5e;
+            --shadow-ui: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
         .light-theme {
-            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(0, 0, 0, 0.08);
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --accent-gold: #d97706;
-            --accent-glow: rgba(217, 119, 6, 0.15);
-            --input-bg: rgba(241, 245, 249, 0.9);
+            --accent-glow: rgba(217, 119, 6, 0.1);
+            --input-bg: #f1f5f9;
             --success-color: #059669;
-            --danger-color: #dc2626;
-            --shadow-ui: 0 20px 35px -15px rgba(0, 0, 0, 0.1);
+            --danger-color: #e11d48;
+            --shadow-ui: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-gradient);
-            background-attachment: fixed;
+            font-family: 'Readex Pro', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
-            padding-bottom: 130px;
+            padding: 16px;
+            padding-bottom: 110px;
             min-height: 100vh;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: all 0.25s ease;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container { max-width: 900px; margin: 0 auto; }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            padding: 20px 28px;
-            border-radius: 24px;
-            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            padding: 16px 22px;
+            border-radius: 16px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow-ui);
         }
 
-        .header h1 { margin: 0; font-size: 24px; color: var(--accent-gold); text-shadow: 0 2px 12px var(--accent-glow); }
-        .header p { margin: 5px 0 0 0; font-size: 14px; color: var(--text-muted); }
+        .header h1 { margin: 0; font-size: 18px; font-weight: 700; color: var(--accent-gold); }
+        .header p { margin: 4px 0 0 0; font-size: 12px; color: var(--text-muted); font-weight: 300; }
 
         .btn-toggle {
             background: var(--input-bg);
             color: var(--text-main);
-            border: 1px solid var(--card-border);
-            padding: 10px 18px;
-            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.2s;
+            font-size: 12px;
+            font-family: inherit;
+            font-weight: 500;
         }
-        .btn-toggle:hover { border-color: var(--accent-gold); }
 
-        .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
 
         .tab-btn {
             flex: 1;
-            padding: 14px;
+            padding: 11px 8px;
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             color: var(--text-muted);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            font-size: 15px;
-            font-weight: bold;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-ui);
+            transition: all 0.2s ease;
         }
 
         .tab-btn.active {
             background: var(--accent-gold);
             color: #ffffff;
             border-color: var(--accent-gold);
-            box-shadow: 0 8px 25px var(--accent-glow);
-            transform: translateY(-2px);
+            font-weight: 600;
+            box-shadow: 0 4px 12px var(--accent-glow);
         }
 
         .tab-content {
             display: none;
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            padding: 28px;
-            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            padding: 22px;
+            border-radius: 18px;
             box-shadow: var(--shadow-ui);
-            margin-bottom: 20px;
-            animation: fadeIn 0.3s ease-in-out;
+            margin-bottom: 16px;
         }
 
         .tab-content.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .grid-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
         }
 
         .input-card {
             background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            padding: 18px;
-            border-radius: 18px;
-            transition: border-color 0.2s;
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            border-radius: 12px;
         }
-        .input-card:hover { border-color: rgba(245, 158, 11, 0.3); }
 
-        .input-card label { display: block; font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 10px; }
+        .input-card label { display: block; font-size: 12.5px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
 
-        .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .input-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
         .input-row:last-child { margin-bottom: 0; }
 
         .input-row input[type="number"] {
             width: 100%;
-            padding: 11px 14px;
+            padding: 7px 10px;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--border-color);
             color: var(--text-main);
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
             text-align: center;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .input-row input[type="number"]:focus {
             border-color: var(--accent-gold);
-            box-shadow: 0 0 10px var(--accent-glow);
         }
 
-        .unit { font-size: 13px; color: var(--text-muted); white-space: nowrap; min-width: 70px; font-weight: 500; }
+        .unit { font-size: 11.5px; color: var(--text-muted); white-space: nowrap; min-width: 60px; }
 
-        .chk-container { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .chk-container input[type="checkbox"] { transform: scale(1.4); cursor: pointer; accent-color: var(--accent-gold); }
-        .chk-container label { font-size: 15px; font-weight: bold; color: var(--text-main); cursor: pointer; margin: 0; }
+        .chk-container { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .chk-container input[type="checkbox"] { transform: scale(1.1); cursor: pointer; accent-color: var(--accent-gold); }
+        .chk-container label { font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; margin: 0; }
 
+        /* شريط النتائج المتناسق والأنيق */
         .sticky-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
             background: var(--card-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-top: 2px solid var(--accent-gold);
-            padding: 16px 30px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-color);
+            padding: 10px 16px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 -15px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.25);
             z-index: 1000;
         }
 
+        .stats-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
         .stat-item { text-align: center; }
-        .stat-item .val { font-size: 22px; font-weight: 800; color: var(--success-color); }
-        .stat-item .lbl { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; }
+        .stat-item .val { font-size: 15px; font-weight: 700; color: var(--success-color); }
+        .stat-item .lbl { font-size: 10.5px; color: var(--text-muted); font-weight: 400; margin-bottom: 1px; }
 
         .btn-pdf {
             background: var(--accent-gold);
             color: #ffffff;
             border: none;
-            padding: 13px 24px;
-            border-radius: 14px;
-            font-weight: bold;
+            padding: 9px 15px;
+            border-radius: 10px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 15px;
-            box-shadow: 0 6px 20px var(--accent-glow);
-            transition: transform 0.2s;
+            font-size: 12.5px;
+            font-family: inherit;
+            box-shadow: 0 3px 10px var(--accent-glow);
         }
-        .btn-pdf:hover { transform: scale(1.03); }
 
         @media print {
             body { background: #fff !important; color: #000 !important; padding: 0; }
@@ -215,13 +209,13 @@
             display: none;
             background: #ffffff;
             color: #000000;
-            padding: 30px;
-            font-family: Arial, sans-serif;
+            padding: 25px;
+            font-family: 'Readex Pro', sans-serif;
         }
 
-        #print-area table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        #print-area th, #print-area td { border: 1px solid #cbd5e1; padding: 12px; text-align: right; font-size: 15px; }
-        #print-area th { background-color: #f1f5f9; font-weight: bold; }
+        #print-area table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        #print-area th, #print-area td { border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-size: 13px; }
+        #print-area th { background-color: #f8fafc; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -229,10 +223,10 @@
 <div class="container">
     <div class="header">
         <div>
-            <h1>🍞 حاسبة تكلفة الخبز</h1>
-            <p>مخبز أبو يونس الأوتوماتيكي</p>
+            <h1>مخبز ابو يونس الاوتوماتيكي</h1>
+            <p>حساب تكاليف انتاج الخبز</p>
         </div>
-        <button class="btn-toggle" onclick="toggleTheme()">🌓 الوضع العائم</button>
+        <button class="btn-toggle" onclick="toggleTheme()">🌓 الوضع</button>
     </div>
 
     <div class="tabs">
@@ -398,28 +392,30 @@
     </div>
 </div>
 
-<!-- شريط النتائج العائم -->
+<!-- شريط النتائج المدمج -->
 <div class="sticky-bar">
-    <div class="stat-item">
-        <div class="lbl">تكلفة الربطة</div>
-        <div class="val" id="res-cost" style="color:var(--danger-color)">0.00</div>
-    </div>
-    <div class="stat-item">
-        <div class="lbl">سعر البيع المقترح</div>
-        <div class="val" id="res-price">0.00</div>
-    </div>
-    <div class="stat-item">
-        <div class="lbl">الربح اليومي الصافي</div>
-        <div class="val" id="res-profit">0.00</div>
+    <div class="stats-group">
+        <div class="stat-item">
+            <div class="lbl">تكلفة الربطة</div>
+            <div class="val" id="res-cost" style="color:var(--danger-color)">0.00</div>
+        </div>
+        <div class="stat-item">
+            <div class="lbl">سعر البيع</div>
+            <div class="val" id="res-price">0.00</div>
+        </div>
+        <div class="stat-item">
+            <div class="lbl">الربح اليومي</div>
+            <div class="val" id="res-profit">0.00</div>
+        </div>
     </div>
     <button class="btn-pdf" onclick="printReport()">🖨️ طباعة / PDF</button>
 </div>
 
-<!-- قالب التقرير المخصص للطباعة -->
+<!-- قالب التقرير للطباعة -->
 <div id="print-area">
-    <h2 style="text-align:center; margin-bottom:5px;">🍞 مخبز أبو يونس الأوتوماتيكي</h2>
-    <p style="text-align:center; color:#555; margin-top:0;">تقرير حساب تكلفة الخبز والأرباح التشغيلية</p>
-    <hr>
+    <h2 style="text-align:center; margin-bottom:4px;">مخبز ابو يونس الاوتوماتيكي</h2>
+    <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
+    <hr style="border: 0; border-top: 1px solid #e2e8f0;">
     <h3>📌 ملخص النتائج والتشغيل:</h3>
     <table>
         <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
@@ -429,7 +425,7 @@
         <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
     </table>
 
-    <h3 style="margin-top:25px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
+    <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
     <table>
         <thead>
             <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
@@ -492,8 +488,7 @@
         let margin = getVal("margin");
         let sellingPrice = costPerLoaf * (1 + margin / 100);
         let profitPerLoaf = sellingPrice - costPerLoaf;
-        let dailyLoaves = loavesPerBag * bagsPerDay;
-        let dailyProfit = profitPerLoaf * dailyLoaves;
+        let dailyProfit = profitPerLoaf * (loavesPerBag * bagsPerDay);
 
         document.getElementById("res-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
         document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
@@ -514,7 +509,7 @@
         if (isChecked('chk_nylon')) detailsHtml += `<tr><td>نايلون (${loavesPerBag} كيس للربطة)</td><td>${nylonCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselPerBag} لتر)</td><td>${dieselCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_overhead')) detailsHtml += `<tr><td>مصروفات يومية ثابتة (${bagsPerDay} كيس/يوم)</td><td>${overheadPerBag.toFixed(2)} شيكل</td></tr>`;
-        detailsHtml += `<tr style="font-weight:bold; background:#f1f5f9;"><td>المجموع الكلي للتكلفة لكيس الطحين الواحد</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
+        detailsHtml += `<tr style="font-weight:600; background:#f8fafc;"><td>المجموع الكلي لتكلفة كيس الطحين</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
 
         document.getElementById("pdf-details-body").innerHTML = detailsHtml;
     }
