@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مخبز ابو يونس الاوتوماتيكي - حساب تكاليف انتاج الخبز</title>
-    <!-- استدعاء خط حديث وأنيق جداً (Readex Pro) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -160,7 +159,6 @@
         .chk-container input[type="checkbox"] { transform: scale(1.1); cursor: pointer; accent-color: var(--accent-gold); }
         .chk-container label { font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; margin: 0; }
 
-        /* شريط النتائج المتناسق والأنيق */
         .sticky-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -199,23 +197,7 @@
             box-shadow: 0 3px 10px var(--accent-glow);
         }
 
-        @media print {
-            body { background: #fff !important; color: #000 !important; padding: 0; }
-            .container, .sticky-bar, .tabs, .btn-toggle { display: none !important; }
-            #print-area { display: block !important; }
-        }
-
-        #print-area {
-            display: none;
-            background: #ffffff;
-            color: #000000;
-            padding: 25px;
-            font-family: 'Readex Pro', sans-serif;
-        }
-
-        #print-area table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        #print-area th, #print-area td { border: 1px solid #e2e8f0; padding: 10px; text-align: right; font-size: 13px; }
-        #print-area th { background-color: #f8fafc; font-weight: 600; }
+        #print-area { display: none; }
     </style>
 </head>
 <body>
@@ -392,7 +374,6 @@
     </div>
 </div>
 
-<!-- شريط النتائج المدمج -->
 <div class="sticky-bar">
     <div class="stats-group">
         <div class="stat-item">
@@ -411,7 +392,7 @@
     <button class="btn-pdf" onclick="printReport()">🖨️ طباعة / PDF</button>
 </div>
 
-<!-- قالب التقرير للطباعة -->
+<!-- محتوى التقرير للطباعة -->
 <div id="print-area">
     <h2 style="text-align:center; margin-bottom:4px;">مخبز ابو يونس الاوتوماتيكي</h2>
     <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
@@ -514,7 +495,43 @@
         document.getElementById("pdf-details-body").innerHTML = detailsHtml;
     }
 
-    function printReport() { window.print(); }
+    function printReport() {
+        let printContents = document.getElementById('print-area').innerHTML;
+        let printWindow = window.open('', '_blank', 'width=800,height=900');
+        
+        if (printWindow) {
+            printWindow.document.write(`
+                <html dir="rtl" lang="ar">
+                <head>
+                    <title>تقرير - مخبز ابو يونس الاوتوماتيكي</title>
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        body { font-family: 'Readex Pro', sans-serif; padding: 20px; color: #000; background: #fff; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
+                        th { background-color: #f8fafc; font-weight: 600; }
+                    </style>
+                </head>
+                <body>
+                    ${printContents}
+                    <script>
+                        window.onload = function() {
+                            setTimeout(function() {
+                                window.print();
+                                window.close();
+                            }, 200);
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        } else {
+            window.print();
+        }
+    }
 
     if ('serviceWorker' in navigator) {
         const swCode = `
