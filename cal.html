@@ -15,6 +15,29 @@
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/png" href="icon.png">
 
+    <!-- كود ذكي لإنشاء ملف Manifest ديناميكي لضمان ظهور الأيقونة على الأندرويد -->
+    <link rel="manifest" id="manifest-link">
+    <script>
+        const manifestData = {
+            "name": "مخبز ابويونس",
+            "short_name": "مخبز ابويونس",
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#f8fafc",
+            "theme_color": "#f8fafc",
+            "icons": [
+                {
+                    "src": "icon.png",
+                    "sizes": "144x144 192x192 256x256 512x512",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                }
+            ]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' });
+        document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -649,7 +672,7 @@
 
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v6-pro';
+            const CACHE_NAME = 'abu-younis-v7-final';
             const urlsToCache = ['./', 'cal.html', 'icon.png'];
 
             self.addEventListener('install', e => {
