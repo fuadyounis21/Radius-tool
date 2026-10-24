@@ -148,6 +148,15 @@
         .card-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--text-main); }
         .card-icon { font-size: 20px; background: var(--bg-input); padding: 8px; border-radius: 14px; }
 
+        /* أيقونة المساعدة (Tooltip / Info) */
+        .info-btn {
+            background: var(--bg-input); color: var(--accent); border: 1px solid var(--border-color);
+            width: 24px; height: 24px; border-radius: 50%; font-size: 12px; font-weight: bold;
+            display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+            position: relative; transition: 0.2s; margin-left: 6px;
+        }
+        .info-btn:hover { background: var(--accent); color: #fff; }
+
         .toggle-switch { position: relative; display: inline-block; width: 46px; height: 25px; }
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-color); transition: .4s; border-radius: 25px; }
@@ -197,6 +206,24 @@
         }
         .btn-print:active { transform: scale(0.95); }
 
+        /* نافذة المساعدة (Modal للإرشادات) */
+        #help-modal {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
+            z-index: 3000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .help-card {
+            background: var(--bg-card); color: var(--text-main);
+            width: 100%; max-width: 450px; border-radius: 24px; padding: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25); text-align: center;
+        }
+        .help-card h3 { color: var(--accent); margin-bottom: 12px; font-size: 18px; }
+        .help-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .help-card button {
+            background: var(--accent); color: #fff; border: none; padding: 10px 20px;
+            border-radius: 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+        }
+
         #report-modal {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
@@ -220,7 +247,7 @@
         .btn-print-modal { background: var(--success); color: #fff; }
         .btn-print-modal:disabled { background: #94a3b8; cursor: not-allowed; }
 
-        /* 📄 تنسيق تقرير الـ PDF الاحترافي والمنسق بدون أقواس */
+        /* 📄 تنسيق تقرير الـ PDF الاحترافي */
         #printable-report-content {
             background-color: #ffffff;
             color: #0f172a;
@@ -276,7 +303,7 @@
             </div>
             <div>
                 <h1>مخبز ابويونس</h1>
-                <p>حساب تكاليف الانتاج</p>
+                <p>حاسبة التكاليف الذكية</p>
             </div>
         </div>
         <button class="btn-theme" onclick="toggleTheme()">🌓 الوضع</button>
@@ -293,7 +320,7 @@
         <div class="grid-inputs">
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🥖</span> عدد ربطات الكيس (25 كجم)</div>
+                    <div class="card-title"><span class="card-icon">🥖</span> ربطات الكيس <span class="info-btn" onclick="showHelp('عدد ربطات الخبز الناتجة عن كيس الطحين الواحد (25 كجم).')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
@@ -303,7 +330,7 @@
             
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">⚖️</span> وزن الربطة الواحدة</div>
+                    <div class="card-title"><span class="card-icon">⚖️</span> وزن الربطة <span class="info-btn" onclick="showHelp('وزن ربطة الخبز الواحدة بالكيلوجرام (مثلاً 2 كجم).')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loafWeight" value="2" oninput="calculate()">
@@ -313,17 +340,17 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي المستهدف</div>
+                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي <span class="info-btn" onclick="showHelp('إجمالي عدد أكياس الطحين التي يتم استهلاكها وإنتاجها يومياً في المخبز.')">i</span></div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="bags" value="200" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">💰</span> هامش الربح المطلوب</div>
+                    <div class="card-title"><span class="card-icon">💰</span> هامش الربح <span class="info-btn" onclick="showHelp('نسبة الربح المئوية التي تريد إضافتها فوق التكلفة لتحديد سعر بيع الربطة.')">i</span></div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="margin" value="30" oninput="calculate()">
@@ -339,7 +366,7 @@
             
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🌾</span> الطحين (دقيق)</div>
+                    <div class="card-title"><span class="card-icon">🌾</span> الطحين <span class="info-btn" onclick="showHelp('ادخل سعر شراء كيس الطحين الواحد سعة 25 كجم.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_flour" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -356,7 +383,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> السكر</div>
+                    <div class="card-title"><span class="card-icon">🧂</span> السكر <span class="info-btn" onclick="showHelp('ادخل سعر كيلو السكر اليوم، وكمية السكر اللازمة لكل كيس طحين 25 كجم.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_sugar" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -382,7 +409,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧂</span> الملح</div>
+                    <div class="card-title"><span class="card-icon">🧂</span> الملح <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الملح والكمية المستخدمة منه لكل كيس طحين.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_salt" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -408,7 +435,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🦠</span> الخميرة</div>
+                    <div class="card-title"><span class="card-icon">🦠</span> الخميرة <span class="info-btn" onclick="showHelp('ادخل سعر كيلو الخميرة والكمية اللازمة لكل كيس طحين.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_yeast" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -441,7 +468,7 @@
             
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية (عمال وإيجار)</div>
+                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية <span class="info-btn" onclick="showHelp('إجمالي المصروفات الثابتة اليومية مثل أجور العمال، الإيجار، والكهرباء موزعة على اليوم.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_overhead" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -458,7 +485,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">💧</span> المياه</div>
+                    <div class="card-title"><span class="card-icon">💧</span> المياه <span class="info-btn" onclick="showHelp('ادخل سعر كوب الماء م³ وعدد اللترات المستهلكة لعجن كيس الطحين الواحد.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_water" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -484,7 +511,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🛍️</span> أكياس التغليف (النايلون)</div>
+                    <div class="card-title"><span class="card-icon">🛍️</span> أكياس النايلون <span class="info-btn" onclick="showHelp('ادخل سعر كيلو النايلون وكم عدد الأكياس التي ينتجها الكيلو الواحد لحساب التكلفة بدقة.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_nylon" checked onchange="calculate()">
                         <span class="slider"></span>
@@ -510,7 +537,7 @@
 
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">⛽</span> السولار (الوقود)</div>
+                    <div class="card-title"><span class="card-icon">⛽</span> السولار (الوقود) <span class="info-btn" onclick="showHelp('ادخل سعر لتر السولار وعدد اللترات المستهلكة لكل كيس طحين.')">i</span></div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="chk_diesel" onclick="calculate()">
                         <span class="slider"></span>
@@ -557,6 +584,15 @@
     <button class="btn-print" onclick="openReportModal()">🖨️ التقرير</button>
 </div>
 
+<!-- نافذة عرض الإرشادات (Tooltip Modal) -->
+<div id="help-modal" onclick="closeHelp()">
+    <div class="help-card" onclick="event.stopPropagation()">
+        <h3>💡 إرشادات الاستخدام</h3>
+        <p id="help-text">نص الإرشادات هنا...</p>
+        <button onclick="closeHelp()">فهمت</button>
+    </div>
+</div>
+
 <!-- نافذة العرض الداخلية للتقرير (Modal) -->
 <div id="report-modal">
     <div class="modal-card">
@@ -565,7 +601,7 @@
             <button class="btn-print-modal" id="pdfBtn" onclick="downloadPDF()">⬇️ تحميل كملف PDF</button>
         </div>
         
-        <!-- المحتوى الخاص بالـ PDF (بدون أقواس ومرتب بنظافة تامة) -->
+        <!-- المحتوى الخاص بالـ PDF -->
         <div id="printable-report-content">
             <div class="pdf-header">
                 <h2>مخبز ابويونس الاوتوماتيكي</h2>
@@ -606,6 +642,15 @@
             tab.classList.toggle('active', i === index);
             contents[i].classList.toggle('active', i === index);
         });
+    }
+
+    // دوال إدارة نافذة الإرشادات
+    function showHelp(text) {
+        document.getElementById('help-text').innerText = text;
+        document.getElementById('help-modal').style.display = 'flex';
+    }
+    function closeHelp() {
+        document.getElementById('help-modal').style.display = 'none';
     }
 
     function calculate() {
@@ -710,7 +755,7 @@
 
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v12-no-brackets';
+            const CACHE_NAME = 'abu-younis-v13-tooltips';
             const urlsToCache = [
                 './', 
                 'cal.html', 
