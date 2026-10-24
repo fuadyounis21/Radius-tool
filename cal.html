@@ -15,7 +15,6 @@
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/png" href="icon.png">
 
-    <!-- كود ذكي لإنشاء ملف Manifest ديناميكي لضمان ظهور الأيقونة على الأندرويد -->
     <link rel="manifest" id="manifest-link">
     <script>
         const manifestData = {
@@ -150,11 +149,7 @@
         input:checked + .slider { background-color: var(--success); }
         input:checked + .slider:before { transform: translateX(-20px); }
 
-        .fields-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .field-col { display: flex; flex-direction: column; gap: 6px; }
         .field-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
 
@@ -228,6 +223,28 @@
             .btn-print { padding: 12px 14px; font-size: 12px; }
             .fields-row { grid-template-columns: 1fr; gap: 10px; }
         }
+
+        /* 🖨️ الكود السحري للطباعة المباشرة وحفظ الـ PDF في نفس الشاشة */
+        @media print {
+            body { background: #ffffff !important; margin: 0; padding: 0; }
+            /* إخفاء كل التطبيق باستثناء نافذة التقرير */
+            body > *:not(#report-modal) { display: none !important; }
+            
+            #report-modal {
+                position: absolute; left: 0; top: 0; width: 100%; height: auto;
+                background: #ffffff !important; display: block !important;
+                padding: 10px; padding-top: 0; align-items: flex-start;
+            }
+            .modal-card {
+                box-shadow: none !important; border: none !important; padding: 0 !important;
+                max-width: 100% !important; background: #ffffff !important; color: #000000 !important;
+            }
+            /* إخفاء الأزرار العلوية (إغلاق وطباعة) عند استخراج الـ PDF */
+            .modal-header-actions { display: none !important; }
+            
+            table th, table td { color: #000 !important; border-color: #ccc !important; }
+            table th { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
+        }
     </style>
 </head>
 <body>
@@ -257,7 +274,7 @@
         <div class="grid-inputs">
             <div class="input-card">
                 <div class="card-header">
-                    <div class="card-title"><span class="card-icon">🥖</span> ربطات الكيس (25 كجم)</div>
+                    <div class="card-title"><span class="card-icon">🥖</span> عدد ربطات الكيس (25 كجم)</div>
                 </div>
                 <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
@@ -280,7 +297,7 @@
                     <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي المستهدف</div>
                 </div>
                 <div class="input-group">
-                    <input type="text" inputmode="decimal" id="bags" value="200" oninput="calculate()">
+                    <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
@@ -525,8 +542,8 @@
 <div id="report-modal">
     <div class="modal-card">
         <div class="modal-header-actions">
-            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق</button>
-            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة التقرير</button>
+            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق التقرير</button>
+            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة / حفظ PDF</button>
         </div>
         <div id="printable-report-content">
             <div style="text-align:center; margin-bottom: 20px;">
@@ -595,8 +612,7 @@
         let waterCost = (waterPrice / 1000) * waterQty;
 
         let nylonPrice = isChecked('chk_nylon') ? getVal("nylon_price") : 0;
-        let nylonBagsPerKg = getVal("nylon_bags_per_kg") || 1; // تفادي القسمة على صفر
-        // تكلفة النايلون = (سعر الكيلو / عدد الأكياس بالكيلو) × عدد الربطات المطلوبة لكيس الطحين
+        let nylonBagsPerKg = getVal("nylon_bags_per_kg") || 1; 
         let nylonCost = (nylonPrice / nylonBagsPerKg) * loavesPerBag;
 
         let dieselPrice = isChecked('chk_diesel') ? getVal("diesel_price") : 0;
@@ -615,11 +631,11 @@
         document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("res-profit").innerText = dailyProfit.toFixed(2) + " ₪";
 
-        document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " شيكل";
-        document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " شيكل";
+        document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
+        document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("pdf-margin").innerText = margin.toFixed(1) + " %";
-        document.getElementById("pdf-profit-loaf").innerText = profitPerLoaf.toFixed(2) + " شيكل";
-        document.getElementById("pdf-profit-daily").innerText = dailyProfit.toFixed(2) + " شيكل";
+        document.getElementById("pdf-profit-loaf").innerText = profitPerLoaf.toFixed(2) + " ₪";
+        document.getElementById("pdf-profit-daily").innerText = dailyProfit.toFixed(2) + " ₪";
 
         let detailsHtml = "";
         if (isChecked('chk_flour')) detailsHtml += `<tr><td>طحين (كيس 25 كجم)</td><td>${flourPrice.toFixed(2)} ₪</td></tr>`;
@@ -638,41 +654,14 @@
     function openReportModal() { document.getElementById("report-modal").style.display = "flex"; }
     function closeReportModal() { document.getElementById("report-modal").style.display = "none"; }
 
+    // الطباعة واستخراج الـ PDF الذكي في نفس الشاشة
     function triggerPrint() {
-        let content = document.getElementById('printable-report-content').innerHTML;
-        let printWin = window.open('', '_blank');
-        if (printWin) {
-            printWin.document.write(`
-                <html dir="rtl" lang="ar">
-                <head>
-                    <title>تقرير - مخبز ابويونس</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-                    <style>
-                        body { font-family: 'Readex Pro', sans-serif; padding: 30px; color: #000; background: #fff; direction: rtl; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 15px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; }
-                        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: right; font-size: 14px; }
-                        th { background-color: #f8fafc; font-weight: 700; }
-                    </style>
-                </head>
-                <body>
-                    ${content}
-                    <script>
-                        window.onload = function() {
-                            setTimeout(function() { window.print(); }, 400);
-                        };
-                    <\/script>
-                </body>
-                </html>
-            `);
-            printWin.document.close();
-        } else {
-            window.print();
-        }
+        window.print();
     }
 
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'abu-younis-v7-final';
+            const CACHE_NAME = 'abu-younis-v8-pdf-fix';
             const urlsToCache = ['./', 'cal.html', 'icon.png'];
 
             self.addEventListener('install', e => {
