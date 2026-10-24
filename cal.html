@@ -285,13 +285,6 @@
         .modal-card table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .modal-card th, .modal-card td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
         .modal-card th { background-color: #f8fafc; font-weight: 600; }
-
-        @media print {
-            body * { visibility: hidden; }
-            #report-modal, #report-modal * { visibility: visible; }
-            #report-modal { position: absolute; left: 0; top: 0; background: #fff; padding: 0; }
-            .modal-header-actions { display: none !important; }
-        }
     </style>
 </head>
 <body>
@@ -496,27 +489,29 @@
     <div class="modal-card">
         <div class="modal-header-actions">
             <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق التقرير</button>
-            <button class="btn-print-modal" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة / حفظ PDF</button>
         </div>
-        <h2 style="text-align:center; margin-bottom:4px;">مخبز ابويونس</h2>
-        <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
-        <hr style="border: 0; border-top: 1px solid #e2e8f0;">
-        <h3>📌 ملخص النتائج والتشغيل:</h3>
-        <table>
-            <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
-            <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
-            <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
-            <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
-            <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
-        </table>
+        <div id="printable-report-content">
+            <h2 style="text-align:center; margin-bottom:4px;">مخبز ابويونس</h2>
+            <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
+            <hr style="border: 0; border-top: 1px solid #e2e8f0;">
+            <h3>📌 ملخص النتائج والتشغيل:</h3>
+            <table>
+                <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
+                <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
+                <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
+                <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
+                <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
+            </table>
 
-        <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
-        <table>
-            <thead>
-                <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
-            </thead>
-            <tbody id="pdf-details-body"></tbody>
-        </table>
+            <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
+            <table>
+                <thead>
+                    <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
+                </thead>
+                <tbody id="pdf-details-body"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -608,6 +603,41 @@
 
     function closeReportModal() {
         document.getElementById("report-modal").style.display = "none";
+    }
+
+    /* دالة الطباعة المخصصة للتغلب على حظر الآيفون PWA */
+    function triggerPrint() {
+        let content = document.getElementById('printable-report-content').innerHTML;
+        let printWin = window.open('', '_blank');
+        if (printWin) {
+            printWin.document.write(`
+                <html dir="rtl" lang="ar">
+                <head>
+                    <title>تقرير - مخبز ابويونس</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        body { font-family: 'Readex Pro', sans-serif; padding: 20px; color: #000; background: #fff; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+                        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
+                        th { background-color: #f8fafc; font-weight: 600; }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                    <script>
+                        window.onload = function() {
+                            setTimeout(function() {
+                                window.print();
+                            }, 300);
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWin.document.close();
+        } else {
+            window.print();
+        }
     }
 
     if ('serviceWorker' in navigator) {
