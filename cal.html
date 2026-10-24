@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مخبز ابويونس - حساب تكاليف انتاج الخبز</title>
     
-    <!-- إعدادات PWA واسم التطبيق -->
+    <!-- إعدادات PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="مخبز ابويونس">
@@ -21,275 +21,273 @@
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* الوضع الفاتح الافتراضي */
+        /* المتغيرات الأساسية للوضع الفاتح */
         :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-input: #f8fafc;
             --border-color: #e2e8f0;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --accent-gold: #d97706;
-            --accent-glow: rgba(217, 119, 6, 0.1);
-            --input-bg: #f1f5f9;
-            --success-color: #059669;
-            --danger-color: #e11d48;
-            --shadow-ui: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.06);
+            --glass-bg: rgba(255, 255, 255, 0.85);
         }
 
-        /* الوضع الداكن */
+        /* الوضع الداكن المطور */
         .dark-theme {
-            --bg-color: #0b1329;
-            --card-bg: rgba(23, 32, 54, 0.85);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-main: #f1f5f9;
+            --bg-body: #0b1120;
+            --bg-card: #1e293b;
+            --bg-input: #0f172a;
+            --border-color: #334155;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-gold: #f59e0b;
-            --accent-glow: rgba(245, 158, 11, 0.15);
-            --input-bg: #0f172a;
-            --success-color: #10b981;
-            --danger-color: #f43f5e;
-            --shadow-ui: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Readex Pro', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Readex Pro', system-ui, sans-serif;
+            background-color: var(--bg-body);
             color: var(--text-main);
-            margin: 0;
             padding: 16px;
-            padding-bottom: 110px;
+            padding-bottom: 140px;
             min-height: 100vh;
-            transition: all 0.25s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; }
 
+        /* ترويسة التطبيق */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-bg);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 16px 22px;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-ui);
+            padding: 16px 20px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s ease;
         }
 
-        .brand-box {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
+        .brand-box { display: flex; align-items: center; gap: 16px; }
+        
         .brand-logo {
-            width: 48px;
-            height: 48px;
-            background: var(--card-bg);
-            border: 1px solid var(--accent-gold);
-            border-radius: 12px;
+            width: 52px; height: 52px;
+            background: var(--bg-card);
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px var(--accent-glow);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px var(--accent-glow);
+            border: 2px solid var(--accent);
         }
+        .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
 
-        .brand-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .header h1 { font-size: 18px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .header p { font-size: 13px; color: var(--accent); font-weight: 500; }
 
-        .header h1 { margin: 0; font-size: 18px; font-weight: 700; color: var(--accent-gold); }
-        .header p { margin: 2px 0 0 0; font-size: 12px; color: var(--text-muted); font-weight: 300; }
-
-        .btn-toggle {
-            background: var(--input-bg);
+        .btn-theme {
+            background: var(--bg-input);
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             font-family: inherit;
-            font-weight: 500;
+            font-weight: 600;
+            transition: 0.3s;
         }
+        .btn-theme:hover { background: var(--border-color); }
 
-        .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+        /* أزرار التبويبات العصرية (Segmented Control) */
+        .tabs-container {
+            background: var(--bg-card);
+            padding: 6px;
+            border-radius: 20px;
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
 
         .tab-btn {
             flex: 1;
-            padding: 11px 8px;
-            background: var(--card-bg);
+            padding: 12px 8px;
+            background: transparent;
             color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: none;
+            border-radius: 14px;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .tab-btn.active {
-            background: var(--accent-gold);
+            background: var(--accent);
             color: #ffffff;
-            border-color: var(--accent-gold);
-            font-weight: 600;
             box-shadow: 0 4px 12px var(--accent-glow);
         }
 
-        .tab-content {
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 22px;
-            border-radius: 18px;
-            box-shadow: var(--shadow-ui);
-            margin-bottom: 16px;
-        }
-
+        /* المحتوى والبطاقات */
+        .tab-content { display: none; animation: fadeIn 0.4s ease forwards; }
         .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .grid-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
         }
 
         .input-card {
-            background: var(--input-bg);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 12px 14px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .input-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
 
-        .input-card label { display: block; font-size: 12.5px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
+        .card-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--text-main); }
+        .card-icon { font-size: 20px; background: var(--bg-input); padding: 6px; border-radius: 10px; }
 
-        .input-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-        .input-row:last-child { margin-bottom: 0; }
+        /* مفتاح التشغيل العصري (iOS Toggle Switch) */
+        .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-color); transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; right: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        input:checked + .slider { background-color: var(--success); }
+        input:checked + .slider:before { transform: translateX(-20px); }
 
-        .input-row input {
+        /* حقول الإدخال */
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 4px 12px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .input-group:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .input-group:last-child { margin-bottom: 0; }
+
+        .input-group input {
+            flex: 1;
             width: 100%;
-            padding: 10px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            padding: 12px 8px;
+            background: transparent;
+            border: none;
             color: var(--text-main);
-            border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             font-family: inherit;
-            text-align: center;
             outline: none;
+            text-align: left;
         }
 
-        .input-row input:focus {
-            border-color: var(--accent-gold);
-        }
+        .unit { font-size: 13px; color: var(--text-muted); font-weight: 600; white-space: nowrap; margin-right: 12px; }
 
-        .unit { font-size: 11.5px; color: var(--text-muted); white-space: nowrap; min-width: 60px; }
-
-        .chk-container { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-        .chk-container input[type="checkbox"] { transform: scale(1.1); cursor: pointer; accent-color: var(--accent-gold); }
-        .chk-container label { font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; margin: 0; }
-
+        /* الشريط السفلي الزجاجي (Glassmorphism Sticky Bar) */
         .sticky-bar {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-top: 1px solid var(--border-color);
-            padding: 10px 16px;
+            bottom: 20px; left: 20px; right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 -8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
             z-index: 1000;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .stats-group {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
+        .stats-group { display: flex; gap: 20px; align-items: center; }
 
-        .stat-item { text-align: center; }
-        .stat-item .val { font-size: 15px; font-weight: 700; color: var(--success-color); }
-        .stat-item .lbl { font-size: 10.5px; color: var(--text-muted); font-weight: 400; margin-bottom: 1px; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-item .lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; }
+        .stat-item .val { font-size: 17px; font-weight: 700; color: var(--text-main); }
+        .stat-item .val.highlight { color: var(--success); }
+        .stat-item .val.danger { color: var(--danger); }
 
-        .btn-pdf {
-            background: var(--accent-gold);
+        .btn-print {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: #ffffff;
             border: none;
-            padding: 9px 15px;
-            border-radius: 10px;
-            font-weight: 600;
+            padding: 14px 20px;
+            border-radius: 16px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 12.5px;
+            font-size: 14px;
             font-family: inherit;
-            box-shadow: 0 3px 10px var(--accent-glow);
+            box-shadow: 0 4px 15px var(--accent-glow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+        .btn-print:active { transform: scale(0.95); }
 
-        /* نافذة التقرير الداخلية (Modal) */
+        /* نافذة الطباعة (Modal) */
         #report-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
+            z-index: 2000; justify-content: center; align-items: center; padding: 20px;
         }
-
         .modal-card {
-            background: #ffffff;
-            color: #000000;
-            width: 100%;
-            max-width: 700px;
-            max-height: 90vh;
-            border-radius: 20px;
-            padding: 25px;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            position: relative;
+            background: var(--bg-card); color: var(--text-main);
+            width: 100%; max-width: 700px; max-height: 90vh;
+            border-radius: 24px; padding: 30px; overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative;
         }
-
         .modal-header-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;
         }
-
         .modal-header-actions button {
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-family: 'Readex Pro', sans-serif;
-            cursor: pointer;
-            font-size: 13px;
-            border: none;
+            padding: 10px 18px; border-radius: 14px; font-weight: 700;
+            font-family: 'Readex Pro', sans-serif; cursor: pointer; font-size: 13px; border: none;
         }
+        .btn-close-modal { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-print-modal { background: var(--success); color: #fff; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
 
-        .btn-close-modal { background: #ef4444; color: #fff; }
-        .btn-print-modal { background: #10b981; color: #fff; }
-
-        .modal-card table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .modal-card th, .modal-card td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
-        .modal-card th { background-color: #f8fafc; font-weight: 600; }
+        .modal-card table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 12px; overflow: hidden; }
+        .modal-card th, .modal-card td { border: 1px solid var(--border-color); padding: 12px; text-align: right; font-size: 14px; }
+        .modal-card th { background-color: var(--bg-input); font-weight: 700; color: var(--text-main); }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- الترويسة العلوية -->
     <div class="header">
         <div class="brand-box">
             <div class="brand-logo">
@@ -297,45 +295,54 @@
             </div>
             <div>
                 <h1>مخبز ابويونس</h1>
-                <p>حساب تكاليف انتاج الخبز</p>
+                <p>حاسبة التكاليف الذكية</p>
             </div>
         </div>
-        <button class="btn-toggle" onclick="toggleTheme()">🌓 الوضع</button>
+        <button class="btn-theme" onclick="toggleTheme()">🌓 الوضع</button>
     </div>
 
-    <div class="tabs">
+    <!-- أزرار التبويبات -->
+    <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab(0)">📦 الإنتاج والكميات</button>
         <button class="tab-btn" onclick="switchTab(1)">🌾 المكونات الأساسية</button>
-        <button class="tab-btn" onclick="switchTab(2)">⚙️ المصاريف والتشغيل</button>
+        <button class="tab-btn" onclick="switchTab(2)">⚙️ المصاريف</button>
     </div>
 
-    <!-- Tab 1 -->
+    <!-- Tab 1: الإنتاج -->
     <div class="tab-content active">
         <div class="grid-inputs">
             <div class="input-card">
-                <label>ربطات الكيس (25 كجم)</label>
-                <div class="input-row">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🥖</span> ربطات الكيس (25 كجم)</div>
+                </div>
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="loavesPerBag" value="16" oninput="calculate()">
                     <span class="unit">ربطة</span>
                 </div>
             </div>
             <div class="input-card">
-                <label>وزن الربطة الواحدة</label>
-                <div class="input-row">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">⚖️</span> وزن الربطة الواحدة</div>
+                </div>
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="loafWeight" value="2" oninput="calculate()">
                     <span class="unit">كجم</span>
                 </div>
             </div>
             <div class="input-card">
-                <label>أكياس الإنتاج اليومي</label>
-                <div class="input-row">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">📈</span> الإنتاج اليومي</div>
+                </div>
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="bags" value="100" oninput="calculate()">
                     <span class="unit">كيس/يوم</span>
                 </div>
             </div>
             <div class="input-card">
-                <label>هامش الربح المطلوب</label>
-                <div class="input-row">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">💰</span> هامش الربح المطلوب</div>
+                </div>
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="margin" value="30" oninput="calculate()">
                     <span class="unit">%</span>
                 </div>
@@ -343,60 +350,72 @@
         </div>
     </div>
 
-    <!-- Tab 2 -->
+    <!-- Tab 2: المكونات -->
     <div class="tab-content">
         <div class="grid-inputs">
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_flour" checked onclick="calculate()">
-                    <label for="chk_flour">طحين</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🌾</span> طحين</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_flour" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="flour" value="65" oninput="calculate()">
                     <span class="unit">شيكل/كيس</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_sugar" checked onclick="calculate()">
-                    <label for="chk_sugar">سكر</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🧂</span> سكر</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_sugar" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="sugar" value="4.5" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="sugar_qty" value="0.5" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_salt" checked onclick="calculate()">
-                    <label for="chk_salt">ملح</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🧂</span> ملح</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_salt" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="salt" value="4.5" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="salt_qty" value="0.25" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_yeast" checked onclick="calculate()">
-                    <label for="chk_yeast">خميرة</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🦠</span> خميرة</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_yeast" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="yeast" value="16" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="yeast_qty" value="0.25" oninput="calculate()">
                     <span class="unit">كجم/كيس</span>
                 </div>
@@ -404,60 +423,72 @@
         </div>
     </div>
 
-    <!-- Tab 3 -->
+    <!-- Tab 3: المصاريف -->
     <div class="tab-content">
         <div class="grid-inputs">
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_overhead" checked onclick="calculate()">
-                    <label for="chk_overhead">مصروفات يومية ثابتة</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🧾</span> مصروفات يومية ثابتة</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_overhead" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="daily" value="1500" oninput="calculate()">
                     <span class="unit">شيكل/يوم</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_water" checked onclick="calculate()">
-                    <label for="chk_water">ماء</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">💧</span> ماء</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_water" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="water_cup" value="120" oninput="calculate()">
                     <span class="unit">شيكل/كوب</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="water_qty" value="11" oninput="calculate()">
                     <span class="unit">لتر/كيس</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_nylon" checked onclick="calculate()">
-                    <label for="chk_nylon">نايلون</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">🛍️</span> نايلون التغليف</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_nylon" checked onchange="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="nylon_price" value="15" oninput="calculate()">
                     <span class="unit">شيكل/كجم</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="nylon_bags_per_kg" value="200" oninput="calculate()">
                     <span class="unit">كيس/كجم</span>
                 </div>
             </div>
 
             <div class="input-card">
-                <div class="chk-container">
-                    <input type="checkbox" id="chk_diesel" onclick="calculate()">
-                    <label for="chk_diesel">سولار</label>
+                <div class="card-header">
+                    <div class="card-title"><span class="card-icon">⛽</span> سولار (وقود)</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="chk_diesel" onclick="calculate()">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="diesel_price" value="0" oninput="calculate()">
                     <span class="unit">شيكل/لتر</span>
                 </div>
-                <div class="input-row">
+                <div class="input-group">
                     <input type="text" inputmode="decimal" id="diesel_liter" value="4.5" oninput="calculate()">
                     <span class="unit">لتر/كيس</span>
                 </div>
@@ -466,48 +497,51 @@
     </div>
 </div>
 
+<!-- الشريط السفلي العائم (النتائج) -->
 <div class="sticky-bar">
     <div class="stats-group">
         <div class="stat-item">
-            <div class="lbl">تكلفة الربطة</div>
-            <div class="val" id="res-cost" style="color:var(--danger-color)">0.00</div>
+            <span class="lbl">تكلفة الربطة</span>
+            <span class="val danger" id="res-cost">0.00 ₪</span>
         </div>
         <div class="stat-item">
-            <div class="lbl">سعر البيع</div>
-            <div class="val" id="res-price">0.00</div>
+            <span class="lbl">سعر البيع</span>
+            <span class="val" id="res-price">0.00 ₪</span>
         </div>
         <div class="stat-item">
-            <div class="lbl">الربح اليومي</div>
-            <div class="val" id="res-profit">0.00</div>
+            <span class="lbl">الربح اليومي</span>
+            <span class="val highlight" id="res-profit">0.00 ₪</span>
         </div>
     </div>
-    <button class="btn-pdf" onclick="openReportModal()">🖨️ طباعة / PDF</button>
+    <button class="btn-print" onclick="openReportModal()">🖨️ التقرير</button>
 </div>
 
 <!-- نافذة العرض الداخلية للتقرير (Modal) -->
 <div id="report-modal">
     <div class="modal-card">
         <div class="modal-header-actions">
-            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق التقرير</button>
-            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة / حفظ PDF</button>
+            <button class="btn-close-modal" onclick="closeReportModal()">✕ إغلاق</button>
+            <button class="btn-print-modal" onclick="triggerPrint()">🖨️ طباعة التقرير</button>
         </div>
         <div id="printable-report-content">
-            <h2 style="text-align:center; margin-bottom:4px;">مخبز ابويونس</h2>
-            <p style="text-align:center; color:#64748b; margin-top:0;">حساب تكاليف انتاج الخبز والتشغيل</p>
-            <hr style="border: 0; border-top: 1px solid #e2e8f0;">
-            <h3>📌 ملخص النتائج والتشغيل:</h3>
+            <div style="text-align:center; margin-bottom: 20px;">
+                <h2 style="margin-bottom:4px; color:#0f172a;">مخبز ابويونس الاوتوماتيكي</h2>
+                <p style="color:#64748b; margin-top:0; font-size: 14px;">تقرير تفصيلي لحساب تكاليف انتاج الخبز والتشغيل</p>
+            </div>
+            
+            <h3 style="color:#0f172a; font-size: 16px;">📌 ملخص النتائج:</h3>
             <table>
                 <tr><th>تكلفة الربطة الواحدة</th><td id="pdf-cost"></td></tr>
                 <tr><th>سعر البيع المقترح</th><td id="pdf-price"></td></tr>
-                <tr><th>هامش الربح</th><td id="pdf-margin"></td></tr>
-                <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf"></td></tr>
-                <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily"></td></tr>
+                <tr><th>هامش الربح المطلوب</th><td id="pdf-margin"></td></tr>
+                <tr><th>الربح الصافي للربطة الواحدة</th><td id="pdf-profit-loaf" style="color:#10b981; font-weight:bold;"></td></tr>
+                <tr><th>الربح الصافي الإجمالي اليومي</th><td id="pdf-profit-daily" style="color:#10b981; font-weight:bold;"></td></tr>
             </table>
 
-            <h3 style="margin-top:20px;">📋 تفصيل التكاليف التشغيلية لكل كيس طحين (25 كجم):</h3>
+            <h3 style="margin-top:24px; color:#0f172a; font-size: 16px;">📋 تفصيل التكاليف لكل كيس طحين (25 كجم):</h3>
             <table>
                 <thead>
-                    <tr><th>المكون / العنصر</th><th>التكلفة الفعلية لكيس الطحين</th></tr>
+                    <tr><th>المكون / العنصر</th><th>التكلفة الفعلية</th></tr>
                 </thead>
                 <tbody id="pdf-details-body"></tbody>
             </table>
@@ -516,10 +550,12 @@
 </div>
 
 <script>
+    // تغيير الثيم
     function toggleTheme() { 
         document.body.classList.toggle('dark-theme'); 
     }
 
+    // التنقل بين التبويبات
     function switchTab(index) {
         let tabs = document.querySelectorAll('.tab-btn');
         let contents = document.querySelectorAll('.tab-content');
@@ -529,6 +565,7 @@
         });
     }
 
+    // دالة الحساب الرئيسية
     function calculate() {
         const isChecked = id => document.getElementById(id).checked;
         const getVal = id => parseFloat(document.getElementById(id).value.replace(',', '.')) || 0;
@@ -537,7 +574,6 @@
         let bagsPerDay = getVal("bags") || 1;
 
         let flourPrice = isChecked('chk_flour') ? getVal("flour") : 0;
-
         let sugarPrice = isChecked('chk_sugar') ? getVal("sugar") : 0;
         let sugarQty = getVal("sugar_qty");
         let sugarCost = sugarPrice * sugarQty;
@@ -573,10 +609,12 @@
         let profitPerLoaf = sellingPrice - costPerLoaf;
         let dailyProfit = profitPerLoaf * (loavesPerBag * bagsPerDay);
 
+        // تحديث الواجهة الرئيسية
         document.getElementById("res-cost").innerText = costPerLoaf.toFixed(2) + " ₪";
         document.getElementById("res-price").innerText = sellingPrice.toFixed(2) + " ₪";
         document.getElementById("res-profit").innerText = dailyProfit.toFixed(2) + " ₪";
 
+        // تحديث التقرير
         document.getElementById("pdf-cost").innerText = costPerLoaf.toFixed(2) + " شيكل";
         document.getElementById("pdf-price").innerText = sellingPrice.toFixed(2) + " شيكل";
         document.getElementById("pdf-margin").innerText = margin.toFixed(1) + " %";
@@ -592,20 +630,15 @@
         if (isChecked('chk_nylon')) detailsHtml += `<tr><td>نايلون (${loavesPerBag} كيس للربطة)</td><td>${nylonCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_diesel')) detailsHtml += `<tr><td>سولار (${dieselPerBag} لتر)</td><td>${dieselCost.toFixed(2)} شيكل</td></tr>`;
         if (isChecked('chk_overhead')) detailsHtml += `<tr><td>مصروفات يومية ثابتة (${bagsPerDay} كيس/يوم)</td><td>${overheadPerBag.toFixed(2)} شيكل</td></tr>`;
-        detailsHtml += `<tr style="font-weight:600; background:#f8fafc;"><td>المجموع الكلي لتكلفة كيس الطحين</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
+        detailsHtml += `<tr style="font-weight:700; background-color:#f1f5f9; color:#0f172a;"><td>المجموع الكلي لتكلفة كيس الطحين</td><td>${totalBatchCost.toFixed(2)} شيكل</td></tr>`;
 
         document.getElementById("pdf-details-body").innerHTML = detailsHtml;
     }
 
-    function openReportModal() {
-        document.getElementById("report-modal").style.display = "flex";
-    }
+    // نوافذ التقرير والطباعة
+    function openReportModal() { document.getElementById("report-modal").style.display = "flex"; }
+    function closeReportModal() { document.getElementById("report-modal").style.display = "none"; }
 
-    function closeReportModal() {
-        document.getElementById("report-modal").style.display = "none";
-    }
-
-    /* دالة الطباعة المخصصة للتغلب على حظر الآيفون PWA */
     function triggerPrint() {
         let content = document.getElementById('printable-report-content').innerHTML;
         let printWin = window.open('', '_blank');
@@ -616,19 +649,17 @@
                     <title>تقرير - مخبز ابويونس</title>
                     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
                     <style>
-                        body { font-family: 'Readex Pro', sans-serif; padding: 20px; color: #000; background: #fff; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-                        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: right; font-size: 13px; }
-                        th { background-color: #f8fafc; font-weight: 600; }
+                        body { font-family: 'Readex Pro', sans-serif; padding: 30px; color: #000; background: #fff; direction: rtl; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 15px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; }
+                        th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: right; font-size: 14px; }
+                        th { background-color: #f8fafc; font-weight: 700; }
                     </style>
                 </head>
                 <body>
                     ${content}
                     <script>
                         window.onload = function() {
-                            setTimeout(function() {
-                                window.print();
-                            }, 300);
+                            setTimeout(function() { window.print(); }, 400);
                         };
                     <\/script>
                 </body>
@@ -640,15 +671,31 @@
         }
     }
 
+    // Service Worker (Cache-First) لضمان العمل بدون انترنت للأبد
     if ('serviceWorker' in navigator) {
         const swCode = `
-            self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
-            self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('PWA Active'))));
+            const CACHE_NAME = 'abu-younis-v4-premium';
+            const urlsToCache = ['./', 'cal.html', 'icon.png'];
+
+            self.addEventListener('install', e => {
+                e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)).then(() => self.skipWaiting()));
+            });
+
+            self.addEventListener('activate', e => {
+                e.waitUntil(caches.keys().then(keys => Promise.all(
+                    keys.map(k => (k !== CACHE_NAME) ? caches.delete(k) : null)
+                )).then(() => self.clients.claim()));
+            });
+
+            self.addEventListener('fetch', e => {
+                e.respondWith(caches.match(e.request).then(res => res || fetch(e.request).catch(() => caches.match('./cal.html'))));
+            });
         `;
         const blob = new Blob([swCode], { type: 'text/javascript' });
-        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
     }
 
+    // التشغيل الأولي
     window.onload = calculate;
 </script>
 </body>
